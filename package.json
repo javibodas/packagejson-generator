@@ -1,0 +1,27 @@
+{
+  "name": "packagejson-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [],
+  "author": "Javier",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "next": "10.0.5",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "@fortawesome/fontawesome-svg-core": "1.2.32",
+    "@fortawesome/free-solid-svg-icons": "5.15.1",
+    "@fortawesome/react-fontawesome": "0.1.13",
+    "ajv": "7.0.3",
+    "axios": "0.21.1",
+    "firebase": "8.1.1",
+    "jsonschema": "1.4.0"
+  }
+}
