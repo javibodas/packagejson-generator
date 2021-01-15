@@ -7,7 +7,11 @@ export const JSON_FILE_OBJECT_DEFAULT = {
         "author": "",
         "main":"index.js",
         "dependencies":{},
-        "devDependencies": {}}
+        "devDependencies": {},
+        "scripts": {
+            "test": "echo \"Error: no test specified\" && exit 1"
+          },
+        "license": "ISC"}
 
 const FormJSONContext = React.createContext(JSON_FILE_OBJECT_DEFAULT);
 
