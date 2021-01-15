@@ -30,7 +30,6 @@ export default function TextEditor(){
     useEffect(function(){
         editor = document.getElementById("json-editor")
         createLinesEditor(txtJSON)
-        console.log(cursorPoint)
         if(writing) editor.setSelectionRange(cursorPoint,cursorPoint)
     })
 
