@@ -8,6 +8,7 @@ export default function Button(props){
                     color: white;
                     font-weight: bold;
                     border: none;
+                    font-size: calc(0.35em + 0.35vw);
                     margin-left: 2rem;
                     padding: 0.5rem 2rem 0.5rem 2rem;
                     font-family: Poppins,sans-serif;

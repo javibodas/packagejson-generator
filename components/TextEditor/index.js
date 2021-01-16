@@ -94,7 +94,7 @@ export default function TextEditor(){
                     background-color: #1e1e1e;
                     color: orange;
                     line-height: var(--line-height-lg);
-                    font-size: var(--font-size-editor-lg);
+                    font-size: calc(0.35em + 0.35vw);
                 }
 
                 .text-editor .editor textarea:focus{
@@ -105,7 +105,7 @@ export default function TextEditor(){
                     width: 5%;
                     position: relative;
                     line-height: var(--line-height-lg);
-                    font-size: var(--font-size-editor-lg);
+                    font-size: calc(0.35em + 0.35vw);
                     font-family: monospace;
                     font-weight: 400;
                 }
@@ -125,36 +125,6 @@ export default function TextEditor(){
                     border: 1px solid red;
                     text-align: center;
                     transition: all .5s ease-in-out;
-                }
-
-                @media (min-width: 900px) and (max-width: 1250px) {
-                    .text-editor textarea{
-                        font-size: var(--font-size-editor-md);
-                    }
-
-                    .editor-lines{
-                        font-size: var(--font-size-editor-md);
-                    }
-                }
-
-                @media (min-width: 1100px) and (max-width: 1300px) {
-                    .text-editor textarea{
-                        font-size: var(--font-size-editor-md);
-                    }
-
-                    .editor-lines{
-                        font-size: var(--font-size-editor-md);
-                    }
-                }
-
-                @media (min-width: 900px) and (max-width: 1250px) {
-                    .text-editor textarea{
-                        font-size: var(--font-size-editor-s);
-                    }
-
-                    .editor-lines{
-                        font-size: var(--font-size-editor-s);
-                    }
                 }
             `}</style>
             </>);

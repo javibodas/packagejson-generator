@@ -77,9 +77,7 @@ export default function Keypad(){
             .copy-uri-popup-box div{
                 width: 10%;
             }
-
-
-
+            
             .btn-copy-uri > a, .btn-close-error-popup > a{
                 text-decoration: none;
             }
