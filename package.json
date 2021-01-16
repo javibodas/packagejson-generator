@@ -11,7 +11,9 @@
   "keywords": [],
   "author": "Javier",
   "license": "ISC",
-  "devDependencies": {},
+  "devDependencies": {
+    "@testing-library/react": "^11.2.3"
+  },
   "dependencies": {
     "next": "10.0.5",
     "react": "16.13.1",
