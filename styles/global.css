@@ -26,7 +26,7 @@ ul{
 
 .label-title{
     font-family: "Lucida Console", Monaco, monospace;
-    font-size: 13px;
+    font-size: calc(0.35em + 0.35vw);
     font-weight: bold;
 }
 
@@ -52,7 +52,7 @@ ul{
     border: none;
     border-bottom: solid 1px #c12127;
     font-family: "Lucida Console", Monaco, monospace;
-    font-size: 13px;
+    font-size: calc(0.35em + 0.35vw);
 }
 
 .data-box input:focus, .section-input input:focus{
