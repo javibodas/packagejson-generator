@@ -1,12 +1,9 @@
-import { useContext } from 'react';
 import Badge from 'components/Badge';
-import FormJSONContext from 'context/formJsonContext';
 import useDependencies from 'hooks/useDependencies';
 
 export default function Dependencies(props){
 
-    const { formJsonCtx } = useContext(FormJSONContext)
-    const { packages, typePackage, addPackage, removePackage, outFocusInputDependencie } = useDependencies({'classType': props.classType, 'type': props.type})
+    const { packages, formJsonCtx, typePackage, addPackage, removePackage, outFocusInputDependencie } = useDependencies({'classType': props.classType, 'type': props.type})
 
     return (<>
                 <div id={'formdepd' +  props.type} className = 'form-group dependencies'>
@@ -14,15 +11,15 @@ export default function Dependencies(props){
                         <div className='data-box'>
                             <label className='label-title'>{props.title}</label>
                             <section className='section-input'>
-                                <input id = {'inpt-dependencies' + props.type} className = 'input-form input-dependencie' placeholder="NPM Package" onChange={typePackage} onBlur={outFocusInputDependencie}/>
-                                <div id = {'packlist' + props.type} className='packages-list'>
+                                <input id = {'inpt-dependencies' + props.type} className = 'input-form input-dependencie' placeholder="NPM Package" onChange={typePackage} onBlur={outFocusInputDependencie} data-testid={'input-' + props.classType}/>
+                                <div id = {'packlist' + props.type} className='packages-list' data-testid={'combo-' + props.classType}>
                                     <ul>
-                                        {packages.map(pack => <li key={pack.name} onClick={addPackage}>{pack.name}<span className='pckg-version'>{' (' + pack.version+')'}</span></li>)}
+                                        {packages.map(pack => <li key={pack.name} onClick={addPackage}>{pack.name}<span className='pckg-version' data-testid={props.classType + '-list-item'}>{' (' + pack.version+')'}</span></li>)}
                                     </ul>
                                 </div>
                             </section>
                         </div>
-                        <div id={'depdlist' + props.type} className='dependencies-list'>
+                        <div id={'depdlist' + props.type} className='dependencies-list' data-testid={props.classType + '-list'}>
                                 {formJsonCtx[props.classType] ? 
                                     Object.keys(formJsonCtx[props.classType]).map(dependencie => <Badge key={dependencie} type={props.type} objKey={dependencie} objValue={formJsonCtx[props.classType][dependencie]} remove={removePackage}/>)
                                 : null
