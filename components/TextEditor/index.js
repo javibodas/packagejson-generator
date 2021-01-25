@@ -66,6 +66,7 @@ export default function TextEditor(){
                         onChange={updateContext}
                         onBlur={() => { writing = false }}
                         onFocus={() => { writing = true }}
+                        data-testid='text-area-editor'
                     />
                 </div>
                 <div id='editor-messages' className='messages'><FontAwesomeIcon icon={faExclamation} size='xs'/> {errorMessage} <FontAwesomeIcon icon={faExclamation} size='xs'/></div>
