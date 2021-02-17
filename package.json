@@ -6,24 +6,37 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest"
   },
   "keywords": [],
   "author": "Javier",
   "license": "ISC",
   "devDependencies": {
-    "@testing-library/react": "^11.2.3"
+    "@testing-library/dom": "^7.29.4",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.3",
+    "@testing-library/react-hooks": "^5.0.3",
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3",
+    "jest-extended": "^0.11.5",
+    "msw": "^0.25.0",
+    "whatwg-fetch": "^3.5.0"
   },
   "dependencies": {
-    "next": "10.0.5",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
     "@fortawesome/fontawesome-svg-core": "1.2.32",
     "@fortawesome/free-solid-svg-icons": "5.15.1",
     "@fortawesome/react-fontawesome": "0.1.13",
     "ajv": "7.0.3",
     "axios": "0.21.1",
     "firebase": "8.1.1",
-    "jsonschema": "1.4.0"
+    "jsonschema": "1.4.0",
+    "next": "10.0.5",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  },
+  "jest": {
+    "setupFiles": ["./jest.setup.js"],
+    "modulePaths": ["./"]
   }
 }
