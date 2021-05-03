@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "jest"
+    "test": "jest --silent"
   },
   "keywords": [],
   "author": "Javier",
@@ -36,7 +36,11 @@
     "react-dom": "16.13.1"
   },
   "jest": {
-    "setupFiles": ["./jest.setup.js"],
-    "modulePaths": ["./"]
+    "setupFiles": [
+      "./jest.setup.js"
+    ],
+    "modulePaths": [
+      "./"
+    ]
   }
 }
