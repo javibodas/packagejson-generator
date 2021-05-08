@@ -1,7 +1,7 @@
 export default function Button(props){
 
     return(<>
-            <button className={'mybtn ' + props.name} onClick={props.click}>{props.children}</button>
+            <button className={'mybtn ' + props.name} onClick={props.click} data-testid={props.testid}>{props.children}</button>
             <style jsx>
             {`
                 .mybtn{

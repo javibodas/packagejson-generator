@@ -33,23 +33,23 @@ export default function ProjectData(){
             <div className='form-group'>
                 <div className='data-box'>
                     <label className='label-title'>Project name</label>
-                    <input className = 'input-form' placeholder='Project123' name='projectName' onChange={typeData} value={formJsonCtx.name}/>
+                    <input className = 'input-form' placeholder='Project123' name='projectName' onChange={typeData} value={formJsonCtx.name} data-testid='form-name'/>
                 </div>
                 <div className='data-box'>
                     <label className='label-title'>Version</label>
-                    <input className = 'input-form' placeholder='1.0.0' name='version' onChange={typeData} value={formJsonCtx.version}/>
+                    <input className = 'input-form' placeholder='1.0.0' name='version' onChange={typeData} value={formJsonCtx.version} data-testid='form-version'/>
                 </div>
                 <div className='data-box'>
                     <label className='label-title'>Description</label>
-                    <input className = 'input-form' placeholder='Build the next generation of js...' name='description' onChange={typeData} value={formJsonCtx.description}/>
+                    <input className = 'input-form' placeholder='Build the next generation of js...' name='description' onChange={typeData} value={formJsonCtx.description} data-testid='form-description'/>
                 </div>
                 <div className='data-box'>
                     <label className='label-title'>Author</label>
-                    <input className = 'input-form' placeholder='Author' name='author' onChange={typeData} value={formJsonCtx.author}/>
+                    <input className = 'input-form' placeholder='Author' name='author' onChange={typeData} value={formJsonCtx.author} data-testid='form-author'/>
                 </div>
                 <div className='data-box'>
                     <label className='label-title'>Main file</label>
-                    <input className = 'input-form' placeholder='index.js' name='main' onChange={typeData} value={formJsonCtx.main}/>
+                    <input className = 'input-form' placeholder='index.js' name='main' onChange={typeData} value={formJsonCtx.main} data-testid='form-main'/>
                 </div>
             </div>
             <style jsx>{`

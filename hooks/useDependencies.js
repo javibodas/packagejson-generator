@@ -65,6 +65,6 @@ export default function useDependencies({classType, type}){
     }
 
 
-    return { packages, typePackage, addPackage, removePackage, outFocusInputDependencie }
+    return { packages, formJsonCtx, typePackage, addPackage, removePackage, outFocusInputDependencie }
 
 }

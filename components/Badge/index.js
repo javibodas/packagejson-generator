@@ -6,10 +6,7 @@ export default function Badge(props){
     const [ styleValue, setStyleValue ] = useState(stylesValuesBadge[0]);
 
     useEffect(function(){
-        (props.type == 'script') ?
-            setStyleValue(stylesValuesBadge[1])
-        :
-            setStyleValue(stylesValuesBadge[0])
+        (props.type == 'script') ? setStyleValue(stylesValuesBadge[1]) : setStyleValue(stylesValuesBadge[0])
     }, [])
 
     return(<>

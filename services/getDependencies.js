@@ -1,4 +1,6 @@
-export default function getDependencies(str){
-    const  URI = `${process.env.NEXT_PUBLIC_URI_DEPENDENCIES}${str}`
+const getDependencies = (str) => {
+    const  URI = `/api/dependencies/${str}`
     return fetch(URI).then(res => res.json() )
 }
+
+export default getDependencies

@@ -6,13 +6,25 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest"
   },
   "keywords": [],
   "author": "Javier",
   "license": "ISC",
   "devDependencies": {
-    "@testing-library/react": "^11.2.3"
+    "@testing-library/dom": "^7.29.4",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.3",
+    "@testing-library/react-hooks": "^5.0.3",
+    "babel-jest": "^26.6.3",
+    "babel-plugin-dynamic-import-node": "^2.3.3",
+    "babel-plugin-transform-dynamic-import": "^2.1.0",
+    "jest": "^26.6.3",
+    "jest-extended": "^0.11.5",
+    "jest-next-dynamic": "^1.0.1",
+    "msw": "^0.25.0",
+    "whatwg-fetch": "^3.5.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "1.2.32",
@@ -32,5 +44,13 @@
     "react-dom": "16.13.1",
     "react-monaco-editor": "^0.41.2",
     "url-loader": "^4.1.1"
+  },
+  "jest": {
+    "setupFiles": [
+      "./jest.setup.js"
+    ],
+    "modulePaths": [
+      "./"
+    ]
   }
 }
