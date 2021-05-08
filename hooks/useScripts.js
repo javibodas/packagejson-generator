@@ -1,24 +1,15 @@
-import { useContext } from 'react';
-import TextEditorJSONContext from 'context/textEditorJsonContext';
-import FormJSONContext from 'context/formJsonContext';
-import useOwnContext from 'hooks/useOwnContext';
-
-export default function useScripts(){
-
-    const { textEditorJSONCtxt, setTextEditorJSONCtxt } = useContext(TextEditorJSONContext)
-    const { formJsonCtx, setFormJsonCtx } = useContext(FormJSONContext)
-    const { addScriptContext, removeScriptContext } = useOwnContext({textEditorJSONCtxt, setTextEditorJSONCtxt, formJsonCtx, setFormJsonCtx})
+export default function useScripts({dispatch, state }){
 
 
     const addScript = function(event){
-        const key = document.getElementById('key-script').value
-        const command = document.getElementById('command-script').value
+        const keyScript = document.getElementById('key-script').value
+        const commandScript = document.getElementById('command-script').value
 
-        if(key.trim() === '' || command.trim() === '' ) return
-        if(!formJsonCtx.scripts) formJsonCtx.scripts = {}
+        if(keyScript.trim() === '' || commandScript.trim() === '' ) return
+        if(!state.scripts) state.scripts = {}
 
-        const alreadyAdded = Object.keys(formJsonCtx.scripts).find(scriptKey => scriptKey === key)
-        if(!alreadyAdded) addScriptContext(key, command)
+        const alreadyAdded = Object.keys(state.scripts).find(scriptKey => scriptKey === keyScript)
+        if(!alreadyAdded)  dispatch({type: 'addScript', key: keyScript, value: commandScript})
 
         const keyElement = document.getElementById('key-script')
         const commdElement = document.getElementById('command-script')
@@ -28,10 +19,10 @@ export default function useScripts(){
     }
 
     const removeScript = function(scriptKey){
-        removeScriptContext(scriptKey)
+        dispatch({type: 'removeScript', key: scriptKey})
     }
 
 
 
-    return { formJsonCtx, addScript, removeScript }
+    return { addScript, removeScript }
 }
