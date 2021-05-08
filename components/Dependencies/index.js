@@ -1,9 +1,14 @@
+import { useContext } from 'react';
 import Badge from 'components/Badge';
 import useDependencies from 'hooks/useDependencies';
+import JSONCtx from 'context';
+
 
 export default function Dependencies(props){
 
-    const { packages, formJsonCtx, typePackage, addPackage, removePackage, outFocusInputDependencie } = useDependencies({'classType': props.classType, 'type': props.type})
+    const { state, dispatch } = useContext(JSONCtx);
+    const { packages, typePackage, addPackage, removePackage, outFocusInputDependencie } = useDependencies({'classType': props.classType, 'type': props.type, 'dispatch': dispatch, 'state': state })
+    
 
     return (<>
                 <div id={'formdepd' +  props.type} className = 'form-group dependencies'>
@@ -20,8 +25,8 @@ export default function Dependencies(props){
                             </section>
                         </div>
                         <div id={'depdlist' + props.type} className='dependencies-list' data-testid={props.classType + '-list'}>
-                                {formJsonCtx[props.classType] ? 
-                                    Object.keys(formJsonCtx[props.classType]).map(dependencie => <Badge key={dependencie} type={props.type} objKey={dependencie} objValue={formJsonCtx[props.classType][dependencie]} remove={removePackage}/>)
+                                {state[props.classType] ? 
+                                    Object.keys(state[props.classType]).map(dependencie => <Badge key={dependencie} type={props.type} objKey={dependencie} objValue={state[props.classType][dependencie]} remove={removePackage}/>)
                                 : null
                                 }
                         </div>
