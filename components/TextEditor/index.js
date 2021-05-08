@@ -1,8 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamation } from '@fortawesome/free-solid-svg-icons';
-import TextEditorJSONContext from 'context/textEditorJsonContext';
-import FormJSONContext from 'context/formJsonContext';
+import JSONCtx from 'context';
 import useEditor from 'hooks/useEditor';
 import { PACKAGE_JSON_SCHEMA } from './schema.js';
 
@@ -14,18 +13,19 @@ export default function TextEditor(){
 
     const [ txtJSON, setTxtJSON ] = useState('')
     const [ errorMessage, setErrorMessage ] = useState('')
-    const { textEditorJSONCtxt, setTextEditorJSONCtxt } = useContext(TextEditorJSONContext)
-    const { setFormJsonCtx } = useContext(FormJSONContext)
+    const {state, dispatch} = useContext(JSONCtx);
     const { validateSchemaAJV, createLinesEditor } = useEditor()
 
+
     useEffect(function(){
-        const error = validateSchemaAJV(textEditorJSONCtxt, PACKAGE_JSON_SCHEMA)
+        const error = validateSchemaAJV(state, PACKAGE_JSON_SCHEMA)
         if (error) setErrorMessage(error)
 
-        const txt = JSON.stringify(textEditorJSONCtxt, 0, 4)
+        const txt = JSON.stringify(state, 0, 4)
+        console.log(state)
         createLinesEditor(txt)
         setTxtJSON(txt)
-    }, [textEditorJSONCtxt])
+    }, [state])
 
     useEffect(function(){
         editor = document.getElementById("json-editor")
@@ -40,11 +40,10 @@ export default function TextEditor(){
 
         try{
             const jsonParsed = JSON.parse(event.target.value)
-            const error = validateSchemaAJV(textEditorJSONCtxt, PACKAGE_JSON_SCHEMA)
+            const error = validateSchemaAJV(state, PACKAGE_JSON_SCHEMA)
             if (error) setErrorMessage(error)
 
-            setFormJsonCtx(jsonParsed)
-            setTextEditorJSONCtxt(jsonParsed)
+            dispatch({type: 'updateJSON', value: jsonParsed})
         }catch(error){
             document.getElementById('editor-messages').style.display = 'block'
             setTxtJSON(event.target.value)

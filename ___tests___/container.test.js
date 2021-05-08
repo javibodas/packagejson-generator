@@ -1,8 +1,7 @@
 import React from 'react'
 import Container from 'components/Container'
-import { FormJSONContextProvider } from 'context/formJsonContext'
-import { TextEditorJSONContextProvider } from 'context/textEditorJsonContext'
-import { JSON_FILE_OBJECT_DEFAULT } from 'context/DEFAULT_PKG_JSON'
+import { JSONContextProvider } from 'context'
+import { jsonInitialState } from 'state'
 import { server } from './setupWorkerAPI'
 import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import 'jest-extended';
@@ -10,11 +9,9 @@ import 'jest-extended';
 describe('Container Test', () => {
 
     const wrapper = ({ children }) => {
-        return (<TextEditorJSONContextProvider>
-                    <FormJSONContextProvider>
+        return (<JSONContextProvider>
                         {children}
-                    </FormJSONContextProvider>
-                </TextEditorJSONContextProvider>)
+                </JSONContextProvider>)
     }
 
     beforeEach(() => render(<Container />, {wrapper}) )
@@ -24,11 +21,11 @@ describe('Container Test', () => {
 
     describe('When initial load', () => {
         it('should have default context values in form and texteditor', () => {
-            Object.keys(JSON_FILE_OBJECT_DEFAULT).map((key) => {
-                if(typeof JSON_FILE_OBJECT_DEFAULT[key] === 'string'){
+            Object.keys(jsonInitialState).map((key) => {
+                if(typeof jsonInitialState[key] === 'string'){
                     const input = screen.queryByTestId('form-' + key)
-                    input ? expect(input.value).toBe(JSON_FILE_OBJECT_DEFAULT[key]) : null
-                    expect(screen.getByTestId('text-area-editor').value).toInclude(JSON_FILE_OBJECT_DEFAULT[key])
+                    input ? expect(input.value).toBe(jsonInitialState[key]) : null
+                    expect(screen.getByTestId('text-area-editor').value).toInclude(jsonInitialState[key])
                 }
             })
             
