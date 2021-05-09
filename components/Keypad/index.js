@@ -22,15 +22,15 @@ export default function Keypad(){
     }
 
     return(<>
-            <Button name='btn-exportjson' click={exportJSONFile}>Generate</Button>
-            <Button name='btn-generateuri' click={generateURIJSONFile}>Share</Button>
-            <Button name='btn-clear' click={clearJSON}>Clear</Button>
-            <div id='err-popbox' className='pop-up error-popup-box'>
+            <Button name='btn-exportjson' click={exportJSONFile} testid='btn-exportjson'>Generate</Button>
+            <Button name='btn-generateuri' click={generateURIJSONFile} testid='btn-generateuri'>Share</Button>
+            <Button name='btn-clear' click={clearJSON} testid='btn-clear'>Clear</Button>
+            <div id='err-popbox' className='pop-up error-popup-box' data-testid='error-fields-popup'>
                 <FontAwesomeIcon icon={faExclamation} size='lg'/>
                 The field <span style={{'fontStyle':'italic'}}>'{errorField}'</span> is empty.
                 <div className='btn-close-error-popup'><button onClick={() => { document.getElementById('err-popbox').style.display = 'none'}}>X</button></div>
             </div>
-            <div id='cp-uri-popbox' className='pop-up copy-uri-popup-box'>
+            <div id='cp-uri-popbox' className='pop-up copy-uri-popup-box' data-testid='copy-uri-popup'>
                 <input id='inpt-uri-json' value={uriJSON} />
                 <div className='btn-copy-uri'><button onClick={copyClipboard}><FontAwesomeIcon icon={faCopy} size='lg'/></button></div>
             </div>

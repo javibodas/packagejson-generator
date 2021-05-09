@@ -33,7 +33,7 @@ describe('Container Test', () => {
     })
 
     describe('When modifying field form', () => {
-        const json = { authorName : 'javi', projectName : 'packagejson-generator', version : '2.3.9', description : 'Testing packagejson-generator', mainFile : 'app.js' }
+        const json = { authorName : 'pepe', projectName : 'packagejson-generator', version : '2.3.9', description : 'Testing packagejson-generator', mainFile : 'app.js' }
 
         it('should show changes in text editor (author)', () => {
             fireEvent.change(screen.getByTestId('form-author'), {target: { value: json.authorName }})
