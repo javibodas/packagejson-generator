@@ -18,13 +18,6 @@ export default function useJSONFile({ state }){
     }
 
     const exportJSONFile = function(){
-        const errorFields = checkFields()
-        if(errorFields){
-            setErrorField(errorFields)
-            document.getElementById('err-popbox').style.display = 'flex'
-            return
-        }
-
         // Create File
         const filename = 'package.json'
         const blob = new Blob([JSON.stringify(state, 0 , 4)], {

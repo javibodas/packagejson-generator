@@ -4,7 +4,7 @@ import Form from 'components/Form';
 import { JSONContextProvider } from 'context'
 import { jsonInitialState } from 'state'
 import { server } from './setupWorkerAPI'
-import { render, screen, waitFor, fireEvent, waitForElement } from '@testing-library/react'
+import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import 'jest-extended';
 
 describe('Keypad Test', () => {
@@ -19,22 +19,6 @@ describe('Keypad Test', () => {
     beforeAll(() => server.listen())
     afterEach(() => server.resetHandlers() )
     afterAll(() => server.close() )
-
-    describe('When initial state', () => {
-        it('should doesnt let export the file', () => {
-            expect(screen.getByTestId('btn-exportjson')).toBeDefined()
-
-            fireEvent.click(screen.getByTestId('btn-exportjson'))
-            expect(screen.getByTestId('error-fields-popup').textContent).toInclude('Project Name')
-        })
-
-        it('should doesnt share the json', () => {
-            expect(screen.getByTestId('btn-generateuri')).toBeDefined()
-
-            fireEvent.click(screen.getByTestId('btn-generateuri'))
-            expect(screen.getByTestId('error-fields-popup').textContent).toInclude('Project Name')
-        })
-    })
 
     describe('When all data needed informed', () => {
 
@@ -79,8 +63,8 @@ describe('Keypad Test', () => {
 
             fireEvent.click(screen.getByTestId('btn-clear'))
 
-            expect(screen.getByTestId('form-name').value).toEqual('')
-            expect(screen.getByTestId('form-author').value).toEqual('')
+            expect(screen.getByTestId('form-name').value).toEqual(jsonInitialState.name)
+            expect(screen.getByTestId('form-author').value).toEqual(jsonInitialState.author)
             expect(screen.getByTestId('form-version').value).toEqual(jsonInitialState.version)
         })
     })
