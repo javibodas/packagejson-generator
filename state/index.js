@@ -1,7 +1,7 @@
 export const jsonInitialState = {
-  name: "",
+  name: "example",
   version: "1.0.0",
-  description: "",
+  description: "Build the next generation of js...",
   author: "",
   main: "index.js",
   dependencies: {},
