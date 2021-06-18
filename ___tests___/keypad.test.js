@@ -3,9 +3,16 @@ import Keypad from 'components/Keypad'
 import Form from 'components/Form';
 import { JSONContextProvider } from 'context'
 import { jsonInitialState } from 'state'
-import { server } from './setupWorkerAPI'
-import { render, screen, waitFor, fireEvent } from '@testing-library/react'
+import { cleanup, render, screen, fireEvent } from '@testing-library/react'
 import 'jest-extended';
+
+const mockGenerateURIJSONFile = jest.fn()
+const mockExportJSONFile = jest.fn()
+jest.mock('hooks/useJSONFile', () => {
+    return jest.fn().mockImplementation(() => {
+        return { generateURIJSONFile: mockGenerateURIJSONFile, exportJSONFile: mockExportJSONFile };
+    });
+})
 
 describe('Keypad Test', () => {
 
@@ -16,30 +23,48 @@ describe('Keypad Test', () => {
     }
 
     beforeEach(() => render(<React.Fragment> <Form /> <Keypad /> </React.Fragment>, {wrapper}) )
-    beforeAll(() => server.listen())
-    afterEach(() => server.resetHandlers() )
-    afterAll(() => server.close() )
+    afterEach(() => cleanup() )
 
-    describe('When all data needed informed', () => {
+    describe('When initial state', () => {
+
+        beforeAll(() => { 
+            jest.clearAllMocks()
+        })
+        
+        it('should let export the file', () => {
+            expect(screen.getByTestId('btn-exportjson')).toBeDefined()
+            fireEvent.click(screen.getByTestId('btn-exportjson'))
+            expect(mockExportJSONFile).toHaveBeenCalledTimes(1)
+        })
+
+        it('should share the json', () => {
+            expect(screen.getByTestId('btn-generateuri')).toBeDefined()
+            fireEvent.click(screen.getByTestId('btn-generateuri'))
+            expect(mockGenerateURIJSONFile).toHaveBeenCalledTimes(1)
+        })
+    })
+
+    describe('When all project data informed', () => {
 
         const projectName = 'Test project';
         const projectAuthor = 'Pepe';
         const projectVersion = '2.3.4';
 
+        beforeAll(() => jest.clearAllMocks())
 
-        beforeEach(() => {
+        it('should let export the file', () => {
             screen.getByTestId('form-name').value = projectName
             screen.getByTestId('form-author').value = projectAuthor
             screen.getByTestId('form-version').value = projectVersion
-        })
-        
-        it('should let export the file', () => {
             expect(screen.getByTestId('btn-exportjson')).toBeDefined()
+            fireEvent.click(screen.getByTestId('btn-exportjson'))
+            expect(mockExportJSONFile).toHaveBeenCalledTimes(1)
         })
 
-        it('should share the json', async () => {
+        it('should share the json', () => {
             expect(screen.getByTestId('btn-generateuri')).toBeDefined()
-
+            fireEvent.click(screen.getByTestId('btn-generateuri'))
+            expect(mockGenerateURIJSONFile).toHaveBeenCalledTimes(1)
         })
     })
 
