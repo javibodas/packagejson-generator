@@ -23,7 +23,7 @@ export default function Header(){
 
     return(<>
             <header className='header'>
-                <h3>Packagejson generator</h3>
+                <h3>package.json generator</h3>
                 {/*<div className='nav'>
                     {
                         user === USER_STATE.NOT_LOGGED ?
