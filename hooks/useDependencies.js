@@ -1,15 +1,9 @@
-import { useState, useContext } from 'react'
-import TextEditorJSONContext from 'context/textEditorJsonContext';
-import FormJSONContext from 'context/formJsonContext';
-import useOwnContext from 'hooks/useOwnContext';
+import { useState } from 'react'
 import getDependencies from 'services/getDependencies';
 
-export default function useDependencies({classType, type}){
+export default function useDependencies({classType, type, dispatch, state}){
 
     const [ packages, setPackages ] = useState([])
-    const { textEditorJSONCtxt, setTextEditorJSONCtxt } = useContext(TextEditorJSONContext)
-    const { formJsonCtx, setFormJsonCtx } = useContext(FormJSONContext)
-    const { addDependencieContext, removeDependencieContext } = useOwnContext({classType , textEditorJSONCtxt, setTextEditorJSONCtxt, formJsonCtx, setFormJsonCtx})
     const EMPTY_OR_ERROR_PACKAGE = {'name' : 'No packages founded'}
 
     const typePackage = function(e){
@@ -39,12 +33,16 @@ export default function useDependencies({classType, type}){
             const packageName = event.target.innerText.replace(/(\r\n|\n|\r)/gm,"").split("(")[0]
             const packageSelected = packages.find(pack => pack.name == packageName)
             
-            if(!formJsonCtx[classType]) formJsonCtx[classType] = {}
+            if(!state[classType]) state[classType] = {}
 
-            const alreadyAdded = Object.keys(formJsonCtx[classType]).find(dependencieName => dependencieName == packageName)
+            const alreadyAdded = Object.keys(state[classType]).find(dependencieName => dependencieName == packageName)
 
             if(!alreadyAdded && packageSelected){
-                addDependencieContext(packageSelected)
+                if(classType == 'dependencies'){
+                    dispatch({type: 'addDependencie', key: packageSelected.name, value: packageSelected.version})
+                }else if(classType == 'devDependencies'){
+                    dispatch({type: 'addDevDependencie', key: packageSelected.name ,value: packageSelected.version})
+                }
             }
         }
 
@@ -56,7 +54,11 @@ export default function useDependencies({classType, type}){
     }
     
     const removePackage = function(packageName){
-        removeDependencieContext(packageName)
+        if(classType == 'dependencies'){
+            dispatch({type: 'removeDependencie', key: packageName})
+        }else if(classType == 'devDependencies'){
+            dispatch({type: 'removeDevDependencie', key: packageName})
+        }
     }
 
     const outFocusInputDependencie = function(){
@@ -65,6 +67,6 @@ export default function useDependencies({classType, type}){
     }
 
 
-    return { packages, formJsonCtx, typePackage, addPackage, removePackage, outFocusInputDependencie }
+    return { packages, typePackage, addPackage, removePackage, outFocusInputDependencie }
 
 }

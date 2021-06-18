@@ -1,33 +1,26 @@
 import { useState } from 'react';
 import { addPackageJsonDB } from 'firebase/client';
 
-export default function useJSONFile({ formJsonCtx, textEditorJSONCtxt }){
+export default function useJSONFile({ state }){
 
     const [ errorField, setErrorField ] = useState('')
     const [ uriJSON, setUriJSON ] = useState('')
 
     const checkFields = function(){
-        if (!formJsonCtx['name'] || formJsonCtx['name'].trim() == '')
+        if (!state['name'] || state['name'].trim() == '')
             return 'Project Name'
-        else if (!formJsonCtx['author'] || formJsonCtx['author'].trim() == '')
+        else if (!state['author'] || state['author'].trim() == '')
             return 'Author'
-        else if(!formJsonCtx['version'] || formJsonCtx['version'].trim() == '')
+        else if(!state['version'] || state['version'].trim() == '')
             return 'Version'
         
         return null
     }
 
     const exportJSONFile = function(){
-        const errorFields = checkFields()
-        if(errorFields){
-            setErrorField(errorFields)
-            document.getElementById('err-popbox').style.display = 'flex'
-            return
-        }
-
         // Create File
         const filename = 'package.json'
-        const blob = new Blob([JSON.stringify(textEditorJSONCtxt, 0 , 4)], {
+        const blob = new Blob([JSON.stringify(state, 0 , 4)], {
             type: "text/plain;charset=utf-8"
         });
 
@@ -52,7 +45,7 @@ export default function useJSONFile({ formJsonCtx, textEditorJSONCtxt }){
             return
         }
 
-        addPackageJsonDB(textEditorJSONCtxt)
+        addPackageJsonDB(state)
         .then((element) => { 
             setUriJSON(process.env.NEXT_PUBLIC_URI_PACKAGES + element.id) 
             document.getElementById('cp-uri-popbox').style.display = 'flex'

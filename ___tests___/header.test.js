@@ -17,7 +17,7 @@ describe('Header Test', () => {
         it('should show title header', () => {
             const { getByText } = render(<Header />)
 
-            getByText('Packagejson generator')
+            getByText('package.json generator')
         })
     })
 })

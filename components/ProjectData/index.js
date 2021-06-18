@@ -1,30 +1,23 @@
 import { useContext } from 'react';
-import TextEditorJSONContext from 'context/textEditorJsonContext';
-import FormJSONContext from 'context/formJsonContext';
+import JSONCtx from 'context';
 
 
 export default function ProjectData(){
 
-    const { textEditorJSONCtxt, setTextEditorJSONCtxt } = useContext(TextEditorJSONContext)
-    const { formJsonCtx, setFormJsonCtx } = useContext(FormJSONContext)
+    const { state, dispatch } = useContext(JSONCtx);
 
     const typeData = function(event){
         if(event.target){
             if(event.target.name === 'projectName'){
-                setTextEditorJSONCtxt({...textEditorJSONCtxt, 'name':event.target.value})
-                setFormJsonCtx({...formJsonCtx, 'name':event.target.value})
+                dispatch({type: 'updateProjectName', value: event.target.value})
             }else if(event.target.name === 'version'){
-                setTextEditorJSONCtxt({...textEditorJSONCtxt, 'version':event.target.value})
-                setFormJsonCtx({...formJsonCtx, 'version':event.target.value})
+                dispatch({type: 'updateProjectVersion', value: event.target.value})
             }else if(event.target.name === 'description'){
-                setTextEditorJSONCtxt({...textEditorJSONCtxt, 'description':event.target.value})
-                setFormJsonCtx({...formJsonCtx, 'description':event.target.value})
+                dispatch({type: 'updateProjectDescription', value: event.target.value})
             }else if(event.target.name === 'author'){
-                setTextEditorJSONCtxt({...textEditorJSONCtxt, 'author':event.target.value})
-                setFormJsonCtx({...formJsonCtx, 'author':event.target.value})
+                dispatch({type: 'updateProjectAuthor', value: event.target.value})
             }else if(event.target.name === 'main'){
-                setTextEditorJSONCtxt({...textEditorJSONCtxt, 'main':event.target.value})
-                setFormJsonCtx({...formJsonCtx, 'main':event.target.value})
+                dispatch({type: 'updateProjectMainFile', value: event.target.value})
             }
         }
     }
@@ -33,23 +26,23 @@ export default function ProjectData(){
             <div className='form-group'>
                 <div className='data-box'>
                     <label className='label-title'>Project name</label>
-                    <input className = 'input-form' placeholder='Project123' name='projectName' onChange={typeData} value={formJsonCtx.name} data-testid='form-name'/>
+                    <input className = 'input-form' placeholder='Project123' name='projectName' onChange={typeData} value={state.name} data-testid='form-name'/>
                 </div>
                 <div className='data-box'>
                     <label className='label-title'>Version</label>
-                    <input className = 'input-form' placeholder='1.0.0' name='version' onChange={typeData} value={formJsonCtx.version} data-testid='form-version'/>
+                    <input className = 'input-form' placeholder='1.0.0' name='version' onChange={typeData} value={state.version} data-testid='form-version'/>
                 </div>
                 <div className='data-box'>
                     <label className='label-title'>Description</label>
-                    <input className = 'input-form' placeholder='Build the next generation of js...' name='description' onChange={typeData} value={formJsonCtx.description} data-testid='form-description'/>
+                    <input className = 'input-form' placeholder='Build the next generation of js...' name='description' onChange={typeData} value={state.description} data-testid='form-description'/>
                 </div>
                 <div className='data-box'>
                     <label className='label-title'>Author</label>
-                    <input className = 'input-form' placeholder='Author' name='author' onChange={typeData} value={formJsonCtx.author} data-testid='form-author'/>
+                    <input className = 'input-form' placeholder='Author' name='author' onChange={typeData} value={state.author} data-testid='form-author'/>
                 </div>
                 <div className='data-box'>
                     <label className='label-title'>Main file</label>
-                    <input className = 'input-form' placeholder='index.js' name='main' onChange={typeData} value={formJsonCtx.main} data-testid='form-main'/>
+                    <input className = 'input-form' placeholder='index.js' name='main' onChange={typeData} value={state.main} data-testid='form-main'/>
                 </div>
             </div>
             <style jsx>{`

@@ -1,7 +1,5 @@
 import { useContext } from 'react';
-import FormJSONContext from 'context/formJsonContext';
-import TextEditorJSONContext from 'context/textEditorJsonContext';
-import { JSON_FILE_OBJECT_DEFAULT } from 'context/DEFAULT_PKG_JSON';
+import JSONCtx from 'context';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamation, faCopy } from '@fortawesome/free-solid-svg-icons';
 import Button from 'components/Button';
@@ -10,9 +8,8 @@ import useJSONFile from 'hooks/useJSONFile';
 
 export default function Keypad(){
 
-    const { formJsonCtx, setFormJsonCtx } = useContext(FormJSONContext)
-    const { textEditorJSONCtxt, setTextEditorJSONCtxt  } = useContext(TextEditorJSONContext)
-    const { exportJSONFile, generateURIJSONFile, errorField, uriJSON } = useJSONFile({formJsonCtx, textEditorJSONCtxt})
+    const { state, dispatch } = useContext(JSONCtx)
+    const { exportJSONFile, generateURIJSONFile, errorField, uriJSON } = useJSONFile({state})
 
     const copyClipboard = function(){
         document.getElementById('inpt-uri-json').select()
@@ -21,20 +18,19 @@ export default function Keypad(){
     }
 
     const clearJSON = function(){
-        setFormJsonCtx(JSON_FILE_OBJECT_DEFAULT)
-        setTextEditorJSONCtxt(JSON_FILE_OBJECT_DEFAULT)
+        dispatch({ type: "clearJSON" })
     }
 
     return(<>
-            <Button name='btn-exportjson' click={exportJSONFile}>Generate</Button>
-            <Button name='btn-generateuri' click={generateURIJSONFile}>Share</Button>
-            <Button name='btn-clear' click={clearJSON}>Clear</Button>
-            <div id='err-popbox' className='pop-up error-popup-box'>
+            <Button name='btn-exportjson' click={exportJSONFile} testid='btn-exportjson'>Generate</Button>
+            <Button name='btn-generateuri' click={generateURIJSONFile} testid='btn-generateuri'>Share</Button>
+            <Button name='btn-clear' click={clearJSON} testid='btn-clear'>Clear</Button>
+            <div id='err-popbox' className='pop-up error-popup-box' data-testid='error-fields-popup'>
                 <FontAwesomeIcon icon={faExclamation} size='lg'/>
                 The field <span style={{'fontStyle':'italic'}}>'{errorField}'</span> is empty.
                 <div className='btn-close-error-popup'><button onClick={() => { document.getElementById('err-popbox').style.display = 'none'}}>X</button></div>
             </div>
-            <div id='cp-uri-popbox' className='pop-up copy-uri-popup-box'>
+            <div id='cp-uri-popbox' className='pop-up copy-uri-popup-box' data-testid='copy-uri-popup'>
                 <input id='inpt-uri-json' value={uriJSON} />
                 <div className='btn-copy-uri'><button onClick={copyClipboard}><FontAwesomeIcon icon={faCopy} size='lg'/></button></div>
             </div>

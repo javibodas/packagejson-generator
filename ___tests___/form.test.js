@@ -1,93 +1,119 @@
-import React from "react";
-import Form from "components/Form";
-import { FormJSONContextProvider } from "context/formJsonContext";
-import { TextEditorJSONContextProvider } from "context/textEditorJsonContext";
-import { JSON_FILE_OBJECT_DEFAULT } from "context/DEFAULT_PKG_JSON";
-import { server } from "./setupWorkerAPI";
-import { render, screen, waitFor, fireEvent } from "@testing-library/react";
-import "jest-extended";
+import React from 'react'
+import Form from 'components/Form'
+import { JSONContextProvider } from 'context'
+import { jsonInitialState } from 'state'
+import { server } from './setupWorkerAPI'
+import { render, screen, waitFor, fireEvent } from '@testing-library/react'
+import 'jest-extended';
 
-describe("Form Test", () => {
-  const wrapper = ({ children }) => {
-    return (
-      <TextEditorJSONContextProvider>
-        <FormJSONContextProvider>{children}</FormJSONContextProvider>
-      </TextEditorJSONContextProvider>
-    );
-  };
+describe('Form Test', () => {
 
-  beforeEach(() => render(<Form />, { wrapper }));
-  beforeAll(async () => {
-    server.listen();
-  });
-  afterEach(() => server.resetHandlers());
-  afterAll(() => server.close());
+    const wrapper = ({ children }) => {
+        return (<JSONContextProvider>
+                        {children}
+                </JSONContextProvider>)
+    }
 
-  describe("When initial load", () => {
-    it("should have default context values", () => {
-      Object.keys(JSON_FILE_OBJECT_DEFAULT).map((key) => {
-        if (typeof JSON_FILE_OBJECT_DEFAULT[key] === "string") {
-          const input = screen.queryByTestId("form-" + key);
-          input
-            ? expect(input.value).toBe(JSON_FILE_OBJECT_DEFAULT[key])
-            : null;
-        }
-      });
-    });
-  });
+    beforeEach(() => render(<Form />, {wrapper}) )
+    beforeAll(() => server.listen())
+    afterEach(() => server.resetHandlers() )
+    afterAll(() => server.close() )
 
-  describe("When writing text in dependencie field", () => {
-    const packageName = "react";
+    describe('When initial load', () => {
+        it('should have default context values in form', () => {
+            Object.keys(jsonInitialState).map((key) => {
+                if(typeof jsonInitialState[key] === 'string'){
+                    const input = screen.queryByTestId('form-' + key)
+                    input ? expect(input.value).toBe(jsonInitialState[key]) : null
+                }
+            })
+            
+        })
+    })
 
-    it("should appear dependencies list", async () => {
-      fireEvent.change(screen.getByTestId("input-dependencies"), {
-        target: { value: packageName },
-      });
+    describe('When writing package in dependencies field', () => {
+        const packageName = 'react'
 
-      await waitFor(() => {
-        expect(screen.queryByTestId("dependencies-list-item")).toBeDefined();
-      });
-    });
-  });
+        beforeEach(() => {
+            screen.getByTestId('input-dependencies').value = ''
+            screen.getByTestId('input-devDependencies').value = ''
+        })
 
-  describe("When selecting package in dependencies combo", () => {
-    const packageName = "react";
+        it('should show packages list for dependencies', async () => {
+            fireEvent.change(screen.getByTestId('input-dependencies'), {target: { value: packageName }})
 
-    beforeEach(async () => {
-      fireEvent.change(screen.getByTestId("input-dependencies"), {
-        target: { value: packageName },
-      });
+            await waitFor(() => {
+                expect(screen.queryByTestId('dependencies-list-item')).toBeDefined()
+            })
+        })
 
-      await waitFor(() => {
-        expect(screen.queryByTestId("dependencies-list-item")).toBeDefined();
-        fireEvent.click(screen.getByTestId("dependencies-list-item"), {
-          target: { innerText: packageName },
-        });
-      });
-    });
+        it('should show packages list for devdependencies', async () => {
+            fireEvent.change(screen.getByTestId('input-devDependencies'), {target: { value: packageName }})
 
-    it("should add package to dependencies list", () => {
-      expect(screen.getByTestId("dependencies-list").textContent).toInclude(
-        packageName
-      );
-    });
-  });
+            await waitFor(() => {
+                expect(screen.queryByTestId('devDependencies-list-item')).toBeDefined()
+            })
+        })
+    })
 
-  describe("When adding script in form", () => {
-    const scriptKey = "test-jest";
-    const scriptvalue = "jest";
+    describe('When selecting package in packages list of dependencies combo', () => {
+        const packageName = 'react'
+        
+        beforeEach(async () => {
+            fireEvent.change(screen.getByTestId('input-dependencies'), {target: { value: packageName }})
 
-    it("should add script to scripts list", () => {
-      screen.getByTestId("script-key").value = scriptKey;
-      screen.getByTestId("script-value").value = scriptvalue;
+            await waitFor(() => {
+                expect(screen.queryByTestId('dependencies-list-item')).toBeDefined()
+                fireEvent.click(screen.getByTestId('dependencies-list-item'), {target : { innerText: packageName}})
+            })
+        })
 
-      fireEvent.click(screen.getByTestId("script-add-btn"));
-      expect(screen.getByTestId("scripts-list").textContent).toInclude(
-        scriptKey
-      );
-      expect(screen.getByTestId("scripts-list").textContent).toInclude(
-        scriptvalue
-      );
-    });
-  });
-});
+        it('should add package to dependencies list', () => {
+            expect(screen.getByTestId('dependencies-list').textContent).toInclude(packageName)
+        })
+    })
+
+    describe('When selecting package in packages list of devDependencies combo', () => {
+        const packageName = 'react'
+        
+        beforeEach(async () => {
+            fireEvent.change(screen.getByTestId('input-devDependencies'), {target: { value: packageName }})
+
+            await waitFor(() => {
+                expect(screen.queryByTestId('devDependencies-list-item')).toBeDefined()
+                fireEvent.click(screen.getByTestId('devDependencies-list-item'), {target : { innerText: packageName}})
+            })
+        })
+
+        it('should add package to devdependencies list', () => {
+            expect(screen.getByTestId('devDependencies-list').textContent).toInclude(packageName)
+        })
+    })
+
+    describe('When adding script in form', () => {
+        const scriptKey = 'test-jest'
+        const scriptvalue = 'jest'
+
+        beforeEach(() => {
+            screen.getByTestId('script-key').value = ''
+            screen.getByTestId('script-value').value = ''
+        })
+
+        it('should not add script to scripts list if script key is not filled', () => {
+            screen.getByTestId('script-value').value = scriptvalue
+
+            fireEvent.click(screen.getByTestId('script-add-btn'))
+            expect(screen.getByTestId('scripts-list').textContent).not.toInclude(scriptKey)
+            expect(screen.getByTestId('scripts-list').textContent).not.toInclude(scriptvalue)
+        })
+
+        it('should add script to scripts list if script key and script value are filled', () => {
+            screen.getByTestId('script-key').value = scriptKey
+            screen.getByTestId('script-value').value = scriptvalue
+
+            fireEvent.click(screen.getByTestId('script-add-btn'))
+            expect(screen.getByTestId('scripts-list').textContent).toInclude(scriptKey)
+            expect(screen.getByTestId('scripts-list').textContent).toInclude(scriptvalue)
+        })
+    })
+})

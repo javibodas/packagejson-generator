@@ -14,3 +14,7 @@
    ```sh
    npm run build
    ```
+3. Run the project
+   ```sh
+   npm run start
+   ```
