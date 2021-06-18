@@ -28,13 +28,18 @@
     "@fortawesome/fontawesome-svg-core": "1.2.32",
     "@fortawesome/free-solid-svg-icons": "5.15.1",
     "@fortawesome/react-fontawesome": "0.1.13",
-    "ajv": "7.0.3",
+    "@zeit/next-css": "^1.0.1",
     "axios": "0.21.1",
     "firebase": "8.1.1",
-    "jsonschema": "1.4.0",
-    "next": "10.2.0",
+    "monaco-editor": "^0.21.2",
+    "monaco-editor-webpack-plugin": "^2.1.0",
+    "next": "10.0.5",
+    "next-compose-plugins": "^2.2.1",
+    "next-transpile-modules": "^6.0.0",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-monaco-editor": "^0.41.2",
+    "url-loader": "^4.1.1"
   },
   "jest": {
     "setupFiles": [
