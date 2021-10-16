@@ -38,6 +38,9 @@ export default function useJSONFile({ state }){
     }
 
     const generateURIJSONFile = function(){
+        document.getElementById('err-popbox').style.display = 'none'
+        document.getElementById('cp-uri-popbox').style.display = 'none'
+
         const errorFields = checkFields()
         if(errorFields){
             setErrorField(errorFields)
