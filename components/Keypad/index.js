@@ -11,12 +11,6 @@ export default function Keypad(){
     const { state, dispatch } = useContext(JSONCtx)
     const { exportJSONFile, generateURIJSONFile, errorField, uriJSON } = useJSONFile({state})
 
-    const copyClipboard = function(){
-        document.getElementById('inpt-uri-json').select()
-        document.execCommand("copy");
-        document.getElementById('cp-uri-popbox').style.display = 'none'
-    }
-
     const clearJSON = function(){
         dispatch({ type: "clearJSON" })
     }
@@ -26,56 +20,65 @@ export default function Keypad(){
             <Button name='btn-generateuri' click={generateURIJSONFile} testid='btn-generateuri'>Share</Button>
             <Button name='btn-clear' click={clearJSON} testid='btn-clear'>Clear</Button>
             <div id='err-popbox' className='pop-up error-popup-box' data-testid='error-fields-popup'>
-                <FontAwesomeIcon icon={faExclamation} size='lg'/>
-                The field <span style={{'fontStyle':'italic'}}>'{errorField}'</span> is empty.
-                <div className='btn-close-error-popup'><button onClick={() => { document.getElementById('err-popbox').style.display = 'none'}}>X</button></div>
+                <div className='content'>
+                    <FontAwesomeIcon icon={faExclamation} size='lg' style={{'padding': '0px 10px'}}/>
+                    <p>The field <span style={{'fontStyle':'italic'}}>'{errorField}'</span> is empty.</p>
+                </div>
+                <div className='arrow'></div>
             </div>
             <div id='cp-uri-popbox' className='pop-up copy-uri-popup-box' data-testid='copy-uri-popup'>
-                <input id='inpt-uri-json' value={uriJSON} />
-                <div className='btn-copy-uri'><button onClick={copyClipboard}><FontAwesomeIcon icon={faCopy} size='lg'/></button></div>
+                <div className='content'>
+                    <div className='btn-copy-uri'><a href={uriJSON} target='_blank'>{uriJSON}</a></div>
+                </div>
+                <div className='arrow'></div>
             </div>
         <style jsx>{`
-
             .pop-up{
                 display: flex;
                 flex-direction: row;
-                padding: 7px 5px;
-                box-shadow: 0px 5px 10px rgba(0,0,0,.2);
+                position: relative;
                 align-items: center;
                 user-select: none;
                 transition: all .5s ease-in-out;
+                border: 1px solid #c12127;
             }
-
+            .pop-up .content {
+                display: flex;
+                width: 100%;
+                align-items: center;
+                justify-content: center;
+            }
+            .pop-up .arrow {
+                position: relative;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+                width: 15px;
+                height: 15px;
+                background-color: #c12127;
+                border: 1px solid #c12127;
+            }
             .error-popup-box{
                 display: none;
-                flex-direction: row;
-                position: relative;
-                max-width: 50%;
-                top: -20%;
-                background: #dedede; color: red;
-                border: 3px solid red;
-                border-radius: 10px;
+                color: red;
+                max-width: 15rem;
+                top: -6.2rem;
+                right: -7rem;
             }
-
+            .error-popup-box .arrow {
+                top: 1.5rem;
+                right: 6rem;
+            }
             .copy-uri-popup-box{
                 display: none;
-                flex-direction: row;
-                max-width: 50%;
-                position: relative;
-                top: -20%;
-                background: #dedede;
+                max-width: 25rem;
+                padding: 15px 10px;
+                top: -5.9rem;
+                right: -5rem;
             }
-
-            .copy-uri-popup-box > input{
-                width: 90%;
-            }
-
-            .copy-uri-popup-box div{
-                width: 10%;
-            }
-            
-            .btn-copy-uri > a, .btn-close-error-popup > a{
-                text-decoration: none;
+            .copy-uri-popup-box .arrow {
+                top: 1.5rem;
+                right: 16rem;
             }
         `}</style>
         </>)
