@@ -13,7 +13,7 @@ export default function Form(){
                 
 
             <style jsx>{`
-                .forms{
+                .forms {
                     min-height: 90%;
                 }
             `}</style>

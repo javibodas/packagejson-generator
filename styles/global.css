@@ -9,6 +9,7 @@ body{
     margin: 0;
     background-color: #F2F2F2;
     min-height: 100vh;
+    font-family: system-ui;
 }
 
 h1, h2, h3, h4, h5, h6{
@@ -25,7 +26,6 @@ ul{
 }
 
 .label-title{
-    font-family: "Lucida Console", Monaco, monospace;
     font-size: calc(0.35em + 0.35vw);
     font-weight: bold;
 }
@@ -50,16 +50,18 @@ ul{
 .data-box input, .section-input input{
     border-radius: 0;
     border: none;
-    border-bottom: solid 1px #c12127;
-    font-family: "Lucida Console", Monaco, monospace;
+    border-bottom: solid 1px #f1efee;
     font-size: calc(0.35em + 0.35vw);
 }
 
-.data-box input:focus, .section-input input:focus{
-    border-radius: 0;
+.data-box input:hover, .section-input input:hover{
     outline: none;
-    border: none;
-    border-bottom: solid 3px #c12127;
+    border-bottom: solid 1px #c12127;
+}
+
+.data-box input:focus, .section-input input:focus{
+    outline: none;
+    border-bottom: solid 1px #c12127;
 }
 
 .data-box input, .data-box .section-input{

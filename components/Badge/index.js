@@ -16,7 +16,7 @@ export default function Badge(props){
                 </div>
                 {props.objValue ? <div className={styleValue}><span>{props.objValue}</span></div> : null}
                 <div className='badge-close' onClick={() => {props.remove(props.objKey)}}>
-                    <span>X</span>
+                    <span>×</span>
                 </div>
             </div>
             <style jsx>{`

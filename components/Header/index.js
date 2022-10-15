@@ -23,8 +23,8 @@ export default function Header(){
 
     return(<>
             <header className='header'>
-                <h3>package.json generator</h3>
-                {/*<div className='nav'>
+                {/*<h3>package.json generator</h3>
+                <div className='nav'>
                     {
                         user === USER_STATE.NOT_LOGGED ?
                             <button onClick={handleSignIn}>LogIn With Github</button>
@@ -36,20 +36,17 @@ export default function Header(){
             </header>
             <style jsx>
                 {`
-                    .header{
+                    .header {
                         max-width: 100vw;
                         display: flex; flex-direction: row; justify-content: space-between;
-                        background: linear-gradient(139deg, #fb8817, #ff4b01, #c12127, #e02aff);
                         padding: 0.5rem 2rem 0.5rem 3rem;
                     }
 
-                    .header h3{
+                    .header h3 {
                         color: black;
-                        font-family: "Lucida Console", Monaco, monospace;
-                        font-style: italic;
+                        font-family: system-ui;
                         margin: auto 0;
                     }
-                
                 `}
             </style>
             </>)
