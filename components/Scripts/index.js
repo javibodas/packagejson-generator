@@ -33,6 +33,7 @@ export default function Scripts(){
                     padding: 1rem 2rem 1rem 8rem;
                     display: flex;
                     flex-flow: row wrap;
+                    overflow-y: auto;
                 }
 
                 .form-scripts .key-inpt{

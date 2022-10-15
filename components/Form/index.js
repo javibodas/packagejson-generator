@@ -10,12 +10,5 @@ export default function Form(){
                     <Dependencies title='Dev dependencies' type='dev' classType='devDependencies'/>
                     <Scripts />
             </div>
-                
-
-            <style jsx>{`
-                .forms {
-                    min-height: 90%;
-                }
-            `}</style>
         </>)
 }

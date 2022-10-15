@@ -39,6 +39,7 @@ ul{
 .dependencies-box{
     display: flex;
     flex-direction: column;
+    max-height: 200px;
 }
 
 .data-box label, .data-box .section-label{
