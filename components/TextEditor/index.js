@@ -29,7 +29,7 @@ export default function TextEditor() {
                 language="json"
                 theme="vs-dark"
                 value={ JSON.stringify(state, 0, 4) }
-                options={{ minimap: { enabled: false, },}}
+                options={{ minimap: { enabled: false, }, automaticLayout: true,}}
                 onChange={ updateContext }
                 data-testid="monaco-editor"
             />
