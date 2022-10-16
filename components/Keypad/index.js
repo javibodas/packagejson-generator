@@ -16,7 +16,7 @@ export default function Keypad(){
     }
 
     return(<>
-            <Button name='btn-exportjson' click={exportJSONFile} testid='btn-exportjson'>Generate</Button>
+            <Button name='btn-exportjson' click={exportJSONFile} testid='btn-exportjson'>Export</Button>
             <Button name='btn-generateuri' click={generateURIJSONFile} testid='btn-generateuri'>Share</Button>
             <Button name='btn-clear' click={clearJSON} testid='btn-clear'>Clear</Button>
             <div id='err-popbox' className='pop-up error-popup-box' data-testid='error-fields-popup'>

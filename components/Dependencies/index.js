@@ -58,20 +58,19 @@ export default function Dependencies(props){
                     }
 
                     .dependencies .packages-list li:hover{
-                        font-size: 16px;
+                        font-weight: bold;
                         cursor: pointer;
                     }
 
                     .dependencies .packages-list li .pckg-version{
                         position: absolute;
                         right: 0;
-                        font-weight: bold;
                         font-size: 10px;
                         color: red;
                     }
 
                     .dependencies .packages-list li:hover .pckg-version{
-                        font-size: 12px;
+                        font-weight: bold;
                     }
 
                     .dependencies .dependencies-list{

@@ -5,16 +5,18 @@ export default function Button(props){
             <style jsx>
             {`
                 .mybtn{
-                    color: white;
-                    font-weight: bold;
                     border: none;
-                    font-size: calc(0.35em + 0.35vw);
                     margin-left: 2rem;
                     padding: 0.5rem 2rem 0.5rem 2rem;
-                    font-family: Poppins,sans-serif;
+
+                    color: white;
+                    font-weight: bold;
+                    font-size: calc(0.35em + 0.35vw);
+                    font-family: system-ui;
                 }
 
                 .btn-exportjson{
+                    border-radius: 2px;
                     background: #b30ad2;
                     border-bottom: solid 5px #e81aa8;
                     transition: background 0.5s ease;
@@ -25,6 +27,7 @@ export default function Button(props){
                 }
                 
                 .btn-generateuri{
+                    border-radius: 2px;
                     background: #fa8717;
                     border-bottom: solid 5px #c12127;
                     transition: background 0.5s ease;
@@ -35,7 +38,7 @@ export default function Button(props){
                 }
 
                 .btn-add-script{
-                    background: #fa8717;
+                    background: #a4a19f;
                     border-radius: 9999px;
                     padding: 0.25rem;
                     text-align: center;
@@ -47,6 +50,7 @@ export default function Button(props){
                 }
 
                 .btn-clear{
+                    border-radius: 2px;
                     background:#0c4094;
                     border-bottom: solid 5px #25eaf5;
                     transition: background 0.5s ease;
