@@ -25,7 +25,6 @@ export default function Container(){
                     grid-template-columns: 1.4fr 0.6fr 1fr; 
                     grid-template-rows: 1fr 1.5fr 0.5fr;
                     max-width: 80%;
-                    min-height: 80vh;
                     margin: 0 auto;
                     border-radius: 4px;
 

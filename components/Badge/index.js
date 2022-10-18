@@ -11,10 +11,10 @@ export default function Badge(props){
 
     return(<>
             <div className='my-badge'>
-                <div className='badge-key'>
+                <div className='badge-key text-ellipsis'>
                     <span>{props.objKey}</span>
                 </div>
-                {props.objValue ? <div className={styleValue}><span>{props.objValue}</span></div> : null}
+                {props.objValue ? <div className={styleValue + ' text-ellipsis'}><span>{props.objValue}</span></div> : null}
                 <div className='badge-close' onClick={() => {props.remove(props.objKey)}}>
                     <span>×</span>
                 </div>
@@ -24,7 +24,7 @@ export default function Badge(props){
                 .my-badge{
                     display: flex;
                     flex-direction: row;
-                    font-size: 12px;
+                    font-size: calc(0.35em + 0.35vw);
                     text-align: center;
                     align-items: center;
                     padding: .15rem .15rem .15rem .15rem;
@@ -76,8 +76,16 @@ export default function Badge(props){
                     border-top: 1px solid green;
                     border-bottom: 1px solid green;
                     background-color: green;
-                    
                 }
+
+                .text-ellipsis{
+                    display: -webkit-box !important;
+                    text-overflow: ellipsis;
+                    white-space: normal;
+                    overflow:hidden;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                  }
             `}</style>
             </>);
 }

@@ -74,7 +74,7 @@ export default function Dependencies(props){
                     }
 
                     .dependencies .dependencies-list{
-                        padding: 1rem 2rem 1rem 8rem;
+                        padding: 1rem 0 1rem 1rem;
                         display: flex;
                         flex-flow: row wrap;
                         overflow-y: auto;
