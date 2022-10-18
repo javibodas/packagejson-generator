@@ -1,17 +1,8 @@
 import Form from 'components/Form';
 import TextEditor from 'components/TextEditor';
 import Keypad from 'components/Keypad';
-import { useEffect } from 'react';
 
 export default function Container(){
-
-    useEffect(() => {
-        document.addEventListener('mousedown', function(e) {
-            document.getElementById('err-popbox').style.display = 'none'
-            document.getElementById('cp-uri-popbox').style.display = 'none'
-        })
-    }, [])
-
     return(<>
             <div className='row my-container'>
                 <div className='editor'>
@@ -57,7 +48,12 @@ export default function Container(){
                 .editor {
                     grid-area: editor;
                 }
-                
+
+                @media (max-width: 500px) {
+                    .editor {
+                      display: none;
+                    }
+                }
                 `}</style>
             </>
     )

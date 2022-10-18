@@ -1,63 +1,62 @@
 export default function Button(props){
 
     return(<>
-            <button className={'mybtn ' + props.name} onClick={props.click} data-testid={props.testid}>{props.children}</button>
+            <button className={'btn ' + props.name} onClick={props.click} data-testid={props.testid}>{props.children}</button>
             <style jsx>
             {`
-                .mybtn{
+                .btn {
+                    border-radius: 2px;
                     border: none;
-                    margin-left: 2rem;
-                    padding: 0.5rem 2rem 0.5rem 2rem;
+
+                    font-family: system-ui;
+                    font-size: calc(.35em + .35vw);
+                    font-weight: bold;
 
                     color: white;
-                    font-weight: bold;
-                    font-size: calc(0.35em + 0.35vw);
-                    font-family: system-ui;
+                    background: none;
+
+                    transition: background .5s ease;
+
+                    padding: 0.5rem 2rem 0.5rem 2rem;
+                    margin: 0 .25rem 0 .25rem;
                 }
 
-                .btn-exportjson{
-                    border-radius: 2px;
+                .btn:hover {
+                    color: white;
+                    background: #c12127;
+                }
+
+                .btn-exportjson {
                     background: #b30ad2;
                     border-bottom: solid 5px #e81aa8;
-                    transition: background 0.5s ease;
                 }
 
-                .btn-exportjson:hover{
+                .btn-exportjson:hover {
                     background: #e81aa8;
                 }
-                
-                .btn-generateuri{
-                    border-radius: 2px;
+
+                .btn-generateuri {
                     background: #fa8717;
                     border-bottom: solid 5px #c12127;
-                    transition: background 0.5s ease;
                 }
 
-                .btn-generateuri:hover{
+                .btn-generateuri:hover {
                     background: #c12127;
                 }
 
-                .btn-add-script{
-                    background: #a4a19f;
-                    border-radius: 9999px;
-                    padding: 0.25rem;
-                    text-align: center;
-                    margin-left: 0.25rem;
-                }
-
-                .btn-add-script:hover{
-                    background: #c12127;
-                }
-
-                .btn-clear{
-                    border-radius: 2px;
+                .btn-clear {
                     background:#0c4094;
                     border-bottom: solid 5px #25eaf5;
-                    transition: background 0.5s ease;
                 }
 
-                .btn-clear:hover{
+                .btn-clear:hover {
                     background: #25eaf5;
+                }
+
+                .btn-add-script {
+                    color: #c12127;
+                    border: solid 1px #c12127;
+                    padding: .05em .7em;
                 }
             `}
             </style>
