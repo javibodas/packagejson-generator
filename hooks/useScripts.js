@@ -1,6 +1,5 @@
 export default function useScripts({dispatch, state }){
 
-
     const addScript = function(event){
         const keyScript = document.getElementById('key-script').value
         const commandScript = document.getElementById('command-script').value
@@ -21,8 +20,6 @@ export default function useScripts({dispatch, state }){
     const removeScript = function(scriptKey){
         dispatch({type: 'removeScript', key: scriptKey})
     }
-
-
 
     return { addScript, removeScript }
 }
