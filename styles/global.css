@@ -1,82 +1,101 @@
-*{
+::-webkit-scrollbar {
+    width: 18px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+}
+
+* {
     --font-size-editor-lg: 13px;
     --line-height-lg: normal;
     --font-size-editor-md: 12px;
     --font-size-editor-s: 10px;
 }
 
-body{ 
+body { 
     margin: 0;
     background-color: #F2F2F2;
     min-height: 100vh;
     font-family: system-ui;
 }
 
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
 
-button:hover{
+button:hover {
     cursor: pointer;
 }
 
-ul{
+ul {
     list-style: none;
     margin: 0;
 }
 
-.label-title{
+.label-title {
     font-size: calc(0.35em + 0.35vw);
     font-weight: bold;
 }
 
-.data-box{
+.data-box {
     display: flex;
     flex-direction: row;
     padding: 0.35rem 0 0.35rem 0;
 }
 
-.dependencies-box{
+.dependencies-box {
     display: flex;
     flex-direction: column;
     max-height: 200px;
 }
 
-.data-box label, .data-box .section-label{
+.data-box label, .data-box .section-label {
     min-width: 20%;
     margin: auto 1rem auto -1rem; 
     text-align: right;
 }
 
-.data-box input, .section-input input{
+.data-box input, .section-input input {
     border-radius: 0;
     border: none;
     border-bottom: solid 1px #f1efee;
     font-size: calc(0.35em + 0.35vw);
 }
 
-.data-box input:hover, .section-input input:hover{
+.data-box input:hover, .section-input input:hover {
     outline: none;
     border-bottom: solid 1px #c12127;
 }
 
-.data-box input:focus, .section-input input:focus{
+.data-box input:focus, .section-input input:focus {
     outline: none;
     border-bottom: solid 1px #c12127;
 }
 
-.data-box input, .data-box .section-input{
+.data-box input, .data-box .section-input {
     min-width: 70%;
 }
 
-.section-input input{
+.section-input input {
     width: 100%;
 }
 
-.input-form{
+.input-form {
     padding: .25rem 0 .25rem 0;
 }
 
-.invisible{
+.invisible {
     display: none;                
 }
