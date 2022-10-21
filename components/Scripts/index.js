@@ -36,14 +36,19 @@ export default function Scripts(){
                     overflow-y: auto;
                 }
 
-                .form-scripts .key-inpt{
-                    max-width: 20%;
-                    min-width: 20%;
+                .key-inpt {
+                    grid-column: 2/2;
+                    grid-row: 1;
+                }
+                
+                .comd-inpt {
+                    grid-column: 3/4;
+                    grid-row: 1;
                 }
 
-                .form-scripts .comd-inpt{
-                    max-width: 50%;
-                    min-width: 50%;
+                #btn-add-script {
+                    grid-column: 5/5;
+                    grid-row: 1;
                 }
             `}</style>
         </>)

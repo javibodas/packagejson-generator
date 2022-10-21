@@ -7,18 +7,12 @@ export default function ProjectData(){
     const { state, dispatch } = useContext(JSONCtx);
 
     const typeData = function(event){
-        if(event.target){
-            if(event.target.name === 'projectName'){
-                dispatch({type: 'updateProjectName', value: event.target.value})
-            }else if(event.target.name === 'version'){
-                dispatch({type: 'updateProjectVersion', value: event.target.value})
-            }else if(event.target.name === 'description'){
-                dispatch({type: 'updateProjectDescription', value: event.target.value})
-            }else if(event.target.name === 'author'){
-                dispatch({type: 'updateProjectAuthor', value: event.target.value})
-            }else if(event.target.name === 'main'){
-                dispatch({type: 'updateProjectMainFile', value: event.target.value})
-            }
+        if (event.target) {
+            if (event.target.name === 'projectName') dispatch({type: 'updateProjectName', value: event.target.value})
+            if (event.target.name === 'version') dispatch({type: 'updateProjectVersion', value: event.target.value})
+            if (event.target.name === 'description') dispatch({type: 'updateProjectDescription', value: event.target.value})
+            if (event.target.name === 'author') dispatch({type: 'updateProjectAuthor', value: event.target.value})
+            if (event.target.name === 'main') dispatch({type: 'updateProjectMainFile', value: event.target.value})
         }
     }
 

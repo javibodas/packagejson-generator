@@ -50,8 +50,8 @@ ul {
 }
 
 .data-box {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
     padding: 0.35rem 0 0.35rem 0;
 }
 
@@ -62,12 +62,14 @@ ul {
 }
 
 .data-box label, .data-box .section-label {
-    min-width: 20%;
-    margin: auto 1rem auto -1rem; 
-    text-align: right;
+    grid-column: 1/1;
+    grid-row: 1;
+    margin: auto 1rem; 
 }
 
-.data-box input, .section-input input {
+.data-box input, .data-box .section-input {
+    grid-column: 2/5;
+    grid-row: 1;
     border-radius: 0;
     border: none;
     border-bottom: solid 1px #f1efee;
@@ -84,18 +86,7 @@ ul {
     border-bottom: solid 1px #c12127;
 }
 
-.data-box input, .data-box .section-input {
-    min-width: 70%;
-}
-
-.section-input input {
-    width: 100%;
-}
-
 .input-form {
     padding: .25rem 0 .25rem 0;
-}
-
-.invisible {
-    display: none;                
+    width: 100%;
 }
