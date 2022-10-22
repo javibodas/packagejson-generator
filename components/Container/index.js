@@ -4,7 +4,7 @@ import Keypad from 'components/Keypad';
 
 export default function Container(){
     return(<>
-            <div className='row my-container'>
+            <div className='container'>
                 <div className='editor'>
                     <TextEditor />
                  </div>
@@ -16,7 +16,7 @@ export default function Container(){
                 </div>
             </div>
             <style jsx>{`
-                .my-container {
+                .container {
                     display: grid;
                     grid-template-areas:
                         "form editor editor"
@@ -49,9 +49,21 @@ export default function Container(){
                     grid-area: editor;
                 }
 
-                @media (max-width: 500px) {
+                @media (max-width: 1000px) {
+                    .my-container {
+                        display: grid;
+                        grid-template-areas: 
+                            "form"
+                            "form"
+                            "keypad";
+                        grid-template-columns: 1fr; 
+                        grid-template-rows: 1fr 1fr 1fr;
+                    }
                     .editor {
-                      display: none;
+                        display: none;
+                    }
+                    .keypad {
+                        padding: 1rem 1rem 1rem 1rem;
                     }
                 }
                 `}</style>
