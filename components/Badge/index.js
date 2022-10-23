@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 export default function Badge(props){
 
@@ -10,18 +12,18 @@ export default function Badge(props){
     }, [])
 
     return(<>
-            <div className='my-badge'>
+            <div className='badge'>
                 <div className='badge-key text-ellipsis'>
                     <span>{props.objKey}</span>
                 </div>
                 {props.objValue ? <div className={styleValue + ' text-ellipsis'}><span>{props.objValue}</span></div> : null}
                 <div className='badge-close' onClick={() => {props.remove(props.objKey)}}>
-                    <span>×</span>
+                    <span className='badge-close-icon'><FontAwesomeIcon icon={faTrash} size="xs"/></span>
                 </div>
             </div>
             <style jsx>{`
 
-                .my-badge{
+                .badge {
                     display: flex;
                     flex-direction: row;
                     font-size: calc(0.35em + 0.35vw);
@@ -30,17 +32,18 @@ export default function Badge(props){
                     padding: .15rem .15rem .15rem .15rem;
                 }
 
-                .my-badge:hover{
+                .badge:hover {
                     cursor: context-menu;
                 }
 
-                .my-badge > div{
+                .badge > div {
                     min-height: 15px;
                     padding: .1em .25em;
                 }
 
-                .my-badge .badge-close{
-                    border: 2px solid #dc3545;
+                .badge .badge-close {
+                    display: flex;
+                    border: 1px solid #dc3545;
                     background-color: white;
                     border-top-right-radius: 5px;
                     border-bottom-right-radius: 5px;
@@ -48,22 +51,25 @@ export default function Badge(props){
                     color: #dc3545;
                 }
 
-                .my-badge .badge-close:hover{
+                .badge .badge-close .badge-close-icon {
+                    margin: auto 0;
+                }
+
+                .badge .badge-close:hover {
                     cursor:pointer;
                     color: white;
                     background-color: #dc3545;
                 }
 
-                .my-badge .badge-key{
+                .badge .badge-key {
                     background-color: #5a5a5a;
                     border: 1px solid #5a5a5a;
                     border-top-left-radius: 5px;
                     border-bottom-left-radius: 5px;
                     color: white;
-                    
                 }
 
-                .my-badge .badge-value-blue{
+                .badge .badge-value-blue {
                     color: white;
                     border-top: 1px solid #0976b4;
                     border-bottom: 1px solid #0976b4;
@@ -71,14 +77,14 @@ export default function Badge(props){
                     
                 }
 
-                .my-badge .badge-value-green{
+                .badge .badge-value-green {
                     color: white;
                     border-top: 1px solid green;
                     border-bottom: 1px solid green;
                     background-color: green;
                 }
 
-                .text-ellipsis{
+                .text-ellipsis {
                     display: -webkit-box !important;
                     text-overflow: ellipsis;
                     white-space: normal;
