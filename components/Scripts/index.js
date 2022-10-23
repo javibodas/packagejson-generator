@@ -17,7 +17,7 @@ export default function Scripts(){
                         <label className='label-title'>Scripts</label>
                         <input id='key-script' className = 'input-form key-inpt' placeholder='Key' data-testid='script-key'/>
                         <input id='command-script' className = 'input-form comd-inpt' placeholder='Command' data-testid='script-value'/>
-                        <Button name='btn-add-script' testid='script-add-btn' click={addScript}>+</Button>
+                        <Button className='btn-add-script' name='btn-add-script' testid='script-add-btn' click={addScript}>+</Button>
                     </div>
                     <div id='scripts-list' className='scripts-list' data-testid='scripts-list'>
                         {state.scripts ? 
@@ -45,7 +45,7 @@ export default function Scripts(){
                     grid-row: 1;
                 }
 
-                #btn-add-script {
+                .btn-add-script {
                     grid-column: 5/5;
                     grid-row: 1;
                 }

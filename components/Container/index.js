@@ -58,11 +58,18 @@ export default function Container(){
                             "keypad";
                         grid-template-columns: 1fr; 
                         grid-template-rows: 1fr 1fr 1fr;
+                        max-width: 90%;
                     }
                     .editor {
                         display: none;
                     }
+                }
+                
+                @media (max-width: 500px) {
                     .keypad {
+                        padding: 1rem 1rem 1rem 1rem;
+                    }
+                    .form {
                         padding: 1rem 1rem 1rem 1rem;
                     }
                 }
