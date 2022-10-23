@@ -28,7 +28,6 @@ export default function Scripts(){
                 </div>
             </div>
             <style jsx>{`
-
                 .form-scripts .scripts-list{
                     padding: 1rem 0 1rem 1rem;
                     display: flex;

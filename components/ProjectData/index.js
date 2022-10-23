@@ -39,7 +39,6 @@ export default function ProjectData(){
                     <input className = 'input-form' placeholder='index.js' name='main' onChange={typeData} value={state.main} data-testid='form-main'/>
                 </div>
             </div>
-            <style jsx>{`
-            `}</style>
-            </>)
+            <style jsx>{``}</style>
+    </>)
 }

@@ -50,9 +50,9 @@ export default function Container(){
                 }
 
                 @media (max-width: 1000px) {
-                    .my-container {
+                    .container {
                         display: grid;
-                        grid-template-areas: 
+                        grid-template-areas:
                             "form"
                             "form"
                             "keypad";
