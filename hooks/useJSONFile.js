@@ -24,7 +24,7 @@ export default function useJSONFile({ state }){
 
     const generateURIJSONFile = function(){
         addPackageJsonDB(state)
-        .then((element) => { window.open(process.env.NEXT_PUBLIC_URI_PACKAGES + element.id, '_blank').focus() })
+        .then((element) => { window.open(process.env.NEXT_PUBLIC_BASE_URL + '/packages/' + element.id, '_blank').focus() })
         .catch((error) => { console.log(error) })
     }
 
