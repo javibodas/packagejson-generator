@@ -29,6 +29,7 @@ export default function Button(props){
                 .btn-exportjson {
                     background: #b30ad2;
                     color: white;
+                    border: none;
                     border-bottom: solid 5px #e81aa8;
                 }
 
@@ -39,6 +40,7 @@ export default function Button(props){
                 .btn-generateuri {
                     background: #fa8717;
                     color: white;
+                    border: none;
                     border-bottom: solid 5px #c12127;
                 }
 
@@ -49,6 +51,7 @@ export default function Button(props){
                 .btn-clear {
                     background:#0c4094;
                     color: white;
+                    border: none;
                     border-bottom: solid 5px #25eaf5;
                 }
 
