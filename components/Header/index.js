@@ -1,50 +1,48 @@
 import { useState, useEffect } from 'react';
-import Avatar from 'components/Avatar';
-import {loginWithGithub, onAuthStateChanged} from 'firebase/client';
+import { loginWithGithub, logoutWithGithub, onAuthStateChanged } from 'firebase/client';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import User from 'components/User'
+import Button from 'components/Button';
 
 
 export default function Header(){
 
-    const USER_STATE = {
-        NOT_LOGGED: null,
-        NOT_KNOWN: undefined
-    }
-    const [ user, setUser ] = useState(USER_STATE.NOT_KNOWN)
+    const USER_STATE = { NOT_LOGGED: null }
+    const [ user, setUser ] = useState(USER_STATE.NOT_LOGGED)
     
     useEffect(function(){
         onAuthStateChanged(user => setUser(user))
     }, [])
 
-    const handleSignIn = function(event){
+    const handleSignIn = function(event) {
         loginWithGithub()
-        .then((user) => {   console.log(user); setUser(user) })
+        .then((user) => { setUser(user) })
         .catch((error) => console.log(error))
     }
 
     return(<>
-            <header className='header'>
-                {/*<h3>package.json generator</h3>
-                <div className='nav'>
+            <header>
+                <nav>
                     {
                         user === USER_STATE.NOT_LOGGED ?
-                            <button onClick={handleSignIn}>LogIn With Github</button>
+                            <Button name='btn-login' click={handleSignIn}>LogIn With <FontAwesomeIcon icon={faGithub} /></Button>
                         :
-                            user === USER_STATE.NOT_KNOWN ? <Avatar />
-                            : <Avatar avatar={user.avatar} name={user.username}/>
+                            <User user={user} logout={logoutWithGithub}/>
                     }
-                </div>*/}
+                </nav>
             </header>
             <style jsx>
                 {`
-                    .header {
+                    header {
                         max-width: 100vw;
-                        display: flex; flex-direction: row; justify-content: space-between;
+                        height: 6vh;
+                        display: flex; flex-direction: row-reverse;
                         padding: 0.5rem 2rem 0.5rem 3rem;
                     }
-
-                    .header h3 {
-                        color: black;
-                        font-family: system-ui;
+                    
+                    nav {
+                        float: right;
                         margin: auto 0;
                     }
                 `}

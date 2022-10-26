@@ -18,34 +18,35 @@ const dbService = firebase.firestore()
 /** LOGIN FUNCTIONS */
 
 const mapUserFromFirebaseAuth = (user) => {
-  if (!user) return null   
-  
-  const { displayName, email, photoURL } = user
-  return { avatar: photoURL, username: displayName, email }
+	if (!user) return null
+
+  	const { displayName, email, photoURL, uid } = user
+  	return { avatar: photoURL, username: displayName, email, uid }
 }
 
-export const onAuthStateChanged = function(onChange){
-      return firebase.auth().onAuthStateChanged( user =>{
-        const normalizedUser = mapUserFromFirebaseAuth(user)
+export const onAuthStateChanged = (onChange) => {
+    return firebase.auth().onAuthStateChanged( user => {
+    	const normalizedUser = mapUserFromFirebaseAuth(user)
         onChange(normalizedUser)
-      })
+    })
 }
 
-export const loginWithGithub = function(){
-
+export const loginWithGithub = () => {
     const githubProvider = new firebase.auth.GithubAuthProvider()
     return firebase.auth().signInWithPopup(githubProvider)
 }
 
+export const logoutWithGithub = () => { firebase.auth().signOut() }
+
 /**  DATABASE FUNCTIONS */
 
-export const addPackageJsonDB = function(jsonFile){
-  return dbService.collection('files').add({
-    jsonFile,
-    createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
-  })
+export const addPackageJsonDB = (jsonFile) => {
+	return dbService.collection('files').add({
+    	jsonFile,
+    	createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
+  	})
 }
 
-export const getPackageJsonDB = function(idPackage){
-  return dbService.collection('files').doc(idPackage).get()
+export const getPackageJsonDB = (fileId) => {
+	return dbService.collection('files').doc(fileId).get()
 }
