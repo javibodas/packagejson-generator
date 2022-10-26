@@ -50,3 +50,18 @@ export const addPackageJsonDB = (jsonFile) => {
 export const getPackageJsonDB = (fileId) => {
 	return dbService.collection('files').doc(fileId).get()
 }
+
+export const getUsersFiles = async (idUser) => {
+    const result = await dbService.collection('users').doc(idUser).get()
+	const user = result.data()
+
+    const userFiles = await Promise.all(
+        user.files.map(async (fileId) => {
+            const result = await dbService.collection('files').doc(fileId).get()
+		    const file = result.data()
+            return {...file, id: fileId}
+        })
+  	)
+    
+  	return userFiles
+}
