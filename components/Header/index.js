@@ -35,15 +35,20 @@ export default function Header(){
             <style jsx>
                 {`
                     header {
-                        max-width: 100vw;
+                        max-width: 80%;
                         height: 6vh;
                         display: flex; flex-direction: row-reverse;
-                        padding: 0.5rem 2rem 0.5rem 3rem;
+                        padding: 0.5rem 0 0.5rem 0;
+                        margin: 0 auto;
                     }
                     
                     nav {
-                        float: right;
                         margin: auto 0;
+                    }
+
+                    @media (max-width: 1000px) {
+                        max-width: 90%!important;
+                        margin: 0 auto;
                     }
                 `}
             </style>
