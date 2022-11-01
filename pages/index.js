@@ -11,7 +11,7 @@ export default function HomePage(props) {
                     <link rel="icon" href="/favicon.png" />
                 </Head>
                 <Header />
-                <JSONContextProvider>
+                <JSONContextProvider value={props.jsonFile}>
                     <Container />
                 </JSONContextProvider>
             </>)
