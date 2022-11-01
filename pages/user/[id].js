@@ -1,13 +1,22 @@
 import Header from "components/Header"
+import FileDetailCard from "components/FileDetailCard"
 
 export default function User({packages, error}){
     return(<>
             <Header />
-            <div>
-                <ul>
-                    { packages.map(packageJson => <li key={packageJson.id}>{packageJson.jsonFile.name}</li>) }
-                </ul>
+            <div className='user-files'>
+                    { packages.map(packageJson => <FileDetailCard key={packageJson.id} timestamp={packageJson.createdAt.seconds} name={packageJson.jsonFile.name} description={packageJson.jsonFile.description} version={packageJson.jsonFile.version}/>)}
             </div>
+            <style>{`
+                .user-files {
+                    display: flex;
+                    flex-flow: row wrap;
+
+                    max-width: 80%;
+                    min-height: 80vh;
+                    margin: 0 auto;
+                }
+            `}</style>
         </>)
 }
 
