@@ -20,12 +20,6 @@ export default function TextEditor() {
       <>
         <div className="text-editor" data-testid="text-area-editor">
             <MonacoEditor
-                editorDidMount={() => {
-                    window.MonacoEnvironment.getWorkerUrl = (_moduleId, label) => {
-                        if (label === "json") return "_next/static/json.worker.js";
-                        return "_next/static/editor.worker.js";
-                    };
-                }}
                 language="json"
                 theme="vs-dark"
                 value={ JSON.stringify(state, 0, 4) }

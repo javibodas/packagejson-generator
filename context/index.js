@@ -4,9 +4,9 @@ import { jsonInitialState } from 'state';
 
 const JSONCtx = React.createContext();
 
-export function JSONContextProvider({children}){
+export function JSONContextProvider({children, value}){
 
-    const [ state, dispatch ] = useReducer(jsonStateReducer, jsonInitialState);
+    const [ state, dispatch ] = useReducer(jsonStateReducer, value ?? jsonInitialState);
     
     return(<JSONCtx.Provider value={{state, dispatch}}>{children}</JSONCtx.Provider>)
 }
