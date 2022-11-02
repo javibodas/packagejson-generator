@@ -18,6 +18,7 @@ export default function User({ user, logout }){
 
                 .user ul {
                     margin: auto 0;
+                    padding-right: .5rem;
                 }
 
                 .user ul li {
