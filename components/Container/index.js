@@ -43,6 +43,7 @@ export default function Container(){
                 .keypad {
                     grid-area: keypad;
                     padding: 2rem 2rem 2rem 2rem;
+                    display: flex;
                 }
 
                 .editor {

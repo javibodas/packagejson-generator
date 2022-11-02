@@ -24,6 +24,8 @@ export default function Keypad(){
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
                 grid-column-gap: 5rem;
+                width: 100%;
+                align-content: end;
             }
 
             @media (max-width: 600px) {
