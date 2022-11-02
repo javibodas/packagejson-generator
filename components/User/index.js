@@ -5,7 +5,6 @@ export default function User({ user, logout }){
     return (<>
         <div className='user'>
             <ul>
-                <li><Button>Files</Button></li>
                 <li><Button click={logout}>Logout</Button></li>
             </ul>
             <Avatar avatar={user.avatar} name={user.username}/>

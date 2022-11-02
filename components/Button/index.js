@@ -26,39 +26,6 @@ export default function Button(props){
                     background: #c12127;
                 }
 
-                .btn-exportjson {
-                    background: #b30ad2;
-                    color: white;
-                    border: none;
-                    border-bottom: solid 5px #e81aa8;
-                }
-
-                .btn-exportjson:hover {
-                    background: #e81aa8;
-                }
-
-                .btn-generateuri {
-                    background: #fa8717;
-                    color: white;
-                    border: none;
-                    border-bottom: solid 5px #c12127;
-                }
-
-                .btn-generateuri:hover {
-                    background: #c12127;
-                }
-
-                .btn-clear {
-                    background:#0c4094;
-                    color: white;
-                    border: none;
-                    border-bottom: solid 5px #25eaf5;
-                }
-
-                .btn-clear:hover {
-                    background: #25eaf5;
-                }
-
                 .btn-add-script {
                     padding: .05em .7em;
                 }

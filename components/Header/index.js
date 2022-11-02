@@ -26,7 +26,7 @@ export default function Header(){
                 <nav>
                     {
                         user === USER_STATE.NOT_LOGGED ?
-                            <Button name='btn-login' click={handleSignIn}>LogIn With <FontAwesomeIcon icon={faGithub} /></Button>
+                            <Button name='btn-login' click={handleSignIn}>Login With <FontAwesomeIcon icon={faGithub} /></Button>
                         :
                             <User user={user} logout={logoutWithGithub}/>
                     }
