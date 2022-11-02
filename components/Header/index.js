@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { loginWithGithub, logoutWithGithub, onAuthStateChanged } from 'firebase/client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
-import User from 'components/User'
+import UserOptions from 'components/UserOptions'
 import Button from 'components/Button';
 
 
@@ -28,7 +28,7 @@ export default function Header(){
                         user === USER_STATE.NOT_LOGGED ?
                             <Button name='btn-login' click={handleSignIn}>LogIn With <FontAwesomeIcon icon={faGithub} /></Button>
                         :
-                            <User user={user} logout={logoutWithGithub}/>
+                            <UserOptions user={user} logout={logoutWithGithub}/>
                     }
                 </nav>
             </header>

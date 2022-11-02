@@ -5,12 +5,14 @@ export default function User({packages, error}){
     return(<>
             <Header />
             <div className='user-files'>
-                    { packages.map(packageJson => <FileDetailCard key={packageJson.id} timestamp={packageJson.createdAt.seconds} name={packageJson.jsonFile.name} description={packageJson.jsonFile.description} version={packageJson.jsonFile.version}/>)}
+                <FileDetailCard key={0} />
+                { packages.map(packageJson => <FileDetailCard key={packageJson.id} id={packageJson.id} fileDetail={packageJson}/>)}
             </div>
             <style>{`
                 .user-files {
-                    display: flex;
-                    flex-flow: row wrap;
+                    display: grid;
+                    grid-template-columns: repeat(5, 1fr);
+                    gap: 20px;
 
                     max-width: 80%;
                     min-height: 80vh;

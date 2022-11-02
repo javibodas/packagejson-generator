@@ -2,13 +2,13 @@ import { useRouter } from 'next/router'
 import Avatar from 'components/Avatar';
 import Button from 'components/Button';
 
-export default function User({ user, logout }){
+export default function UserOptions({ user, logout }){
     const router = useRouter()
 
     return (<>
         <div className='user'>
             <ul>
-                <li><Button click={() => router.push('/user/' + user.uid )}>Files</Button></li>
+                <li><Button click={() => router.push('/users/' + user.uid )}>Files</Button></li>
                 <li><Button click={logout}>Logout</Button></li>
             </ul>
             <Avatar avatar={user.avatar} name={user.username}/>
