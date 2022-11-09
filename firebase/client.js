@@ -36,31 +36,63 @@ export const loginWithGithub = () => {
     return firebase.auth().signInWithPopup(githubProvider)
 }
 
-export const logoutWithGithub = () => { firebase.auth().signOut() }
+export const logoutWithGithub = () => { return firebase.auth().signOut() }
 
 /**  DATABASE FUNCTIONS */
 
-export const addPackageJsonDB = (jsonFile) => {
+export const addFile = (jsonFile) => {
 	return dbService.collection('files').add({
     	jsonFile,
     	createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
   	})
 }
 
-export const getPackageJsonDB = async (fileId) => {
+export const deleteFile = async (fileId) => {
+	const result = await dbService.collection('files').doc(fileId)
+
+    return result.delete()
+}
+
+export const getFile = async (fileId) => {
 	const result = await dbService.collection('files').doc(fileId).get()
 
     return result.data()
 }
 
-export const getUsersFiles = async (idUser) => {
-    const result = await dbService.collection('users').doc(idUser).get()
-	const user = result.data()
+export const updateFile = async (fileId, newValue) => {
+    const result = await dbService.collection('files').doc(fileId)
+
+    return result.set(newValue)
+}
+
+export const getUser = async (userId) => {
+    const result = await dbService.collection('users').doc(userId).get()
+	
+    return result.data()
+}
+
+export const removeUserFile = async (userId, fileId) => {
+    const user = await getUser(userId)
+    const userFileIds = user.files
+
+    const indexOfFileInArray = userFileIds.indexOf(fileId);
+    if (indexOfFileInArray > -1) {
+        userFileIds.splice(indexOfFileInArray, 1);
+
+        const result = await dbService.collection('users').doc(userId).set({
+            files: userFileIds
+        })
+    }
+
+    return deleteFile(fileId)
+}
+
+export const getUsersFiles = async (userId) => {
+	const user = await getUser(userId)
 
     const userFiles = await Promise.all(
         user.files.map(async (fileId) => {
-            const result = await dbService.collection('files').doc(fileId).get()
-		    const file = result.data()
+		    const file = await getFile(fileId)
             return {...file, id: fileId}
         })
   	)

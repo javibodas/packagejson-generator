@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -45,7 +44,7 @@ export default function FileDetailCard({ id, fileDetail }) {
     }
     
     const { createdAt, jsonFile } = fileDetail
-    const { name, version, description, devDependencies, dependencies } = jsonFile
+    const { name, version, description } = jsonFile
     const { seconds } = createdAt
 
     return (<>
@@ -56,9 +55,8 @@ export default function FileDetailCard({ id, fileDetail }) {
             </div>
             <div className='file-content'>
                 <span className='description'>{description}</span>
-                <span className='devDependencies'>{Object.keys(devDependencies).length > 0 ? Object.keys(devDependencies).slice(0,5).reduce((prevVal, nextVal) => { return prevVal + nextVal + ',' }, '') + '...' : null}</span>
                 <span className='dateCreation'>{(new Date(seconds*1000)).toDateString()}</span>
-            </div>    
+            </div>
         </div>
         <style>{`
                 .file {

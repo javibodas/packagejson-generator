@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
-import { loginWithGithub, logoutWithGithub, onAuthStateChanged } from 'firebase/client';
+import { useContext, useEffect } from 'react';
+import UserCtx from 'context/user';
+import useUser from 'hooks/useUser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import UserOptions from 'components/UserOptions'
@@ -8,27 +9,24 @@ import Button from 'components/Button';
 
 export default function Header(){
 
-    const USER_STATE = { NOT_LOGGED: null }
-    const [ user, setUser ] = useState(USER_STATE.NOT_LOGGED)
-    
-    useEffect(function(){
-        onAuthStateChanged(user => setUser(user))
-    }, [])
+    const { user, setUser } = useContext(UserCtx)
+    const { isLogged, handleLogIn, handleLogout, onAuthStateChanged } = useUser({ user, setUser })
 
-    const handleSignIn = function(event) {
-        loginWithGithub()
-        .then((user) => { setUser(user) })
-        .catch((error) => console.log(error))
-    }
+    useEffect(function(){
+        onAuthStateChanged((userUpdated) => {
+            (userUpdated) ? setUser({...userUpdated, isLogged: true })
+            : setUser({isLogged: false})
+        })
+    }, [])
 
     return(<>
             <header>
                 <nav>
                     {
-                        user === USER_STATE.NOT_LOGGED ?
-                            <Button name='btn-login' click={handleSignIn}>Login With <FontAwesomeIcon icon={faGithub} /></Button>
+                        !isLogged() ?
+                            <Button name='btn-login' click={handleLogIn}>Login With <FontAwesomeIcon icon={faGithub} /></Button>
                         :
-                            <UserOptions user={user} logout={logoutWithGithub}/>
+                            <UserOptions user={user} logout={handleLogout}/>
                     }
                 </nav>
             </header>

@@ -1,4 +1,4 @@
-import { addPackageJsonDB } from 'firebase/client';
+import { addFile } from 'firebase/client';
 
 export default function useJSONFile({ state }){
 
@@ -23,7 +23,7 @@ export default function useJSONFile({ state }){
     }
 
     const generateURIJSONFile = function(){
-        addPackageJsonDB(state)
+        addFile(state)
         .then((element) => { window.open(process.env.NEXT_PUBLIC_BASE_URL + '/files/' + element.id, '_blank').focus() })
         .catch((error) => { console.log(error) })
     }

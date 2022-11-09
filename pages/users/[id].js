@@ -1,13 +1,16 @@
+import { UserContextProvider } from 'context/user';
 import Header from "components/Header"
 import FileDetailCard from "components/FileDetailCard"
 
-export default function User({packages, error}){
+export default function User({ packages, error}){
     return(<>
-            <Header />
-            <div className='user-files'>
-                <FileDetailCard key={0} />
-                { packages.map(packageJson => <FileDetailCard key={packageJson.id} id={packageJson.id} fileDetail={packageJson}/>)}
-            </div>
+            <UserContextProvider>
+                <Header />
+                <div className='user-files'>
+                    <FileDetailCard key={0} />
+                    { packages.map(packageJson => <FileDetailCard key={packageJson.id} id={packageJson.id} fileDetail={packageJson}/>)}
+                </div>
+            </UserContextProvider>
             <style>{`
                 .user-files {
                     display: grid;
