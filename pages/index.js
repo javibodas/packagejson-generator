@@ -9,6 +9,7 @@ export default function HomePage(props) {
                 <Head>
                     <title>Package.json generator</title>
                     <link rel="icon" href="/favicon.png" />
+                    <meta name="description" content="Generator and manager of package.json files" />
                 </Head>
                 <Header />
                 <JSONContextProvider value={props.jsonFile}>
