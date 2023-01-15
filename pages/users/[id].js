@@ -1,36 +1,55 @@
-import { UserContextProvider } from 'context/user';
-import Header from "components/Header"
-import FileDetailCard from "components/FileDetailCard"
+import { useState, useEffect, useContext } from 'react'
+import { useRouter } from 'next/router'
+import UserCtx from 'src/context/user';
+import useUser from 'src/hooks/useUser';
+import getUserFiles from 'src/services/getUserFiles';
+import FileDetailCard from "src/components/FileDetailCard"
 
-export default function User({ packages, error}){
+export default function User(props){
+
+    const router = useRouter()
+
+    const [ files, setFiles ] = useState([])
+    const { user, setUser } = useContext(UserCtx)
+    const { deleteFile } = useUser({ user, setUser })
+
+    const handleClickNewFile = (event) => {
+        console.log('Must redirect')
+        router.push('/')
+    }
+
+    const handleClickFile = (event, fileId) => {
+        router.push('/files/' + fileId)
+    }
+
+    const handleDeleteFile = async (event, fileId) => {
+        event.stopPropagation()
+        await deleteFile(fileId)
+        setFiles(files.filter((file) => file.id !== fileId))
+    }
+
+    useEffect(async function(){
+        if (router.isReady) {
+            const response = await getUserFiles(router.query.id)
+            setFiles(response.data)
+        }
+    }, [router.isReady])
+
     return(<>
-            <UserContextProvider>
-                <Header />
-                <div className='user-files'>
-                    <FileDetailCard key={0} />
-                    { packages.map(packageJson => <FileDetailCard key={packageJson.id} id={packageJson.id} fileDetail={packageJson}/>)}
-                </div>
-            </UserContextProvider>
-            <style>{`
-                .user-files {
-                    display: grid;
-                    grid-template-columns: repeat(5, 1fr);
-                    gap: 20px;
+        <div className='user-files'>
+            <FileDetailCard key={0} handleClick={handleClickNewFile}/>
+            { files.map(file => <FileDetailCard key={file.id} id={file.id} fileDetail={file} handleClick={handleClickFile} handleDelete={handleDeleteFile} />)}
+        </div>
+        <style>{`
+            .user-files {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
 
-                    max-width: 80%;
-                    min-height: 80vh;
-                    margin: 0 auto;
-                }
-            `}</style>
-        </>)
-}
-
-
-export async function getServerSideProps(context) {
-    const id = context.params.id
-
-    const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/user/' + id)
-    const jsonRes = await res.json()
-  
-    return { props: { packages: jsonRes.data, error: jsonRes.error } }
+                max-width: 60%;
+                margin: 0 auto;
+                padding: 2rem 0;
+            }
+        `}</style>
+    </>)
 }
