@@ -15,7 +15,7 @@ export default function Keypad(){
     const { isLogged, saveUserFile } = useUser({ user, setUser })
 
     const handleSaveFile = () => {
-        isLogged ? saveUserFile(state)
+        isLogged() ? saveUserFile(state)
         : saveFile()
 
     }

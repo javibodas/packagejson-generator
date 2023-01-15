@@ -1,7 +1,8 @@
 import React from 'react'
-import Form from 'components/Form'
-import { JSONContextProvider } from 'context'
-import { jsonInitialState } from 'state'
+import Form from 'src/components/Form'
+import { JSONContextProvider } from 'src/context'
+import { UserContextProvider } from 'src/context/user'
+import { jsonInitialState } from 'src/state'
 import { server } from './setupWorkerAPI'
 import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import 'jest-extended';
@@ -9,9 +10,11 @@ import 'jest-extended';
 describe('Form Test', () => {
 
     const wrapper = ({ children }) => {
-        return (<JSONContextProvider>
+        return (<UserContextProvider>
+                    <JSONContextProvider>
                         {children}
-                </JSONContextProvider>)
+                    </JSONContextProvider>
+                </UserContextProvider>)
     }
 
     beforeEach(() => render(<Form />, {wrapper}) )

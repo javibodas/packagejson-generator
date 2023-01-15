@@ -1,25 +1,36 @@
 import React from 'react'
-import Keypad from 'components/Keypad'
-import Form from 'components/Form';
-import { JSONContextProvider } from 'context'
-import { jsonInitialState } from 'state'
+import Keypad from 'src/components/Keypad'
+import Form from 'src/components/Form';
+import { JSONContextProvider } from 'src/context'
+import { UserContextProvider } from 'src/context/user'
+import { jsonInitialState } from 'src/state'
 import { cleanup, render, screen, fireEvent } from '@testing-library/react'
 import 'jest-extended';
 
-const mockGenerateURIJSONFile = jest.fn()
-const mockExportJSONFile = jest.fn()
-jest.mock('hooks/useJSONFile', () => {
+const mockSaveFile = jest.fn()
+const mockExportFile = jest.fn()
+const mockIsLogged = jest.fn(() => { return false })
+const mockSaveUserFile = jest.fn()
+jest.mock('src/hooks/useFile', () => {
     return jest.fn().mockImplementation(() => {
-        return { generateURIJSONFile: mockGenerateURIJSONFile, exportJSONFile: mockExportJSONFile };
+        return { saveFile: mockSaveFile, exportFile: mockExportFile };
     });
 })
+jest.mock('src/hooks/useUser', () => {
+    return jest.fn().mockImplementation(() => {
+        return { isLogged: mockIsLogged, saveUserFile: mockSaveUserFile };
+    });
+})
+
 
 describe('Keypad Test', () => {
 
     const wrapper = ({ children }) => {
-        return (<JSONContextProvider>
+        return (<UserContextProvider>
+                    <JSONContextProvider>
                         {children}
-                </JSONContextProvider>)
+                    </JSONContextProvider>
+                </UserContextProvider>)
     }
 
     beforeEach(() => render(<React.Fragment> <Form /> <Keypad /> </React.Fragment>, {wrapper}) )
@@ -34,13 +45,13 @@ describe('Keypad Test', () => {
         it('should let export the file', () => {
             expect(screen.getByTestId('btn-exportjson')).toBeDefined()
             fireEvent.click(screen.getByTestId('btn-exportjson'))
-            expect(mockExportJSONFile).toHaveBeenCalledTimes(1)
+            expect(mockExportFile).toHaveBeenCalledTimes(1)
         })
 
         it('should share the json', () => {
             expect(screen.getByTestId('btn-generateuri')).toBeDefined()
             fireEvent.click(screen.getByTestId('btn-generateuri'))
-            expect(mockGenerateURIJSONFile).toHaveBeenCalledTimes(1)
+            expect(mockSaveFile).toHaveBeenCalledTimes(1)
         })
     })
 
@@ -58,13 +69,13 @@ describe('Keypad Test', () => {
             screen.getByTestId('form-version').value = projectVersion
             expect(screen.getByTestId('btn-exportjson')).toBeDefined()
             fireEvent.click(screen.getByTestId('btn-exportjson'))
-            expect(mockExportJSONFile).toHaveBeenCalledTimes(1)
+            expect(mockExportFile).toHaveBeenCalledTimes(1)
         })
 
         it('should share the json', () => {
             expect(screen.getByTestId('btn-generateuri')).toBeDefined()
             fireEvent.click(screen.getByTestId('btn-generateuri'))
-            expect(mockGenerateURIJSONFile).toHaveBeenCalledTimes(1)
+            expect(mockSaveFile).toHaveBeenCalledTimes(1)
         })
     })
 
