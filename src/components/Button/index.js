@@ -29,6 +29,12 @@ export default function Button(props){
                 .btn-add-script {
                     padding: .05em .7em;
                 }
+
+                @media (max-width: 1000px) {
+                    .btn {
+                        font-size: 10px;
+                    }
+                }
             `}
             </style>
             </>)

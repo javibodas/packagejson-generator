@@ -59,7 +59,9 @@ export default function Container(){
                             "keypad";
                         grid-template-columns: 1fr; 
                         grid-template-rows: 1fr 1fr 1fr;
-                        max-width: 90%;
+                        max-width: 100%;
+                        min-height: 92vh;
+                        margin-top: .5rem;
                     }
                     .editor {
                         display: none;
@@ -71,7 +73,7 @@ export default function Container(){
                         padding: 1rem 1rem 1rem 1rem;
                     }
                     .form {
-                        padding: 1rem 1rem 1rem 1rem;
+                        padding: 1rem 0 1rem 0;
                     }
                 }
                 `}</style>

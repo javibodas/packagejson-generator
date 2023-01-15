@@ -7,7 +7,7 @@ export default function Form(){
             <div className='forms'>
                     <ProjectData />
                     <Dependencies title='Dependencies' type='dep' classType='dependencies'/>
-                    <Dependencies title='Dev dependencies' type='dev' classType='devDependencies'/>
+                    <Dependencies title='Dev Dependen.' type='dev' classType='devDependencies'/>
                     <Scripts />
             </div>
         </>)
