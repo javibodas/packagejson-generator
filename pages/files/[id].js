@@ -1,6 +1,6 @@
 import HomePage from 'pages'
  
-export default function PackageJson({file, error}){
+export default function File({file, error}){
 
     return(<HomePage jsonFile={file.jsonFile} />)
 }
