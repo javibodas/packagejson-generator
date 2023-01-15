@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
-import Avatar from 'components/Avatar';
-import Button from 'components/Button';
+import Avatar from 'src/components/Avatar';
+import Button from 'src/components/Button';
 
 export default function UserOptions({ user, logout }){
     const router = useRouter()

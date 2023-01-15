@@ -1,6 +1,6 @@
-import Form from 'components/Form';
-import TextEditor from 'components/TextEditor';
-import Keypad from 'components/Keypad';
+import Form from 'src/components/Form';
+import TextEditor from 'src/components/TextEditor';
+import Keypad from 'src/components/Keypad';
 
 export default function Container(){
     return(<>

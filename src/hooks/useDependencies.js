@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import getDependencies from 'services/getDependencies';
+import getDependencies from 'src/services/getDependencies';
 
 export default function useDependencies({classType, type, dispatch, state}){
 

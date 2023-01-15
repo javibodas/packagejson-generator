@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import Badge from 'components/Badge';
-import useDependencies from 'hooks/useDependencies';
-import JSONCtx from 'context';
+import Badge from 'src/components/Badge';
+import useDependencies from 'src/hooks/useDependencies';
+import JSONCtx from 'src/context';
 
 
 export default function Dependencies(props){

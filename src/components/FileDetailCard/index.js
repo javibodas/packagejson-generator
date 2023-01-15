@@ -1,20 +1,12 @@
-import { useRouter } from 'next/router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 
-export default function FileDetailCard({ id, fileDetail }) {
-
-    const router = useRouter()
-
-    const handleClickFile = (event) => {
-        id ? router.push('/files/' + id)
-        : router.push('/')
-    }
+export default function FileDetailCard({ id, fileDetail, handleClick, handleDelete }) {
 
     if (!id) {
         return(<>
-            <div className='file' onClick={handleClickFile}>
-                <span className='file-new'><FontAwesomeIcon icon={faPlus} size="10x"/></span>
+            <div className='file' onClick={handleClick}>
+                <span className='file-new'><FontAwesomeIcon icon={faPlus} size="8x"/></span>
             </div>
             <style>{`
                 .file {
@@ -24,7 +16,8 @@ export default function FileDetailCard({ id, fileDetail }) {
                     padding: 2rem;
                     border-radius: 4px;
                     border: 2px solid white;
-                    max-height: 200px;
+                    height: 150px;
+                    width: 150px;
                 }
 
                 .file:hover {
@@ -48,14 +41,17 @@ export default function FileDetailCard({ id, fileDetail }) {
     const { seconds } = createdAt
 
     return (<>
-        <div className='file' onClick={handleClickFile}>
+        <div className='file' onClick={(e) => handleClick(e, id)}>
             <div className='file-title'>
                 <h3>{name}</h3>
                 <span className='version'>{version}</span>
             </div>
             <div className='file-content'>
                 <span className='description'>{description}</span>
-                <span className='dateCreation'>{(new Date(seconds*1000)).toDateString()}</span>
+                <div className='footer'>
+                    <span className='dateCreation'>{(new Date(seconds*1000)).toDateString()}</span>
+                    <span className='badge-remove-icon' onClick={(e) => handleDelete(e, id)}><FontAwesomeIcon icon={faTrash} size="lg"/></span>
+                </div>
             </div>
         </div>
         <style>{`
@@ -66,7 +62,8 @@ export default function FileDetailCard({ id, fileDetail }) {
                     padding: 2rem;
                     border-radius: 4px;
                     border: 2px solid white;
-                    max-height: 200px;
+                    height: 150px;
+                    width: 150px;
                 }
 
                 .file:hover {
@@ -96,12 +93,23 @@ export default function FileDetailCard({ id, fileDetail }) {
                 .file .file-content .description {
                     font-size: calc(0.35em + 0.35vw);
                     color: #808080;
+                    height: 100%
+                }
+
+                .file .file-content .footer {
+                    display: flex;
+                    flex-direction: row;
                 }
 
                 .file .file-content .dateCreation {
-                    align-self: flex-end;
                     font-weight: bold;
                     font-size: calc(0.35em + 0.35vw);
+                    width: 100%;
+                    margin: auto 0;
+                }
+
+                .file .file-content .badge-remove-icon:hover {
+                    color: #c12127;
                 }
         `}</style>
     </>)

@@ -1,6 +1,6 @@
-import ProjectData from 'components/ProjectData';
-import Dependencies from 'components/Dependencies';
-import Scripts from 'components/Scripts';
+import ProjectData from 'src/components/ProjectData';
+import Dependencies from 'src/components/Dependencies';
+import Scripts from 'src/components/Scripts';
 
 export default function Form(){
     return(<>

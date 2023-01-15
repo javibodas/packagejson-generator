@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import dynamic from "next/dynamic";
-import JSONCtx from 'context';
+import JSONCtx from 'src/context';
 
 const MonacoEditor = dynamic(import("react-monaco-editor"), { ssr: false });
 

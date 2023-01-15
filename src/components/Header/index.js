@@ -1,10 +1,10 @@
 import { useContext, useEffect } from 'react';
-import UserCtx from 'context/user';
-import useUser from 'hooks/useUser';
+import UserCtx from 'src/context/user';
+import useUser from 'src/hooks/useUser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
-import UserOptions from 'components/UserOptions'
-import Button from 'components/Button';
+import UserOptions from 'src/components/UserOptions'
+import Button from 'src/components/Button';
 
 
 export default function Header(){

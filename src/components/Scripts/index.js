@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import JSONCtx from 'context';
-import Badge from 'components/Badge';
-import Button from 'components/Button';
-import useScripts from 'hooks/useScripts';
+import JSONCtx from 'src/context';
+import Badge from 'src/components/Badge';
+import Button from 'src/components/Button';
+import useScripts from 'src/hooks/useScripts';
 
 
 export default function Scripts(){

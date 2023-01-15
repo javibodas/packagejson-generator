@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import JSONCtx from 'context';
+import JSONCtx from 'src/context';
 
 
 export default function ProjectData(){

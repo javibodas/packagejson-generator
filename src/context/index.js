@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
-import jsonStateReducer from 'reducer';
-import { jsonInitialState } from 'state';
+import jsonStateReducer from 'src/reducer';
+import { jsonInitialState } from 'src/state';
 
 const JSONCtx = React.createContext();
 

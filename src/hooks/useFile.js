@@ -1,8 +1,8 @@
-import { addFile } from 'firebase/client';
+import { addFile } from 'src/firebase/client';
 
-export default function useJSONFile({ state }){
+export default function useFile({ state }){
 
-    const exportJSONFile = function(){
+    const exportFile = function(){
         const filename = 'package.json'
         const blob = new Blob([JSON.stringify(state, 0 , 4)], {
             type: "application/json"
@@ -13,7 +13,7 @@ export default function useJSONFile({ state }){
             return;
         }
         
-        var elem = window.document.createElement('a');
+        let elem = window.document.createElement('a');
         elem.href = window.URL.createObjectURL(blob);
         elem.download = filename;        
         document.body.appendChild(elem);
@@ -22,11 +22,11 @@ export default function useJSONFile({ state }){
         
     }
 
-    const generateURIJSONFile = function(){
+    const saveFile = function(){
         addFile(state)
         .then((element) => { window.open(process.env.NEXT_PUBLIC_BASE_URL + '/files/' + element.id, '_blank').focus() })
         .catch((error) => { console.log(error) })
     }
 
-    return { exportJSONFile, generateURIJSONFile }
+    return { exportFile, saveFile }
 }
