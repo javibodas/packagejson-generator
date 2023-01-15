@@ -1,4 +1,4 @@
-import { getUsersFiles } from 'firebase/client';
+import { getUsersFiles } from 'src/firebase/client';
 
 async function handler(req, res) {
     const { query: { id }, } = req
