@@ -91,7 +91,13 @@ export default function Badge(props){
                     overflow:hidden;
                     -webkit-line-clamp: 1;
                     -webkit-box-orient: vertical;
-                  }
+                }
+
+                @media (max-width: 1000px) {
+                    .badge {
+                        font-size: 10px;
+                    }
+                }
             `}</style>
             </>);
 }

@@ -49,6 +49,12 @@ ul {
     font-weight: bold;
 }
 
+@media (max-width: 1000px) {
+    .label-title {
+        font-size: 10px;
+    }
+}
+
 .data-box {
     display: grid;
     grid-template-columns: repeat(4,1fr);
@@ -89,6 +95,12 @@ ul {
     border-radius: 0;
     border-bottom: solid 1px #f1efee;
     font-size: calc(0.35em + 0.35vw);
+}
+
+@media (max-width: 1000px) {
+    .data-box input {
+        font-size: 10px;
+    }
 }
 
 .data-box input:hover, .section-input input:hover {
