@@ -1,7 +1,8 @@
 import React from 'react'
-import Container from 'components/Container'
-import { JSONContextProvider } from 'context'
-import { jsonInitialState } from 'state'
+import Container from 'src/components/Container'
+import { FileContextProvider } from 'src/context/file'
+import { UserContextProvider } from 'src/context/user'
+import { fileInitialState } from 'src/state'
 import { server } from './setupWorkerAPI'
 import { render, screen, waitFor, fireEvent, cleanup } from '@testing-library/react'
 import 'jest-extended'
@@ -9,9 +10,11 @@ import 'jest-extended'
 describe('Container Test', () => {
 
     const wrapper = ({ children }) => {
-        return (<JSONContextProvider>
+        return (<UserContextProvider>
+                    <FileContextProvider>
                         {children}
-                </JSONContextProvider>)
+                    </FileContextProvider>
+                </UserContextProvider>)
     }
 
     
@@ -25,44 +28,15 @@ describe('Container Test', () => {
 
     describe('When initial load', () => {
         it('should have default context values in form and texteditor', async () => {
-            Object.keys(jsonInitialState).map((key) => {
-                if(typeof jsonInitialState[key] === 'string'){
+            Object.keys(fileInitialState.json).map((key) => {
+                if(typeof fileInitialState.json[key] === 'string'){
                     const input = screen.queryByTestId('form-' + key)
-                    input ? expect(input.value).toBe(jsonInitialState[key]) : null
+                    input ? expect(input.value).toBe(fileInitialState.json[key]) : null
                 }
             })
             
         })
     })
-
-    /*describe('When modifying field form', () => {
-        const json = { authorName : 'pepe', projectName : 'packagejson-generator', version : '2.3.9', description : 'Testing packagejson-generator', mainFile : 'app.js' }
-
-        it('should show changes in text editor (author)', () => {
-            fireEvent.change(screen.getByTestId('form-author'), {target: { value: json.authorName }})
-            expect(screen.getByTestId('text-area-editor').textContent).toInclude(json.authorName)
-        })
-
-        it('should show changes in text editor (project name)', () => {
-            fireEvent.change(screen.getByTestId('form-name'), {target: { value: json.projectName }})
-            expect(screen.getByTestId('text-area-editor').textContent).toInclude(json.projectName)
-        })
-
-        it('should show changes in text editor (version)', () => {
-            fireEvent.change(screen.getByTestId('form-version'), {target: { value: json.version }})
-            expect(screen.getByTestId('text-area-editor').textContent).toInclude(json.version)
-        })
-
-        it('should show changes in text editor (description)', () => {
-            fireEvent.change(screen.getByTestId('form-description'), {target: { value: json.description }})
-            expect(screen.getByTestId('text-area-editor').textContent).toInclude(json.description)
-        })
-
-        it('should show changes in text editor (main)', () => {
-            fireEvent.change(screen.getByTestId('form-main'), {target: { value: json.mainFile }})
-            expect(screen.getByTestId('text-area-editor').textContent).toInclude(json.mainFile)
-        })
-    })*/
 
     describe('When selecting package in dependencies combo ', () => {
         const packageName = 'react'

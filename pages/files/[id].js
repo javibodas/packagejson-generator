@@ -1,8 +1,8 @@
 import HomePage from 'pages'
  
-export default function PackageJson({file, error}){
+export default function File({file: { json, id}, error}){
 
-    return(<HomePage jsonFile={file.jsonFile} />)
+    return(<HomePage file={{ json, id }} />)
 }
 
 export async function getServerSideProps(context) {
@@ -11,5 +11,5 @@ export async function getServerSideProps(context) {
     const res = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/files/' + id)
     const jsonRes = await res.json()
   
-    return { props: { file: jsonRes.data, error: jsonRes.error } }
+    return { props: { file: {json: jsonRes.data.jsonFile, id}, error: jsonRes.error } }
 }

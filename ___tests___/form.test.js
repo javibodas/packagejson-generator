@@ -1,7 +1,8 @@
 import React from 'react'
-import Form from 'components/Form'
-import { JSONContextProvider } from 'context'
-import { jsonInitialState } from 'state'
+import Form from 'src/components/Form'
+import { FileContextProvider } from 'src/context/file'
+import { UserContextProvider } from 'src/context/user'
+import { fileInitialState } from 'src/state'
 import { server } from './setupWorkerAPI'
 import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import 'jest-extended';
@@ -9,9 +10,11 @@ import 'jest-extended';
 describe('Form Test', () => {
 
     const wrapper = ({ children }) => {
-        return (<JSONContextProvider>
+        return (<UserContextProvider>
+                    <FileContextProvider>
                         {children}
-                </JSONContextProvider>)
+                    </FileContextProvider>
+                </UserContextProvider>)
     }
 
     beforeEach(() => render(<Form />, {wrapper}) )
@@ -21,10 +24,10 @@ describe('Form Test', () => {
 
     describe('When initial load', () => {
         it('should have default context values in form', () => {
-            Object.keys(jsonInitialState).map((key) => {
-                if(typeof jsonInitialState[key] === 'string'){
+            Object.keys(fileInitialState.json).map((key) => {
+                if(typeof fileInitialState.json[key] === 'string'){
                     const input = screen.queryByTestId('form-' + key)
-                    input ? expect(input.value).toBe(jsonInitialState[key]) : null
+                    input ? expect(input.value).toBe(fileInitialState.json[key]) : null
                 }
             })
             

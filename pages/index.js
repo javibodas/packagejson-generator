@@ -1,19 +1,11 @@
-import Head from 'next/head';
-import Container from 'components/Container';
-import { JSONContextProvider } from 'context';
-import Header from 'components/Header';
+import Container from 'src/components/Container';
+import { FileContextProvider } from 'src/context/file';
 
-export default function HomePage(props) {
+export default function HomePage({ file }) {
 	  
-  	return (<>
-                <Head>
-                    <title>Package.json generator</title>
-                    <link rel="icon" href="/favicon.png" />
-                    <meta name="description" content="Generator and manager of package.json files" />
-                </Head>
-                <Header />
-                <JSONContextProvider value={props.jsonFile}>
-                    <Container />
-                </JSONContextProvider>
-            </>)
+  	return (
+        <FileContextProvider value={file}>
+            <Container />
+        </FileContextProvider>
+    )
 }
