@@ -1,27 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 export default function Badge(props){
 
-    const stylesValuesBadge = ['badge-value-blue', 'badge-value-green']
-    const [ styleValue, setStyleValue ] = useState(stylesValuesBadge[0]);
+	const stylesValuesBadge = ['badge-value-blue', 'badge-value-green']
+	const [ styleValue, setStyleValue ] = useState(stylesValuesBadge[0])
 
-    useEffect(function(){
-        (props.type == 'script') ? setStyleValue(stylesValuesBadge[1]) : setStyleValue(stylesValuesBadge[0])
-    }, [])
+	useEffect(function(){
+		(props.type == 'script') ? setStyleValue(stylesValuesBadge[1]) : setStyleValue(stylesValuesBadge[0])
+	})
 
-    return(<>
-            <div className='badge'>
-                <div className='badge-key text-ellipsis'>
-                    <span>{props.objKey}</span>
-                </div>
-                {props.objValue ? <div className={styleValue + ' text-ellipsis'}><span>{props.objValue}</span></div> : null}
-                <div className='badge-close' onClick={() => {props.remove(props.objKey)}}>
-                    <span className='badge-close-icon'><FontAwesomeIcon icon={faTrash} size="xs"/></span>
-                </div>
-            </div>
-            <style jsx>{`
+	return(<>
+		<div className='badge'>
+			<div className='badge-key text-ellipsis'>
+				<span>{props.objKey}</span>
+			</div>
+			{props.objValue ? <div className={styleValue + ' text-ellipsis'}><span>{props.objValue}</span></div> : null}
+			<div className='badge-close' onClick={() => {props.remove(props.objKey)}}>
+				<span className='badge-close-icon'><FontAwesomeIcon icon={faTrash} size="xs"/></span>
+			</div>
+		</div>
+		<style jsx>{`
 
                 .badge {
                     display: flex;
@@ -99,5 +99,5 @@ export default function Badge(props){
                     }
                 }
             `}</style>
-            </>);
+	</>)
 }
