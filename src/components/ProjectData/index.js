@@ -1,10 +1,10 @@
 import { useContext } from 'react';
-import JSONCtx from 'src/context';
+import FileCtx from 'src/context/file';
 
 
 export default function ProjectData(){
 
-    const { state, dispatch } = useContext(JSONCtx);
+    const { file, dispatch } = useContext(FileCtx);
 
     const typeData = function(event){
         if (event.target) {
@@ -20,23 +20,23 @@ export default function ProjectData(){
             <div className='form-group'>
                 <div className='data-box'>
                     <label className='label-title'>Project name</label>
-                    <input className = 'input-form' placeholder='Project123' name='projectName' onChange={typeData} value={state.name} data-testid='form-name'/>
+                    <input className = 'input-form' placeholder='Project123' name='projectName' onChange={typeData} value={file.json.name} data-testid='form-name'/>
                 </div>
                 <div className='data-box'>
                     <label className='label-title'>Version</label>
-                    <input className = 'input-form' placeholder='1.0.0' name='version' onChange={typeData} value={state.version} data-testid='form-version'/>
+                    <input className = 'input-form' placeholder='1.0.0' name='version' onChange={typeData} value={file.json.version} data-testid='form-version'/>
                 </div>
                 <div className='data-box'>
                     <label className='label-title'>Description</label>
-                    <input className = 'input-form' placeholder='Build the next generation of js...' name='description' onChange={typeData} value={state.description} data-testid='form-description'/>
+                    <input className = 'input-form' placeholder='Build the next generation of js...' name='description' onChange={typeData} value={file.json.description} data-testid='form-description'/>
                 </div>
                 <div className='data-box'>
                     <label className='label-title'>Author</label>
-                    <input className = 'input-form' placeholder='Author' name='author' onChange={typeData} value={state.author} data-testid='form-author'/>
+                    <input className = 'input-form' placeholder='Author' name='author' onChange={typeData} value={file.json.author} data-testid='form-author'/>
                 </div>
                 <div className='data-box'>
                     <label className='label-title'>Main file</label>
-                    <input className = 'input-form' placeholder='index.js' name='main' onChange={typeData} value={state.main} data-testid='form-main'/>
+                    <input className = 'input-form' placeholder='index.js' name='main' onChange={typeData} value={file.json.main} data-testid='form-main'/>
                 </div>
             </div>
             <style jsx>{``}</style>

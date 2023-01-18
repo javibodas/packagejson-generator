@@ -1,11 +1,11 @@
 import Container from 'src/components/Container';
-import { JSONContextProvider } from 'src/context';
+import { FileContextProvider } from 'src/context/file';
 
-export default function HomePage(props) {
+export default function HomePage({ file }) {
 	  
   	return (
-        <JSONContextProvider value={props.jsonFile}>
+        <FileContextProvider value={file}>
             <Container />
-        </JSONContextProvider>
+        </FileContextProvider>
     )
 }

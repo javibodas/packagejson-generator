@@ -99,7 +99,10 @@ export const addUserFile = async (jsonFile, userId) => {
 export const updateFile = async (fileId, newValue) => {
     const result = await dbService.collection('files').doc(fileId)
 
-    return result.set(newValue)
+    return result.set({
+        jsonFile: newValue,
+        createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
+    })
 }
 
 export const deleteFile = async (fileId) => {

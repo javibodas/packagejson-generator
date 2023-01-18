@@ -1,13 +1,13 @@
-export default function useScripts({dispatch, state }){
+export default function useScripts({dispatch, file }){
 
     const addScript = function(event){
         const keyScript = document.getElementById('key-script').value
         const commandScript = document.getElementById('command-script').value
 
         if(keyScript.trim() === '' || commandScript.trim() === '' ) return
-        if(!state.scripts) state.scripts = {}
+        if(!file.json.scripts) file.json.scripts = {}
 
-        const alreadyAdded = Object.keys(state.scripts).find(scriptKey => scriptKey === keyScript)
+        const alreadyAdded = Object.keys(file.json.scripts).find(scriptKey => scriptKey === keyScript)
         if(!alreadyAdded)  dispatch({type: 'addScript', key: keyScript, value: commandScript})
 
         const keyElement = document.getElementById('key-script')

@@ -32,15 +32,9 @@ export default function useUser({ user, setUser }) {
         .catch()
     }
 
-    const updateUserFile = function(fileId, newFile) {
-        updateFile(fileId, newFile)
-        .then()
-        .catch()
-    }
-
     const saveUserFile = function(file) {
         addUserFile(file, user.uid)
-        .then((element) => window.open(process.env.NEXT_PUBLIC_BASE_URL + '/files/' + element.id, '_blank').focus() )
+        .then((element) => router.push('/files/' + element.id))
         .catch((error) => console.log(`Failed saving file into user ${user.uid}: ${error}`) )
     }
 

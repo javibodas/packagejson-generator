@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import getDependencies from 'src/services/getDependencies';
 
-export default function useDependencies({classType, type, dispatch, state}){
+export default function useDependencies({classType, type, dispatch, file}){
 
     const [ packages, setPackages ] = useState([])
     const EMPTY_OR_ERROR_PACKAGE = {'name' : 'No packages founded'}
@@ -39,8 +39,8 @@ export default function useDependencies({classType, type, dispatch, state}){
         const packageName = event.target.innerText.replace(/(\r\n|\n|\r)/gm,"").split("(")[0]
         const packageSelected = packages.find(pack => pack.name == packageName)
             
-        if (!state[classType]) state[classType] = {}
-        const alreadyAdded = Object.keys(state[classType]).find(dependencieName => dependencieName == packageName)
+        if (!file.json[classType]) file.json[classType] = {}
+        const alreadyAdded = Object.keys(file.json[classType]).find(dependencieName => dependencieName == packageName)
 
         if (alreadyAdded || !packageSelected) {
             clearDependenciesElements(packagesListElement, inputPackage)

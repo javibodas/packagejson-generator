@@ -1,10 +1,13 @@
-import { addFile } from 'src/firebase/client';
+import { useRouter } from 'next/router'
+import { addFile as saveFileFirebase, updateFile as updateFileFirebase } from 'src/firebase/client';
 
-export default function useFile({ state }){
+export default function useFile({ json }){
+
+    const router = useRouter()
 
     const exportFile = function(){
         const filename = 'package.json'
-        const blob = new Blob([JSON.stringify(state, 0 , 4)], {
+        const blob = new Blob([JSON.stringify(json, 0 , 4)], {
             type: "application/json"
         });
 
@@ -22,11 +25,17 @@ export default function useFile({ state }){
         
     }
 
+    const updateFile = function(fileId, newFile) {
+        updateFileFirebase(fileId, newFile)
+        .then()
+        .catch()
+    }
+
     const saveFile = function(){
-        addFile(state)
-        .then((element) => { window.open(process.env.NEXT_PUBLIC_BASE_URL + '/files/' + element.id, '_blank').focus() })
+        saveFileFirebase(json)
+        .then((element) => router.push('/files/' + element.id))
         .catch((error) => { console.log(error) })
     }
 
-    return { exportFile, saveFile }
+    return { exportFile, saveFile, updateFile }
 }

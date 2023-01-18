@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import Badge from 'src/components/Badge';
 import useDependencies from 'src/hooks/useDependencies';
-import JSONCtx from 'src/context';
+import FileCtx from 'src/context/file';
 
 
 export default function Dependencies(props){
 
-    const { state, dispatch } = useContext(JSONCtx);
-    const { packages, typePackage, addPackage, removePackage, outFocusInputDependencie } = useDependencies({'classType': props.classType, 'type': props.type, 'dispatch': dispatch, 'state': state })
+    const { file, dispatch } = useContext(FileCtx);
+    const { packages, typePackage, addPackage, removePackage, outFocusInputDependencie } = useDependencies({classType: props.classType, type: props.type, dispatch, file })
     
 
     return (<>
@@ -25,8 +25,8 @@ export default function Dependencies(props){
                             </section>
                         </div>
                         <div id={'depdlist' + props.type} className='dependencies-list' data-testid={props.classType + '-list'}>
-                                {state[props.classType] ? 
-                                    Object.keys(state[props.classType]).map(dependencie => <Badge key={dependencie} type={props.type} objKey={dependencie} objValue={state[props.classType][dependencie]} remove={removePackage}/>)
+                                {file.json[props.classType] ? 
+                                    Object.keys(file.json[props.classType]).map(dependencie => <Badge key={dependencie} type={props.type} objKey={dependencie} objValue={file.json[props.classType][dependencie]} remove={removePackage}/>)
                                 : null
                                 }
                         </div>

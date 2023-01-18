@@ -1,9 +1,9 @@
 import React from 'react'
 import Keypad from 'src/components/Keypad'
 import Form from 'src/components/Form';
-import { JSONContextProvider } from 'src/context'
+import { FileContextProvider } from 'src/context/file'
 import { UserContextProvider } from 'src/context/user'
-import { jsonInitialState } from 'src/state'
+import { fileInitialState } from 'src/state'
 import { cleanup, render, screen, fireEvent } from '@testing-library/react'
 import 'jest-extended';
 
@@ -27,9 +27,9 @@ describe('Keypad Test', () => {
 
     const wrapper = ({ children }) => {
         return (<UserContextProvider>
-                    <JSONContextProvider>
+                    <FileContextProvider>
                         {children}
-                    </JSONContextProvider>
+                    </FileContextProvider>
                 </UserContextProvider>)
     }
 
@@ -99,9 +99,9 @@ describe('Keypad Test', () => {
 
             fireEvent.click(screen.getByTestId('btn-clear'))
 
-            expect(screen.getByTestId('form-name').value).toEqual(jsonInitialState.name)
-            expect(screen.getByTestId('form-author').value).toEqual(jsonInitialState.author)
-            expect(screen.getByTestId('form-version').value).toEqual(jsonInitialState.version)
+            expect(screen.getByTestId('form-name').value).toEqual(fileInitialState.json.name)
+            expect(screen.getByTestId('form-author').value).toEqual(fileInitialState.json.author)
+            expect(screen.getByTestId('form-version').value).toEqual(fileInitialState.json.version)
         })
     })
 })

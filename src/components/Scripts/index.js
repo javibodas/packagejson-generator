@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import JSONCtx from 'src/context';
+import FileCtx from 'src/context/file';
 import Badge from 'src/components/Badge';
 import Button from 'src/components/Button';
 import useScripts from 'src/hooks/useScripts';
@@ -7,8 +7,8 @@ import useScripts from 'src/hooks/useScripts';
 
 export default function Scripts(){
 
-    const { state, dispatch } = useContext(JSONCtx)
-    const { addScript, removeScript } = useScripts({'dispatch': dispatch, 'state': state })
+    const { file, dispatch } = useContext(FileCtx)
+    const { addScript, removeScript } = useScripts({ dispatch, file })
 
     return(<>
             <div className='form-group form-scripts'>
@@ -20,8 +20,8 @@ export default function Scripts(){
                         <Button className='btn-add-script' name='btn-add-script' testid='script-add-btn' click={addScript}>+</Button>
                     </div>
                     <div id='scripts-list' className='scripts-list' data-testid='scripts-list'>
-                        {state.scripts ? 
-                            Object.keys(state.scripts).map(key => <Badge type='script' key={key} objKey={key} objValue={state.scripts[key]} remove={removeScript}/>)
+                        {file.json.scripts ? 
+                            Object.keys(file.json.scripts).map(key => <Badge type='script' key={key} objKey={key} objValue={file.json.scripts[key]} remove={removeScript}/>)
                         : null
                         }
                     </div>

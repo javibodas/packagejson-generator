@@ -1,60 +1,62 @@
-const jsonInitialState = {
-  name: "example",
-  version: "1.0.0",
-  description: "Build the next generation of js...",
-  author: "",
-  main: "index.js",
-  dependencies: {},
-  devDependencies: {},
-  scripts: {
-    test: 'echo "Error: no test specified" && exit 1',
+const fileInitialState = {
+	json: {
+		name: 'example',
+		version: '1.0.0',
+		description: 'Build the next generation of js...',
+		author: '',
+		main: 'index.js',
+		dependencies: {},
+		devDependencies: {},
+		scripts: {
+		  test: 'echo "Error: no test specified" && exit 1',
+		},
+		license: 'ISC',
   },
-  license: "ISC",
 };
 
-export default function jsonStateReducer(state, action) {
+export default function fileReducer(file, action) {
     
     switch (action.type) {
       case "updateProjectName":
-        return {...state, 'name': action.value};
+        return {...file, json: {...file.json, 'name': action.value}};
       case "updateProjectVersion":
-        return {...state, 'version': action.value};
+        return {...file, json: {...file.json, 'version': action.value}};
       case "updateProjectDescription":
-        return {...state, 'description': action.value};
+        return {...file, json: {...file.json, 'description': action.value}};
       case "updateProjectAuthor":
-        return {...state, 'author': action.value};
+        return {...file, json: {...file.json, 'author': action.value}};
       case "updateProjectMainFile":
-        return {...state, 'main': action.value};
+        return {...file, json: {...file.json, 'main': action.value}};
       case "addDependencie":
-        var newDependencies = state.dependencies;
+        var newDependencies = file.json.dependencies;
         newDependencies[action.key] = action.value;
-        return {...state, 'dependencies': newDependencies};
+        return {...file, json: {...file.json, 'dependencies': newDependencies}};
       case "removeDependencie":
-        var newDependencies = state.dependencies;
+        var newDependencies = file.json.dependencies;
         delete newDependencies[action.key];
-        return {...state, 'dependencies': newDependencies};
+        return {...file, json: {...file.json, 'dependencies': newDependencies}};
       case "addDevDependencie":
-        var newDevDependencies = state.devDependencies;
+        var newDevDependencies = file.json.devDependencies;
         newDevDependencies[action.key] = action.value
-        return {...state, 'devDependencies': newDevDependencies};
+        return {...file, json: {...file.json, 'devDependencies': newDevDependencies}};
       case "removeDevDependencie":
-        var newDevpendencies = state.devDependencies;
+        var newDevpendencies = file.json.devDependencies;
         delete newDevpendencies[action.key];
-        return {...state, 'devDependencies': newDevpendencies};
+        return {...file, json: {...file.json, 'devDependencies': newDevpendencies}};
       case "addScript":
-        var newScripts = state.scripts
+        var newScripts = file.json.scripts
         newScripts[action.key] = action.value
-        return {...state, 'scripts': newScripts};
+        return {...file, json: {...file.json, 'scripts': newScripts}};
       case "removeScript":
-        var newScripts = state.scripts;
+        var newScripts = file.json.scripts;
         delete newScripts[action.key]
-        return {...state, 'scripts': newScripts};
+        return {...file, json: {...file.json, 'scripts': newScripts}};
       case "updateJSON":
         return action.value;
       case "clearJSON":
-        return jsonInitialState;
+        return action.value ? {...fileInitialState, id: action.value} : fileInitialState;
       default:
-        return state;
+        return file;
     }
 
 }
