@@ -24,7 +24,7 @@ async function handler(req, res) {
 
 			res.status(200).json(resp)
 		})
-		.catch(error => {
+		.catch(() => {
 			resp.error = 'No packages found'
 			res.status(200).json(resp)
 		})
