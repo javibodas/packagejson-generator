@@ -55,11 +55,11 @@ export default function Dependencies(props){
                         font-style: italic;
                         font-size: 14px;
                         padding: 0.25rem;
+                        cursor: pointer;
                     }
 
                     .dependencies .packages-list li:hover{
                         font-weight: bold;
-                        cursor: pointer;
                     }
 
                     .dependencies .packages-list li .pckg-version{
