@@ -1,15 +1,10 @@
-import { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 export default function Badge(props){
 
 	const stylesValuesBadge = ['badge-value-blue', 'badge-value-green']
-	const [ styleValue, setStyleValue ] = useState(stylesValuesBadge[0])
-
-	useEffect(function(){
-		(props.type == 'script') ? setStyleValue(stylesValuesBadge[1]) : setStyleValue(stylesValuesBadge[0])
-	})
+	const styleValue = (props.type == 'script') ? stylesValuesBadge[1] : stylesValuesBadge[0]
 
 	return(<>
 		<div className='badge'>
