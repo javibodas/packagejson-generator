@@ -3,12 +3,12 @@ import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 export default function FileDetailCard({ id, fileDetail, handleClick, handleDelete }) {
 
-    if (!id) {
-        return(<>
-            <div className='file' onClick={handleClick}>
-                <span className='file-new'><FontAwesomeIcon icon={faPlus} size="8x"/></span>
-            </div>
-            <style>{`
+	if (!id) {
+		return(<>
+			<div className='file' onClick={handleClick}>
+				<span className='file-new'><FontAwesomeIcon icon={faPlus} size="8x"/></span>
+			</div>
+			<style>{`
                 .file {
                     display: flex;
                     flex-direction: column;
@@ -33,28 +33,28 @@ export default function FileDetailCard({ id, fileDetail, handleClick, handleDele
                     color: #c12127;
                 }
             `}</style>
-        </>)
-    }
+		</>)
+	}
     
-    const { createdAt, jsonFile } = fileDetail
-    const { name, version, description } = jsonFile
-    const { seconds } = createdAt
+	const { createdAt, jsonFile } = fileDetail
+	const { name, version, description } = jsonFile
+	const { seconds } = createdAt
 
-    return (<>
-        <div className='file' onClick={(e) => handleClick(e, id)}>
-            <div className='file-title'>
-                <h3>{name}</h3>
-                <span className='version'>{version}</span>
-            </div>
-            <div className='file-content'>
-                <span className='description'>{description}</span>
-                <div className='footer'>
-                    <span className='dateCreation'>{(new Date(seconds*1000)).toDateString()}</span>
-                    <span className='badge-remove-icon' onClick={(e) => handleDelete(e, id)}><FontAwesomeIcon icon={faTrash} size="lg"/></span>
-                </div>
-            </div>
-        </div>
-        <style>{`
+	return (<>
+		<div className='file' onClick={(e) => handleClick(e, id)}>
+			<div className='file-title'>
+				<h3>{name}</h3>
+				<span className='version'>{version}</span>
+			</div>
+			<div className='file-content'>
+				<span className='description'>{description}</span>
+				<div className='footer'>
+					<span className='dateCreation'>{(new Date(seconds*1000)).toDateString()}</span>
+					<span className='badge-remove-icon' onClick={(e) => handleDelete(e, id)}><FontAwesomeIcon icon={faTrash} size="lg"/></span>
+				</div>
+			</div>
+		</div>
+		<style>{`
                 .file {
                     display: flex;
                     flex-direction: column;
@@ -112,5 +112,5 @@ export default function FileDetailCard({ id, fileDetail, handleClick, handleDele
                     color: #c12127;
                 }
         `}</style>
-    </>)
+	</>)
 }

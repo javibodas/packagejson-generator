@@ -1,9 +1,9 @@
 export default function Avatar({ avatar }){
-    return(<>
-        <div className='avatar'>
-            <img src={avatar ? avatar : 'default-avatar.png'}/>
-        </div>
-        <style jsx>{`
+	return(<>
+		<div className='avatar'>
+			<img src={avatar ? avatar : 'default-avatar.png'}/>
+		</div>
+		<style jsx>{`
             .avatar{
                 display: flex; flex-direction: row;
                 padding: .25rem;
@@ -19,5 +19,5 @@ export default function Avatar({ avatar }){
                 cursor: pointer;
             }
         `}</style>
-    </>)
+	</>)
 }

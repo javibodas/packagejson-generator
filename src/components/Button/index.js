@@ -1,9 +1,9 @@
 export default function Button(props){
 
-    return(<>
-            <button className={'btn ' + props.name} onClick={props.click} data-testid={props.testid}>{props.children}</button>
-            <style jsx>
-            {`
+	return(<>
+		<button className={'btn ' + props.name} onClick={props.click} data-testid={props.testid}>{props.children}</button>
+		<style jsx>
+			{`
                 .btn {
                     border-radius: 2px;
                     border: solid 1px #c12127;
@@ -36,6 +36,6 @@ export default function Button(props){
                     }
                 }
             `}
-            </style>
-            </>)
+		</style>
+	</>)
 }

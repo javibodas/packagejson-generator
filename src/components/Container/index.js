@@ -1,21 +1,21 @@
-import Form from 'src/components/Form';
-import TextEditor from 'src/components/TextEditor';
-import Keypad from 'src/components/Keypad';
+import Form from 'src/components/Form'
+import TextEditor from 'src/components/TextEditor'
+import Keypad from 'src/components/Keypad'
 
 export default function Container(){
-    return(<>
-            <div className='container'>
-                <div className='editor'>
-                    <TextEditor />
-                 </div>
-                 <div className='form'>
-                    <Form />
-                </div>
-                <div className='keypad'>
-                    <Keypad />
-                </div>
-            </div>
-            <style jsx>{`
+	return(<>
+		<div className='container'>
+			<div className='editor'>
+				<TextEditor />
+			</div>
+			<div className='form'>
+				<Form />
+			</div>
+			<div className='keypad'>
+				<Keypad />
+			</div>
+		</div>
+		<style jsx>{`
                 .container {
                     display: grid;
                     grid-template-areas:
@@ -77,6 +77,6 @@ export default function Container(){
                     }
                 }
                 `}</style>
-            </>
-    )
+	</>
+	)
 }
