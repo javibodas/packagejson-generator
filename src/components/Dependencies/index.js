@@ -8,6 +8,14 @@ export default function Dependencies(props){
 
 	const { file, dispatch } = useContext(FileCtx)
 	const { packages, typePackage, addPackage, removePackage, outFocusInputDependencie } = useDependencies({classType: props.classType, type: props.type, dispatch, file })
+
+	const handleOnClick = function(event) {
+		addPackage(event)
+	}
+
+	const handleOnTouch = function(event) {
+		addPackage(event)
+	}
     
 
 	return (<>
@@ -19,7 +27,7 @@ export default function Dependencies(props){
 						<input id = {'inpt-dependencies' + props.type} className = 'input-form input-dependencie' placeholder="NPM Package" onChange={typePackage} onBlur={outFocusInputDependencie} data-testid={'input-' + props.classType}/>
 						<div id = {'packlist' + props.type} className='packages-list' data-testid={'combo-' + props.classType}>
 							<ul>
-								{packages.map(pack => <li key={pack.name} onClick={addPackage}>{pack.name}<span className='pckg-version' data-testid={props.classType + '-list-item'}>{' (' + pack.version+')'}</span></li>)}
+								{packages.map(pack => <li key={pack.name} onClick={handleOnClick} onTouchStart={handleOnTouch}>{pack.name}<span className='pckg-version' data-testid={props.classType + '-list-item'}>{' (' + pack.version+')'}</span></li>)}
 							</ul>
 						</div>
 					</section>
