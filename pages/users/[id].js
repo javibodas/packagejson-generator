@@ -33,7 +33,7 @@ export default function User(){
 			const response = await getUserFiles(router.query.id)
 			setFiles(response.data)
 		}
-	}, [router.isReady, router.query.id])
+	}, [router.isReady])
 
 	return(<>
 		<div className='user-files'>

@@ -7,13 +7,15 @@ const MonacoEditor = dynamic(import('react-monaco-editor'), { ssr: false })
 export default function TextEditor() {
 	const { file, dispatch } = useContext(FileCtx)
 
-	const updateContext = function (newValue, event) {
+	const updateContext = function (newValue) {
 		try {
 			const jsonParsed = JSON.parse(newValue)
 
 			dispatch({type: 'updateJSON', value: { ...file, json: jsonParsed}})
 
-		} catch (error) {}
+		} catch (error) {
+			console.log('Error parsing json text editor')
+		}
 	}
 
 	return (
