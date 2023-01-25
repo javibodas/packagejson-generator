@@ -1,20 +1,19 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useContext } from 'react'
 import { useRouter } from 'next/router'
-import UserCtx from 'src/context/user'
-import useUser from 'src/hooks/useUser'
-import getUserFiles from 'src/services/getUserFiles'
-import FileDetailCard from 'src/components/FileDetailCard'
+import UserCtx from 'src/client/context/user'
+import useUser from 'src/client/hooks/useUser'
+import FileDetailCard from 'src/client/components/FileDetailCard'
+import getUser from 'src/client/services/getUser'
 
-export default function User(){
+export default function User({ filesApi }){
 
 	const router = useRouter()
 
-	const [ files, setFiles ] = useState([])
+	const [ files, setFiles ] = useState(filesApi)
 	const { user, setUser } = useContext(UserCtx)
 	const { deleteFile } = useUser({ user, setUser })
 
 	const handleClickNewFile = () => {
-		console.log('Must redirect')
 		router.push('/')
 	}
 
@@ -28,17 +27,10 @@ export default function User(){
 		setFiles(files.filter((file) => file.id !== fileId))
 	}
 
-	useEffect(async function(){
-		if (router.isReady) {
-			const response = await getUserFiles(router.query.id)
-			setFiles(response.data)
-		}
-	}, [router.isReady])
-
 	return(<>
 		<div className='user-files'>
 			<FileDetailCard key={0} handleClick={handleClickNewFile}/>
-			{ files.map(file => <FileDetailCard key={file.id} id={file.id} fileDetail={file} handleClick={handleClickFile} handleDelete={handleDeleteFile} />)}
+			{ files.map(file => <FileDetailCard key={file.id} fileDetail={file} handleClick={handleClickFile} handleDelete={handleDeleteFile} />)}
 		</div>
 		<style>{`
             .user-files {
@@ -52,4 +44,22 @@ export default function User(){
             }
         `}</style>
 	</>)
+}
+
+export async function getServerSideProps(context) {
+	const id = context.params.id
+
+	const data = await getUser(id)
+
+	if (data.error) {
+		console.log('Error al buscar el cliente' + data.error)
+		return {
+			redirect: {
+				destination: '/',
+				permanent: false
+			}
+		}
+	}
+
+	return { props: { filesApi: data.files ? data.files : [] }}
 }

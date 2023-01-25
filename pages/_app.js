@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import { UserContextProvider } from 'src/context/user'
-import Header from 'src/components/Header'
+import { UserContextProvider } from 'src/client/context/user'
+import Header from 'src/client/components/Header'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import 'styles/global.css'

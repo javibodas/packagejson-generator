@@ -1,5 +1,5 @@
-import Container from 'src/components/Container'
-import { FileContextProvider } from 'src/context/file'
+import Container from 'src/client/components/Container'
+import { FileContextProvider } from 'src/client/context/file'
 
 export default function HomePage({ file }) { 
 	return (
