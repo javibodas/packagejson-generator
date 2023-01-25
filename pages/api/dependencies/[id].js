@@ -1,24 +1,17 @@
 const axios = require('axios')
 
-async function handler(req, res) {
-	const {
-		query: { id },
-	} = req
-    
-	const resp = {
-		error: '',
-		data: []
-	}
+export default async function handler(req, res) {
+	const { query: { id } } = req
+	const resp = { error: '', data: [] }
 
-	await axios.get('https://www.npmjs.com/search/suggestions?q='+id)
+	await axios.get(`https://www.npmjs.com/search/suggestions?q=${id}`)
 		.then(response => {
-
-			if (response.data){
+			if (response.data) {
 				resp.data = response.data.map(p => {
 					const { name, version, description} = p
 					return { id, name, version, description }
 				})
-			}else{
+			} else {
 				resp.error = 'No packages found'
 			}
 
@@ -29,5 +22,3 @@ async function handler(req, res) {
 			res.status(200).json(resp)
 		})
 }
-
-export default handler
