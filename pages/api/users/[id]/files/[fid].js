@@ -1,7 +1,12 @@
+import databaseConnect from 'src/server/database'
+import User from 'src/server/models/User'
+import File from 'src/server/models/File'
+import UserNotExist from 'src/server/errors/UserNotExist'
 import FileDoesntBelongToUser from 'src/server/errors/FileDoesntBelongToUser'
 import FileNotExist from 'src/server/errors/FileNotExist'
-import UserNotExist from 'src/server/errors/UserNotExist'
-import { userExists, fileExists, fileExistsInUser, deleteUserFile, deleteFile } from 'src/client/firebase/client'
+
+
+databaseConnect()
 
 export default async function handler(req, res) {
 	const { query: { id, fid }, method } = req
@@ -9,12 +14,15 @@ export default async function handler(req, res) {
 	switch (method) {
 	case 'DELETE':
 		try {
-			if (!(await fileExists(fid))) throw new FileNotExist()
-			if (!(await userExists(id))) throw new UserNotExist()
-			if (!(await fileExistsInUser(fid, id))) throw new FileDoesntBelongToUser()
+			const user = await User.findById(id)
+			const file = await File.findById(fid)
 
-			await deleteUserFile(fid, id)
-			await deleteFile(fid)
+			if (!file) throw new FileNotExist()
+			if (!user) throw new UserNotExist()
+			if (!fileExistsInUser(fid, user._doc.files)) throw new FileDoesntBelongToUser()
+			
+			await File.findByIdAndDelete(fid)
+			await User.findByIdAndUpdate(id, { $pull : { files: fid }})
 
 			res.status(200).json({ id: fid })
 		} catch (e) {
@@ -30,4 +38,8 @@ export default async function handler(req, res) {
 		res.setHeader('Allow', ['DELETE'])
 		res.status(405).end(`Method ${method} Not Allowed`)
 	}
+}
+
+const fileExistsInUser = function(fileId, userFiles) {
+	return userFiles.filter((id) => id.toString() === fileId).length > 0
 }

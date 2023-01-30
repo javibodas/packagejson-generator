@@ -1,5 +1,5 @@
 export default function createFile(fileContent) {
-	const  URI = `${process.env.NEXT_PUBLIC_BASE_URL}/api/files/create`
+	const  URI = `${process.env.NEXT_PUBLIC_BASE_URL}/api/files`
 	return fetch(URI, {
 		method: 'POST',
 		headers: { 'Content-Type' : 'application/json' },

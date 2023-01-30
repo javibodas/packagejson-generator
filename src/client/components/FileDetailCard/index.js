@@ -47,7 +47,7 @@ export default function FileDetailCard({ fileDetail, handleClick, handleDelete }
 			<div className='file-content'>
 				<span className='description'>{description}</span>
 				<div className='footer'>
-					<span className='dateCreation'>{createdAt}</span>
+					<span className='dateCreation'>{(new Date(createdAt)).toDateString()}</span>
 					<span className='badge-remove-icon' onClick={(e) => handleDelete(e, id)}><FontAwesomeIcon icon={faTrash} size="lg"/></span>
 				</div>
 			</div>

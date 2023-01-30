@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { loginWithGithub, logoutWithGithub, onAuthStateChanged } from 'src/client/firebase/client'
+import createUser from 'src/client/services/createUser'
 import createUserFile from 'src/client/services/createUserFile'
 import deleteUserFile from 'src/client/services/deleteUserFile'
 
@@ -15,7 +16,10 @@ export default function useUser({ user, setUser }) {
 
 	const handleLogIn = () => {
 		login()
-			.then((userLogin) => setUser({...userLogin, isLogged: true}))
+			.then((userLogin) => {
+				createUser(userLogin.uid)
+				setUser({...userLogin, isLogged: true})
+			})
 			.catch((error) => console.log(error))
 	}
     
