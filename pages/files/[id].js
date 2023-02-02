@@ -9,7 +9,18 @@ export default function File({ json, id }){
 export async function getServerSideProps(context) {
 	const id = context.params.id
 
-	const data = await getFile(id)
-	
-	return { props: { ...data }}
+	try {
+		const data = await getFile(id)
+
+		if (data.error) throw new Error()
+
+		return { props: { ...data }}
+	} catch (e) {
+		return {
+			redirect: {
+				destination: '/',
+				permanent: false
+			}
+		}
+	}
 }

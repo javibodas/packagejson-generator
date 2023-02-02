@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 		}
 	case 'PUT':
 		try {
-			const fileUpdated = await File.findByIdAndUpdate(pid, body, { new: true })
+			const fileUpdated = await File.findByIdAndUpdate(pid, { json: body }, { new: true })
 			if (!fileUpdated) throw new FileNotExist()
 
 			return res.status(200).json({ ...fileUpdated._doc })

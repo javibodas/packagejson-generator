@@ -2,13 +2,13 @@ import firebase from 'firebase'
 
 const firebaseConfig = {
 	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-	authDomain: 'packagejson-generator.firebaseapp.com',
-	databaseURL: 'https://packagejson-generator.firebaseio.com',
-	projectId: 'packagejson-generator',
-	storageBucket: 'packagejson-generator.appspot.com',
-	messagingSenderId: '320777149161',
+	authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+	databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+	projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+	storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_SENDER_ID,
 	appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-	measurementId: 'G-3D5B9YKHE9'
+	measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 }
 
 !firebase.apps.length && firebase.initializeApp(firebaseConfig)

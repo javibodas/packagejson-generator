@@ -14,35 +14,52 @@ export default function useUser({ user, setUser }) {
 
 	const logout = () => { return logoutWithGithub() }
 
-	const handleLogIn = () => {
-		login()
-			.then((userLogin) => {
-				createUser(userLogin.uid)
-				setUser({...userLogin, isLogged: true})
-			})
-			.catch((error) => console.log(error))
+	const handleLogIn = async () => {
+		try {
+			const userLogin = await login()
+			const userCreated = await createUser(userLogin.uid)
+			if (userCreated.error) throw new Error(userCreated.error)
+
+			setUser({...userLogin, isLogged: true})
+		} catch (e) {
+			console.log(e.message)
+		}
 	}
     
-	const handleLogout = () => {
-		logout()
-			.then(() => {
-				setUser({isLogged: false})
-				router.push('/')
-			})
-			.catch((error) => console.log(error))
+	const handleLogout = async () => {
+		try {
+			await logout()
+
+			setUser({isLogged: false})
+			router.push('/')
+		} catch (e) {
+			console.log(e.message)
+		}
 	}
 
 	const saveUserFile = async (fileContent) => {
-		const response = await createUserFile(user.uid, fileContent)
+		try { 
+			const response = await createUserFile(user.uid, fileContent)
 
-		if (response.error) console.log(response.error)
-		else router.push('/files/' + response.id)
+			if (response.error) throw new Error(response.error)
+
+			router.push('/files/' + response.id)
+		} catch (e) {
+			console.log(e.message)
+		}
 	}
 
 	const deleteFile = async (fileId) => {
-		const response = await deleteUserFile(user.uid, fileId)
+		try {
+			const response = await deleteUserFile(user.uid, fileId)
 		
-		if (response.error) console.log(response.error)
+			if (response.error) throw new Error(response.error)
+
+			return true
+		} catch (e) {
+			console.log(e.message)
+			return false
+		}
 	}
 
 	return { isLogged, onAuthStateChanged, handleLogIn, handleLogout, deleteFile, saveUserFile }

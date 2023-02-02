@@ -28,8 +28,7 @@ export default async function handler(req, res) {
 		} catch (e) {
 			const resp = { error: e.message }
             
-			if (e instanceof UserNotExist) res.status(404).json(resp)
-			else if (e instanceof FileNotExist) res.status(404).json(resp)
+			if (e instanceof UserNotExist || e instanceof FileNotExist) res.status(404).json(resp)
 			else if (e instanceof FileDoesntBelongToUser) res.status(401).json(resp)
 			else res.status(500).json(resp)
 		}

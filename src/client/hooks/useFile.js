@@ -27,16 +27,25 @@ export default function useFile({ json }){
 	}
 
 	const handleUpdateFile = async (fileId) => {
-		const response = await updateFile(fileId, json)
+		try {
+			const response = await updateFile(fileId, json)
 
-		if (response.error) console.log(response.error)
+			if (response.error) throw new Error(response.error)
+		} catch (e) {
+			console.log(e.message)
+		}
 	}
 
 	const handleCreateFile = async () => {
-		const response = await createFile(json)
+		try {
+			const response = await createFile(json)
 
-		if (response.error) console.log(response.error)
-		else router.push('/files/' + response.id)
+			if (response.error) throw new Error(response.error)
+			
+			router.push('/files/' + response.id)
+		} catch (e) {
+			console.log(e.message)
+		}
 	}
 
 	return { exportFile, handleCreateFile, handleUpdateFile }
