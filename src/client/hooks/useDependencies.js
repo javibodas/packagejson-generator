@@ -6,25 +6,33 @@ export default function useDependencies({classType, type, dispatch, file}){
 	const [ packages, setPackages ] = useState([])
 	const EMPTY_OR_ERROR_PACKAGE = {'name' : 'No packages founded'}
 
-	const typePackage = (e) => {
-		if(e.target.value === ''){ 
-			const packagesListEl = document.getElementById('packlist' + type)
-			packagesListEl.classList.remove('active')
+	const outFocusInputDependencie = () => {
+		const packagesListElement = document.getElementById('packlist' + type)
+		if (packagesListElement) packagesListElement.classList.remove('active')
+	}
+
+	const showPackagesList = () => {
+		const packagesListEl = document.getElementById('packlist' + type)
+		if (!packagesListEl.classList.contains('active')) packagesListEl.classList.add('active')
+	}
+
+	const typePackage = async (e) => {
+		if(e.target.value === '') { 
+			outFocusInputDependencie()
 			return
 		}
 
-		getDependencies(e.target.value)
-			.then(response => {
-				if (response.error) {
-					setPackages([EMPTY_OR_ERROR_PACKAGE])
-					return
-				}
+		try {
+			const response = await getDependencies(e.target.value)
+			
+			if (response.error) throw new Error()
             
-				setPackages(response.data)
-				const packagesListEl = document.getElementById('packlist' + type)
-				if (!packagesListEl.classList.contains('active')) packagesListEl.classList.add('active')
-			})
-			.catch((error) => { setPackages([EMPTY_OR_ERROR_PACKAGE]); console.log(error) })
+			setPackages(response.data)
+			showPackagesList()
+		} catch (e) {
+			console.log(e.message)
+			setPackages([EMPTY_OR_ERROR_PACKAGE])
+		}
 	}
 
 	const addPackage = (event) => {
@@ -59,11 +67,6 @@ export default function useDependencies({classType, type, dispatch, file}){
 	const removePackage = function(packageName) {
 		if (classType === 'dependencies') dispatch({type: 'removeDependencie', key: packageName})
 		if (classType === 'devDependencies') dispatch({type: 'removeDevDependencie', key: packageName})
-	}
-
-	const outFocusInputDependencie = () => {
-		const packagesListElement = document.getElementById('packlist' + type)
-		if (packagesListElement) packagesListElement.classList.remove('active')
 	}
 
 	return { packages, typePackage, addPackage, removePackage, outFocusInputDependencie }

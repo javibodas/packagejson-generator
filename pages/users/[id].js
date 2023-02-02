@@ -23,7 +23,10 @@ export default function User({ filesApi }){
 
 	const handleDeleteFile = async (event, fileId) => {
 		event.stopPropagation()
-		await deleteFile(fileId)
+
+		const isFileDeleted = await deleteFile(fileId)
+		if (!isFileDeleted) return
+
 		setFiles(files.filter((file) => file.id !== fileId))
 	}
 
@@ -49,10 +52,13 @@ export default function User({ filesApi }){
 export async function getServerSideProps(context) {
 	const id = context.params.id
 
-	const data = await getUser(id)
+	try {
+		const data = await getUser(id)
 
-	if (data.error) {
-		console.log('Error al buscar el cliente' + data.error)
+		if (data.error) throw new Error()
+
+		return { props: { filesApi: data.files ? data.files : [] }}
+	} catch (e) {
 		return {
 			redirect: {
 				destination: '/',
@@ -60,6 +66,4 @@ export async function getServerSideProps(context) {
 			}
 		}
 	}
-
-	return { props: { filesApi: data.files ? data.files : [] }}
 }

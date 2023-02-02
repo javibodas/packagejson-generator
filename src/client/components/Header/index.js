@@ -13,7 +13,6 @@ export default function Header(){
 	const { isLogged, handleLogIn, handleLogout, onAuthStateChanged } = useUser({ user, setUser })
 
 	useEffect(function(){
-		console.log('On oauth')
 		onAuthStateChanged((userUpdated) => {
 			(userUpdated) ? setUser({...userUpdated, isLogged: true })
 				: setUser({isLogged: false})

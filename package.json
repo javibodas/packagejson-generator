@@ -39,6 +39,7 @@
     "firebase": "8.1.1",
     "monaco-editor": "0.21.2",
     "monaco-editor-webpack-plugin": "2.1.0",
+    "mongoose": "6.8.4",
     "next": "10.0.5",
     "next-compose-plugins": "2.2.1",
     "next-transpile-modules": "6.0.0",
