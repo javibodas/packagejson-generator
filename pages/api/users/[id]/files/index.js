@@ -14,7 +14,7 @@ export default async function handler(req, res) {
 			const user = await User.findById(id)
 			if (!user) throw new UserNotExist()
 			
-			const file = new File({ json: body })
+			const file = new File({ json: body, createdBy: id })
 			await file.save()
 
 			await User.findByIdAndUpdate(id, { $addToSet: { files: file._id.toString() } })

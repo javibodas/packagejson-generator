@@ -17,7 +17,7 @@ export default async function handler(req, res) {
 		}
 	case 'POST':
 		try {
-			const file = new File({ json: body })
+			const file = new File({ json: body, createdBy: '' })
 			await file.save()
 			
 			return res.status(200).json({ id: file._id })

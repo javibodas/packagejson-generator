@@ -12,7 +12,8 @@ const FileSchema = new Schema({
 		devDependencies: { type: Object },
 		scripts: { type: Object },
 		license: { type: String, trim: true },
-	}
+	},
+	createdBy: { type: String }
 }, { timestamps: true, versionKey: false, strict: false })
 
 const FileModel = models.File || model('File', FileSchema)
