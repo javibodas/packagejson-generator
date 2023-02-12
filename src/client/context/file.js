@@ -4,7 +4,7 @@ import { fileInitialState } from 'src/client/state'
 
 const FileCtx = React.createContext()
 
-export function FileContextProvider({children, value}){
+export function FileContextProvider({ children, value }){
 
 	const [ file, dispatch ] = useReducer(fileReducer, value ?? fileInitialState)
     

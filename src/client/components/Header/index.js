@@ -10,7 +10,7 @@ import Button from 'src/client/components/Button'
 export default function Header(){
 
 	const { user, setUser } = useContext(UserCtx)
-	const { isLogged, handleLogIn, handleLogout, onAuthStateChanged } = useUser({ user, setUser })
+	const { handleLogIn, handleLogout, onAuthStateChanged } = useUser({ user, setUser })
 
 	useEffect(function(){
 		onAuthStateChanged((userUpdated) => {
@@ -23,7 +23,7 @@ export default function Header(){
 		<header>
 			<nav>
 				{
-					!isLogged() ?
+					!user.isLogged ?
 						<Button name='btn-login' click={handleLogIn}>Login With <FontAwesomeIcon icon={faGithub} /></Button>
 						:
 						<UserOptions user={user} logout={handleLogout}/>

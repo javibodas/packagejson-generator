@@ -5,7 +5,7 @@ export default function FileDetailCard({ fileDetail, handleClick, handleDelete }
 
 	if (!fileDetail) {
 		return(<>
-			<div className='file' onClick={handleClick}>
+			<div className='file' onClick={handleClick} data-testid='file-new'>
 				<span className='file-new'><FontAwesomeIcon icon={faPlus} size="8x"/></span>
 			</div>
 			<style>{`
@@ -39,16 +39,16 @@ export default function FileDetailCard({ fileDetail, handleClick, handleDelete }
 	const { id, name, version, description, createdAt } = fileDetail
 
 	return (<>
-		<div className='file' onClick={(e) => handleClick(e, id)}>
+		<div className='file' onClick={(e) => handleClick(e, id)} data-testid={`file-saved-${id}`}>
 			<div className='file-title'>
-				<h3>{name}</h3>
-				<span className='version'>{version}</span>
+				<h3 data-testid="file-title">{name}</h3>
+				<span className='version' data-testid="file-version">{version}</span>
 			</div>
 			<div className='file-content'>
 				<span className='description'>{description}</span>
 				<div className='footer'>
-					<span className='dateCreation'>{(new Date(createdAt)).toDateString()}</span>
-					<span className='badge-remove-icon' onClick={(e) => handleDelete(e, id)}><FontAwesomeIcon icon={faTrash} size="lg"/></span>
+					<span className='dateCreation' data-testid="file-description">{(new Date(createdAt)).toDateString()}</span>
+					<span className='badge-remove-icon' onClick={(e) => handleDelete(e, id)}  data-testid={`btn-delete-file-saved-${id}`}><FontAwesomeIcon icon={faTrash} size="lg"/></span>
 				</div>
 			</div>
 		</div>

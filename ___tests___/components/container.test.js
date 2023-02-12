@@ -3,7 +3,7 @@ import Container from 'src/client/components/Container'
 import { FileContextProvider } from 'src/client/context/file'
 import { UserContextProvider } from 'src/client/context/user'
 import { fileInitialState } from 'src/client/state'
-import { server } from './setupWorkerAPI'
+import { server } from '../setupWorkerAPI'
 import { render, screen, waitFor, fireEvent, cleanup } from '@testing-library/react'
 import 'jest-extended'
 
