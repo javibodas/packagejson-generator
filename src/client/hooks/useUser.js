@@ -7,8 +7,6 @@ import deleteUserFile from 'src/client/services/deleteUserFile'
 export default function useUser({ user, setUser }) {
 
 	const router = useRouter()
-    
-	const isLogged = () => { return user.isLogged }
 
 	const login = () => { return loginWithGithub() }
 
@@ -62,5 +60,5 @@ export default function useUser({ user, setUser }) {
 		}
 	}
 
-	return { isLogged, onAuthStateChanged, handleLogIn, handleLogout, deleteFile, saveUserFile }
+	return { onAuthStateChanged, handleLogIn, handleLogout, deleteFile, saveUserFile }
 }

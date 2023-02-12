@@ -2,7 +2,8 @@
 	"env": {
 		"node": true,
 		"es2021": true,
-		"browser": true
+		"browser": true,
+		"jest/globals": true
 	},
 	"extends": [
 		"eslint:recommended",
@@ -18,7 +19,7 @@
 			"jsx": true
 		}
 	},
-	"plugins": [ "react" ],
+	"plugins": [ "react", "jest" ],
 	"settings": {
 		"react": {
 		  "version": "detect"

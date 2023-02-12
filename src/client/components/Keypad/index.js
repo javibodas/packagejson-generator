@@ -12,11 +12,11 @@ export default function Keypad(){
 	const { exportFile, handleCreateFile, handleUpdateFile } = useFile({json: file.json})
 
 	const { user, setUser } = useContext(UserCtx)
-	const { isLogged, saveUserFile } = useUser({ user, setUser })
+	const { saveUserFile } = useUser({ user, setUser })
 
 	const handleClickSave = () => {
 		file.id ? handleUpdateFile(file.id)
-			: isLogged() ? saveUserFile(file.json)
+			: user.isLogged ? saveUserFile(file.json)
 				: handleCreateFile()
 
 	}
@@ -27,8 +27,8 @@ export default function Keypad(){
 
 	return(<>
 		<div className='btns-keypad'>
-			<Button name='btn-exportjson' click={exportFile} testid='btn-exportjson'>Export</Button>
-			<Button name='btn-generateuri' click={handleClickSave} testid='btn-generateuri'>{ file.id ? 'Update' : !isLogged() ? 'Share' : 'Save' }</Button>
+			<Button name='btn-exportjson' click={exportFile} testid='btn-export'>Export</Button>
+			<Button name='btn-generateuri' click={handleClickSave} testid='btn-save'>{ file.id ? 'Update' : !user.isLogged ? 'Share' : 'Save' }</Button>
 			<Button name='btn-clear' click={handleClear} testid='btn-clear'>Clear</Button>
 		</div>
 		<style jsx>{`
