@@ -16,14 +16,9 @@ export default function useDependencies({classType, type, dispatch, file}){
 		if (!packagesListEl.classList.contains('active')) packagesListEl.classList.add('active')
 	}
 
-	const typePackage = async (e) => {
-		if(e.target.value === '') { 
-			outFocusInputDependencie()
-			return
-		}
-
+	const searchPackages = async (str) => {
 		try {
-			const response = await getDependencies(e.target.value)
+			const response = await getDependencies(str)
 			
 			if (response.error) throw new Error()
             
@@ -33,6 +28,19 @@ export default function useDependencies({classType, type, dispatch, file}){
 			console.log(e.message)
 			setPackages([EMPTY_OR_ERROR_PACKAGE])
 		}
+	}
+
+	let timer
+	const typePackage = (e, timeout = 300) => {
+		clearTimeout(timer)
+
+		if(e.target.value === '') { 
+			outFocusInputDependencie()
+			return
+		}
+
+		const str = e.target.value
+		timer = setTimeout(() => { searchPackages(str) }, timeout)
 	}
 
 	const addPackage = (event) => {
