@@ -13,7 +13,8 @@ const FileSchema = new Schema({
 		scripts: { type: Object },
 		license: { type: String, trim: true },
 	},
-	createdBy: { type: String }
+	createdBy: { type: String },
+	isPrivate: { type: Boolean, default: false }
 }, { timestamps: true, versionKey: false, strict: false })
 
 const FileModel = models.File || model('File', FileSchema)
