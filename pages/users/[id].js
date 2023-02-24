@@ -60,10 +60,7 @@ export async function getServerSideProps(context) {
 		return { props: { filesApi: data.files ? data.files : [] }}
 	} catch (e) {
 		return {
-			redirect: {
-				destination: '/',
-				permanent: false
-			}
+			notFound: true
 		}
 	}
 }
