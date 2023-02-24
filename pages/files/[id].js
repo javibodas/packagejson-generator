@@ -17,10 +17,7 @@ export async function getServerSideProps(context) {
 		return { props: { ...data }}
 	} catch (e) {
 		return {
-			redirect: {
-				destination: '/',
-				permanent: false
-			}
+			notFound: true
 		}
 	}
 }
