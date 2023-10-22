@@ -1,6 +1,3 @@
-import Image from 'next/image'
-import notFoundPic from '../public/404.jpg'
-
 export default function NotFoundPage() {
 	return <>
 		<div className='container'>
@@ -8,7 +5,6 @@ export default function NotFoundPage() {
 				<h1>4 &#123; &#125; 4</h1>
 				<span>The resource was not found</span>
 			</section>
-			<Image src={notFoundPic} width={500} height={500}/>
 		</div>
 		<style jsx>{`
 				@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');

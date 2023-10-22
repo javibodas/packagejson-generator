@@ -1,25 +1,20 @@
-const withPlugins = require('next-compose-plugins')
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
-const withCSS = require('@zeit/next-css')
+import { patchWebpackConfig } from 'next-global-css';
+import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin'
 
-module.exports = withPlugins([withCSS], {
-	webpack: config => {
-		config.module.rules.push({
-			test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-			use: {
-				loader: 'url-loader',
-				options: {
-					limit: 100000,
-				},
-			},
-		})
-      
-		config.plugins.push(
-			new MonacoWebpackPlugin({
-				languages: ['json'],
-				filename: 'static/[name].worker.js'
-			})
-		)
-		return config
-	}
-})
+export default {
+	  webpack: (config, options ) => {
+			// allow global CSS to be imported from within node_modules
+			patchWebpackConfig(config, options)
+		
+			if(!options.isServer) {
+				config.plugins.push(
+					new MonacoWebpackPlugin({
+						languages: ['json'],
+						filename: 'static/[name].worker.js'
+					})
+				);
+			}
+
+			return config
+		}
+}

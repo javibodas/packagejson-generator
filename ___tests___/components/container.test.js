@@ -51,7 +51,7 @@ describe('Container Test', () => {
 		})
 
 		it('should add package to dependencies list and text editor content', () => {
-			expect(screen.getByTestId('dependencies-list').textContent).toInclude(packageName)
+			expect(screen.getByTestId('dependencies-list').textContent).toMatch(packageName)
 		})
 	})
 
@@ -64,8 +64,8 @@ describe('Container Test', () => {
 			screen.getByTestId('script-value').value = scriptvalue
 
 			fireEvent.click(screen.getByTestId('script-add-btn'))
-			expect(screen.getByTestId('scripts-list').textContent).toInclude(scriptKey)
-			expect(screen.getByTestId('scripts-list').textContent).toInclude(scriptvalue)
+			expect(screen.getByTestId('scripts-list').textContent).toMatch(scriptKey)
+			expect(screen.getByTestId('scripts-list').textContent).toMatch(scriptvalue)
 		})
 	})
 })
