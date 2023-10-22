@@ -72,7 +72,7 @@ describe('Form Test', () => {
 		})
 
 		it('should add package to dependencies list', () => {
-			expect(screen.getByTestId('dependencies-list').textContent).toInclude(packageName)
+			expect(screen.getByTestId('dependencies-list').textContent).toMatch(packageName)
 		})
 	})
 
@@ -89,7 +89,7 @@ describe('Form Test', () => {
 		})
 
 		it('should add package to devdependencies list', () => {
-			expect(screen.getByTestId('devDependencies-list').textContent).toInclude(packageName)
+			expect(screen.getByTestId('devDependencies-list').textContent).toMatch(packageName)
 		})
 	})
 
@@ -106,8 +106,8 @@ describe('Form Test', () => {
 			screen.getByTestId('script-value').value = scriptvalue
 
 			fireEvent.click(screen.getByTestId('script-add-btn'))
-			expect(screen.getByTestId('scripts-list').textContent).not.toInclude(scriptKey)
-			expect(screen.getByTestId('scripts-list').textContent).not.toInclude(scriptvalue)
+			expect(screen.getByTestId('scripts-list').textContent).not.toMatch(scriptKey)
+			expect(screen.getByTestId('scripts-list').textContent).not.toMatch(scriptvalue)
 		})
 
 		it('should add script to scripts list if script key and script value are filled', () => {
@@ -115,8 +115,8 @@ describe('Form Test', () => {
 			screen.getByTestId('script-value').value = scriptvalue
 
 			fireEvent.click(screen.getByTestId('script-add-btn'))
-			expect(screen.getByTestId('scripts-list').textContent).toInclude(scriptKey)
-			expect(screen.getByTestId('scripts-list').textContent).toInclude(scriptvalue)
+			expect(screen.getByTestId('scripts-list').textContent).toMatch(scriptKey)
+			expect(screen.getByTestId('scripts-list').textContent).toMatch(scriptvalue)
 		})
 	})
 })
