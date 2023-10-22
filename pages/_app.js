@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import { UserContextProvider } from 'src/client/context/user'
-import Header from 'src/client/components/Header'
+import Layout from 'src/client/components/Layout'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import 'styles/global.css'
@@ -13,10 +12,9 @@ function MyApp({ Component, pageProps }) {
 			<link rel="icon" href="/favicon.png" />
 			<meta name="description" content="Generator and manager of package.json files" />
 		</Head>
-		<UserContextProvider>
-			<Header />
+		<Layout>
 			<Component { ...pageProps } />
-		</UserContextProvider>
+		</Layout>
 	</>)
 }
 
