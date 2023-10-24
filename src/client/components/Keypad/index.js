@@ -6,13 +6,13 @@ import Button from 'src/client/components/Button'
 import useFile from 'src/client/hooks/useFile'
 
 
-export default function Keypad(){
-
-	const { file, dispatch } = useContext(FileCtx)
-	const { exportFile, handleCreateFile, handleUpdateFile } = useFile({json: file.json})
+export default function Keypad() {
 
 	const { user, setUser } = useContext(UserCtx)
 	const { saveUserFile } = useUser({ user, setUser })
+
+	const { file, dispatch } = useContext(FileCtx)
+	const { exportFile, handleCreateFile, handleUpdateFile } = useFile({ ...file, createdBy: user.uid })
 
 	const handleClickSave = () => {
 		file.id ? handleUpdateFile(file.id)
@@ -25,11 +25,24 @@ export default function Keypad(){
 		dispatch({ type: 'clearJSON', value: file.id })
 	}
 
+	const fileIsEditable = () => {
+		const fileExists = file.id
+		const fileIsOwnedByCurrentUser = file.createdBy && file.createdBy === user.uid
+
+		return !fileExists || (fileExists && fileIsOwnedByCurrentUser)
+	}
+
 	return(<>
 		<div className='btns-keypad'>
 			<Button name='btn-exportjson' click={exportFile} testid='btn-export'>Export</Button>
-			<Button name='btn-generateuri' click={handleClickSave} testid='btn-save'>{ file.id ? 'Update' : !user.isLogged ? 'Share' : 'Save' }</Button>
-			<Button name='btn-clear' click={handleClear} testid='btn-clear'>Clear</Button>
+			{
+				!fileIsEditable() ? null
+					: <Button name='btn-generateuri' click={handleClickSave} testid='btn-save'>{ file.id ? 'Update' : !user.isLogged ? 'Share' : 'Save' }</Button>
+			}
+			{
+				!fileIsEditable() ? null
+					: <Button name='btn-clear' click={handleClear} testid='btn-clear'>Clear</Button>
+			}
 		</div>
 		<style jsx>{`
             .btns-keypad {

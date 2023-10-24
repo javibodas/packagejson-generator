@@ -27,6 +27,8 @@ export default function fileReducer(file, action) {
 		return {...file, json: {...file.json, 'author': action.value}}
 	case 'updateProjectMainFile':
 		return {...file, json: {...file.json, 'main': action.value}}
+	case 'updateIsPrivate':
+		return {...file, isPrivate: action.value}
 	case 'addDependencie':
 		let addDependencies = file.json.dependencies
 		addDependencies[action.key] = action.value
