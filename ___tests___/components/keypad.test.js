@@ -27,7 +27,7 @@ describe('Keypad Test', () => {
 
 	beforeEach(() => jest.clearAllMocks())
 
-	describe('When user is not logged', () => {
+	describe('When user is not logged and file does not exist', () => {
 		beforeEach(() => {
 			const user = {isLogged: false}
 			render(
@@ -40,7 +40,7 @@ describe('Keypad Test', () => {
 		})
 		afterEach(() => cleanup() )
 
-		it('should appear "Share" button', () => {
+		it('should appear share button', () => {
 			expect(screen.getByTestId('btn-save')).toBeDefined()
 			expect(screen.getByTestId('btn-save').textContent).toEqual('Share')
 		})
@@ -63,7 +63,65 @@ describe('Keypad Test', () => {
 		})
 	})
 
-	describe('When user is logged', () => {
+	describe('When user is not logged and file exist but doesnt have owner', () => {
+		beforeEach(() => {
+			const user = {isLogged: false}
+			const file = {id: 'file-id'}
+			render(
+				<UserContextProvider value={user}>
+					<FileContextProvider value={file}>  
+						<Keypad /> 
+					</FileContextProvider>
+				</UserContextProvider>
+			)
+		})
+		afterEach(() => cleanup() )
+
+		it('should not appear share button', () => {
+			expect(screen.queryByTestId('btn-save')).toBeNull()
+		})
+
+		it('should not appear clear button', () => {
+			expect(screen.queryByTestId('btn-clear')).toBeNull()
+		})
+        
+		it('should let export the file', () => {
+			expect(screen.getByTestId('btn-export')).toBeDefined()
+			fireEvent.click(screen.getByTestId('btn-export'))
+			expect(mockExportFile).toHaveBeenCalledTimes(1)
+		})
+	})
+
+	describe('When user is not logged and file exist but it has owner', () => {
+		beforeEach(() => {
+			const user = {isLogged: false}
+			const file = { id: 'file-id', createdBy: 'user-owner-id'}
+			render(
+				<UserContextProvider value={user}>
+					<FileContextProvider value={file}>  
+						<Keypad /> 
+					</FileContextProvider>
+				</UserContextProvider>
+			)
+		})
+		afterEach(() => cleanup() )
+
+		it('should not appear share button', () => {
+			expect(screen.queryByTestId('btn-save')).toBeNull()
+		})
+
+		it('should not appear clear button', () => {
+			expect(screen.queryByTestId('btn-clear')).toBeNull()
+		})
+        
+		it('should let export the file', () => {
+			expect(screen.getByTestId('btn-export')).toBeDefined()
+			fireEvent.click(screen.getByTestId('btn-export'))
+			expect(mockExportFile).toHaveBeenCalledTimes(1)
+		})
+	})
+
+	describe('When user is logged and file does not exist', () => {
 		beforeEach(() => {
 			const user = {isLogged: true}
 			render(
@@ -76,7 +134,7 @@ describe('Keypad Test', () => {
 		})
 		afterEach(() => cleanup())
 
-		it('should appear "Save" button', () => {
+		it('should appear save button', () => {
 			expect(screen.getByTestId('btn-save')).toBeDefined()
 			expect(screen.getByTestId('btn-save').textContent).toEqual('Save')
 		})
@@ -100,11 +158,12 @@ describe('Keypad Test', () => {
 		})
 	})
 
-	describe('When file already exists ', () => {
-		const file = { id: '123' }
+	describe('When user is logged and file exist but is not owned by current user', () => {
+		const file = { id: 'file-id', createdBy: 'not-current-user-id' }
+		const user = { isLogged: true, uid: 'user-id' }
 		beforeEach(() => {
 			render(
-				<UserContextProvider>
+				<UserContextProvider value={user}>
 					<FileContextProvider value={file}>
 						<Keypad /> 
 					</FileContextProvider>
@@ -113,7 +172,36 @@ describe('Keypad Test', () => {
 		})
 		afterEach(() => cleanup())
 
-		it('should appear "Update" button', () => {
+		it('should not appear update button', () => {
+			expect(screen.queryByTestId('btn-save')).toBeNull()
+		})
+
+		it('should let export the file', () => {
+			expect(screen.getByTestId('btn-export')).toBeDefined()
+			fireEvent.click(screen.getByTestId('btn-export'))
+			expect(mockExportFile).toHaveBeenCalledTimes(1)
+		})
+
+		it('should not appear clear the file', () => {
+			expect(screen.queryByTestId('btn-clear')).toBeNull()
+		})
+	})
+
+	describe('When user is logged and file exist and is owned by current user', () => {
+		const file = { id: 'file-id', createdBy: 'user-id' }
+		const user = { isLogged: true, uid: 'user-id' }
+		beforeEach(() => {
+			render(
+				<UserContextProvider value={user}>
+					<FileContextProvider value={file}>
+						<Keypad /> 
+					</FileContextProvider>
+				</UserContextProvider>
+			)
+		})
+		afterEach(() => cleanup())
+
+		it('should appear update button', () => {
 			expect(screen.getByTestId('btn-save')).toBeDefined()
 			expect(screen.getByTestId('btn-save').textContent).toEqual('Update')
 		})

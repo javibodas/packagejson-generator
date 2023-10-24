@@ -28,18 +28,6 @@ describe('File Test', () => {
 		})
 		afterEach(() => cleanup())
 
-		it('should appear "Update" button', () => {
-			expect(screen.getByTestId('btn-save')).toBeDefined()
-			expect(screen.getByTestId('btn-save').textContent).toEqual('Update')
-		})
-
-		it('should let update the file', () => {
-			expect(screen.getByTestId('btn-save')).toBeDefined()
-			fireEvent.click(screen.getByTestId('btn-save'))
-			expect(mockUpdateFile).toHaveBeenCalledTimes(1)
-			expect(mockUpdateFile).toHaveBeenCalledWith(fileId)
-		})
-
 		it('should appear file values in form', () => {
 			Object.keys(fileJson).map((key) => {
 				if(typeof fileJson[key] === 'string'){
