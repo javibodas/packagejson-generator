@@ -6,17 +6,17 @@ import Button from 'src/client/components/Button'
 import useFile from 'src/client/hooks/useFile'
 
 
-export default function Keypad(){
+export default function Keypad() {
 
 	const { file, dispatch } = useContext(FileCtx)
-	const { exportFile, handleCreateFile, handleUpdateFile } = useFile({json: file.json})
+	const { exportFile, handleCreateFile, handleUpdateFile } = useFile(file)
 
 	const { user, setUser } = useContext(UserCtx)
 	const { saveUserFile } = useUser({ user, setUser })
 
 	const handleClickSave = () => {
 		file.id ? handleUpdateFile(file.id)
-			: user.isLogged ? saveUserFile(file.json)
+			: user.isLogged ? saveUserFile(file)
 				: handleCreateFile()
 
 	}

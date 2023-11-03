@@ -35,9 +35,10 @@ export default function useUser({ user, setUser }) {
 		}
 	}
 
-	const saveUserFile = async (fileContent) => {
-		try { 
-			const response = await createUserFile(user.uid, fileContent)
+	const saveUserFile = async (file) => {
+		try {
+			file.createdBy = user.uid
+			const response = await createUserFile(user.uid, file)
 
 			if (response.error) throw new Error(response.error)
 

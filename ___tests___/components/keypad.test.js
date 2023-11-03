@@ -64,11 +64,13 @@ describe('Keypad Test', () => {
 	})
 
 	describe('When user is logged', () => {
+		const user = { isLogged: true }
+		const file = { json: fileInitialState.json }
+
 		beforeEach(() => {
-			const user = {isLogged: true}
 			render(
 				<UserContextProvider value={user}>
-					<FileContextProvider>  
+					<FileContextProvider>
 						<Keypad /> 
 					</FileContextProvider>
 				</UserContextProvider>
@@ -91,7 +93,7 @@ describe('Keypad Test', () => {
 			expect(screen.getByTestId('btn-save')).toBeDefined()
 			fireEvent.click(screen.getByTestId('btn-save'))
 			expect(mockSaveUserFile).toHaveBeenCalledTimes(1)
-			expect(mockSaveUserFile).toHaveBeenCalledWith(fileInitialState.json)
+			expect(mockSaveUserFile).toHaveBeenCalledWith(file)
 		})
 
 		it('should let clear the file', () => {
