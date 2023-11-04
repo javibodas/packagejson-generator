@@ -16,8 +16,6 @@ export default async function handler(req, res) {
 			
 			const file = new File(body)
 			await file.save()
-
-			await User.findByIdAndUpdate(id, { $addToSet: { files: file.id.toString() } })
 			
 			return res.status(200).json({ id: file.id })
 		} catch (e) {

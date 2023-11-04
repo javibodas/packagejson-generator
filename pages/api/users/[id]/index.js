@@ -6,15 +6,16 @@ import UserNotExist from 'src/server/errors/UserNotExist'
 databaseConnect()
 
 export default async function handler(req, res) {
-	const { query: { id }, method } = req
+	const { query: { id: userId }, method } = req
 
 	switch (method) {
 	case 'GET':
 		try {
-			const user = await User.findById(id)
+			let user = await User.findById(userId)
 			if(!user) throw new UserNotExist()
+			user = user.toObject()
 
-			user.files = await getUserFilesDetail(user.files)
+			user.files = await getUserFiles(userId)
 
 			return res.status(200).json(user)
 		} catch (e) {
@@ -29,20 +30,12 @@ export default async function handler(req, res) {
 	}
 }
 
-const getUserFilesDetail = async function(files) {
+const getUserFiles = async function(userId) {
 
+	const userFiles = await File.find({ createdBy: userId }).exec()
 
-	const userFilesForFilter = await Promise.all(
-		files.map(async (fileId) => { 
-			const file = await File.findById(fileId)
-			return file
-		})
-	)
-
-	const userFilesFiltered = userFilesForFilter.filter((file) => file != null)
-
-	return userFilesFiltered.map((file) => {
-		const { _id, createdAt, json } = file._doc
+	return userFiles.map((file) => {
+		const { _id, createdAt, json } = file
 		const { name, version, description } = json
 		
 		return { id: _id, name, version, description, createdAt }

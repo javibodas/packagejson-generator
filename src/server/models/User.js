@@ -2,8 +2,7 @@ import { Schema, model, models } from 'mongoose'
 
 
 const UserSchema = new Schema({
-	_id: { type: String },
-	files: { type: Array, default: [] }
+	_id: { type: String }
 }, { timestamps: true, versionKey: false })
 
 

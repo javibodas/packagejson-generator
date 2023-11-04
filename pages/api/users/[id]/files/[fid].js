@@ -9,22 +9,21 @@ import FileNotExist from 'src/server/errors/FileNotExist'
 databaseConnect()
 
 export default async function handler(req, res) {
-	const { query: { id, fid }, method } = req
+	const { query: { id: userId, fid: fileId }, method } = req
 
 	switch (method) {
 	case 'DELETE':
 		try {
-			const user = await User.findById(id)
-			const file = await File.findById(fid)
+			const user = await User.findById(userId)
+			const file = await File.findById(fileId)
 
 			if (!file) throw new FileNotExist()
 			if (!user) throw new UserNotExist()
-			if (!fileExistsInUser(fid, user._doc.files)) throw new FileDoesntBelongToUser()
+			if (!fileBelongsToUser(fileId, userId)) throw new FileDoesntBelongToUser()
 			
-			await File.findByIdAndDelete(fid)
-			await User.findByIdAndUpdate(id, { $pull : { files: fid }})
+			await File.findByIdAndDelete(fileId)
 
-			res.status(200).json({ id: fid })
+			res.status(200).json({ id: fileId })
 		} catch (e) {
 			const resp = { error: e.message }
             
@@ -39,6 +38,6 @@ export default async function handler(req, res) {
 	}
 }
 
-const fileExistsInUser = function(fileId, userFiles) {
-	return userFiles.filter((id) => id.toString() === fileId).length > 0
+const fileBelongsToUser = function(fileId, userId) {
+	return File.exists({ id: fileId, createdBy: userId })
 }
