@@ -1,6 +1,7 @@
 import React from 'react'
 import File from 'pages/files/[id]'
 import { UserContextProvider } from 'src/client/context/user'
+import { FILE_ID_EXAMPLE } from '___tests___/constants'
 import { cleanup, render, screen, act, fireEvent } from '@testing-library/react'
 import 'jest-extended'
 
@@ -14,15 +15,14 @@ jest.mock('src/client/hooks/useFile', () => {
 
 describe('File Test', () => {
 	describe('When existing file loaded', () => {
-		const fileJson = { name: 'TestNameProject', version: '1.0.0' }
-		const fileId = '123'
+		const file = { id: FILE_ID_EXAMPLE, json: { name: 'TestNameProject', version: '1.0.0' } }
 
 		beforeEach(async () => {
 			const user = { isLogged: false }
 
 			await act(async () => render(
 				<UserContextProvider value={user}>
-					<File json={fileJson} id={fileId}/> 
+					<File json={file.json} id={file.id}/> 
 				</UserContextProvider>
 			))
 		})
@@ -37,15 +37,15 @@ describe('File Test', () => {
 			expect(screen.getByTestId('btn-save')).toBeDefined()
 			fireEvent.click(screen.getByTestId('btn-save'))
 			expect(mockUpdateFile).toHaveBeenCalledTimes(1)
-			expect(mockUpdateFile).toHaveBeenCalledWith(fileId)
+			expect(mockUpdateFile).toHaveBeenCalledWith(file.id)
 		})
 
 		it('should appear file values in form', () => {
-			Object.keys(fileJson).map((key) => {
-				if(typeof fileJson[key] === 'string'){
+			Object.keys(file.json).map((key) => {
+				if(typeof file.json[key] === 'string'){
 					expect(screen.getByTestId('form-' + key)).toBeDefined()
 					const input = screen.getByTestId('form-' + key)
-					expect(input.value).toBe(fileJson[key])
+					expect(input.value).toBe(file.json[key])
 				}
 			})
 		})

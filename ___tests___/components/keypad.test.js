@@ -3,6 +3,7 @@ import Keypad from 'src/client/components/Keypad'
 import { FileContextProvider } from 'src/client/context/file'
 import { UserContextProvider } from 'src/client/context/user'
 import { fileInitialState } from 'src/client/state'
+import { FILE_ID_EXAMPLE } from '___tests___/constants'
 import { cleanup, render, screen, fireEvent } from '@testing-library/react'
 import 'jest-extended'
 
@@ -29,7 +30,7 @@ describe('Keypad Test', () => {
 
 	describe('When user is not logged', () => {
 		beforeEach(() => {
-			const user = {isLogged: false}
+			const user = { isLogged: false }
 			render(
 				<UserContextProvider value={user}>
 					<FileContextProvider>  
@@ -103,7 +104,7 @@ describe('Keypad Test', () => {
 	})
 
 	describe('When file already exists ', () => {
-		const file = { id: '123' }
+		const file = { id: FILE_ID_EXAMPLE }
 		beforeEach(() => {
 			render(
 				<UserContextProvider>
