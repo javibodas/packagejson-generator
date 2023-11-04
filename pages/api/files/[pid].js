@@ -13,7 +13,7 @@ export default async function handler(req, res) {
 			const file = await File.findById(fileId)
 			if (!file) throw new FileNotExist()
 
-			return res.status(200).json({ id: file._doc._id.toString(), ...file._doc })
+			return res.status(200).json(file)
 		} catch (e) {
 			const resp = { error : e.message }
 
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
 			const fileUpdated = await File.findByIdAndUpdate(fileId, body, { new: true })
 			if (!fileUpdated) throw new FileNotExist()
 
-			return res.status(200).json({ ...fileUpdated._doc })
+			return res.status(200).json(fileUpdated)
 		} catch(e) {
 			const resp = { error : e.message }
 

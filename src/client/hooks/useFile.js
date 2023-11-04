@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { uuid } from 'uuidv4'
 import createFile from 'src/client/services/createFile'
 import updateFile from 'src/client/services/updateFile'
 
@@ -38,6 +39,7 @@ export default function useFile(file) {
 
 	const handleCreateFile = async () => {
 		try {
+			file.id = uuid()
 			const response = await createFile(file)
 
 			if (response.error) throw new Error(response.error)
