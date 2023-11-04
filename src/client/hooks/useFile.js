@@ -1,14 +1,15 @@
 import { useRouter } from 'next/router'
+import { uuid } from 'uuidv4'
 import createFile from 'src/client/services/createFile'
 import updateFile from 'src/client/services/updateFile'
 
-export default function useFile({ json }){
+export default function useFile(file) {
 
 	const router = useRouter()
 
 	const exportFile = () => {
 		const filename = 'package.json'
-		const blob = new Blob([JSON.stringify(json, 0 , 4)], {
+		const blob = new Blob([JSON.stringify(file.json, 0 , 4)], {
 			type: 'application/json'
 		})
 
@@ -28,7 +29,7 @@ export default function useFile({ json }){
 
 	const handleUpdateFile = async (fileId) => {
 		try {
-			const response = await updateFile(fileId, json)
+			const response = await updateFile(fileId, file)
 
 			if (response.error) throw new Error(response.error)
 		} catch (e) {
@@ -38,7 +39,8 @@ export default function useFile({ json }){
 
 	const handleCreateFile = async () => {
 		try {
-			const response = await createFile(json)
+			file.id = uuid()
+			const response = await createFile(file)
 
 			if (response.error) throw new Error(response.error)
 			

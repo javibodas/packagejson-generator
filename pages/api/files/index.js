@@ -17,10 +17,11 @@ export default async function handler(req, res) {
 		}
 	case 'POST':
 		try {
-			const file = new File({ json: body, createdBy: '' })
+			console.log(body)
+			const file = new File(body)
 			await file.save()
 			
-			return res.status(200).json({ id: file._id })
+			return res.status(200).json({ id: file.id })
 		} catch (e) {
 			return res.status(500).json({ error: e.message })
 		}

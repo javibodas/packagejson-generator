@@ -3,6 +3,7 @@ import Keypad from 'src/client/components/Keypad'
 import { FileContextProvider } from 'src/client/context/file'
 import { UserContextProvider } from 'src/client/context/user'
 import { fileInitialState } from 'src/client/state'
+import { FILE_ID_EXAMPLE } from '___tests___/constants'
 import { cleanup, render, screen, fireEvent } from '@testing-library/react'
 import 'jest-extended'
 
@@ -29,7 +30,7 @@ describe('Keypad Test', () => {
 
 	describe('When user is not logged', () => {
 		beforeEach(() => {
-			const user = {isLogged: false}
+			const user = { isLogged: false }
 			render(
 				<UserContextProvider value={user}>
 					<FileContextProvider>  
@@ -64,11 +65,13 @@ describe('Keypad Test', () => {
 	})
 
 	describe('When user is logged', () => {
+		const user = { isLogged: true }
+		const file = { json: fileInitialState.json }
+
 		beforeEach(() => {
-			const user = {isLogged: true}
 			render(
 				<UserContextProvider value={user}>
-					<FileContextProvider>  
+					<FileContextProvider>
 						<Keypad /> 
 					</FileContextProvider>
 				</UserContextProvider>
@@ -91,7 +94,7 @@ describe('Keypad Test', () => {
 			expect(screen.getByTestId('btn-save')).toBeDefined()
 			fireEvent.click(screen.getByTestId('btn-save'))
 			expect(mockSaveUserFile).toHaveBeenCalledTimes(1)
-			expect(mockSaveUserFile).toHaveBeenCalledWith(fileInitialState.json)
+			expect(mockSaveUserFile).toHaveBeenCalledWith(file)
 		})
 
 		it('should let clear the file', () => {
@@ -101,7 +104,7 @@ describe('Keypad Test', () => {
 	})
 
 	describe('When file already exists ', () => {
-		const file = { id: '123' }
+		const file = { id: FILE_ID_EXAMPLE }
 		beforeEach(() => {
 			render(
 				<UserContextProvider>

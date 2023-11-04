@@ -14,12 +14,10 @@ export default async function handler(req, res) {
 			const user = await User.findById(id)
 			if (!user) throw new UserNotExist()
 			
-			const file = new File({ json: body, createdBy: id })
+			const file = new File(body)
 			await file.save()
-
-			await User.findByIdAndUpdate(id, { $addToSet: { files: file._id.toString() } })
 			
-			return res.status(200).json({ id: file._id })
+			return res.status(200).json({ id: file.id })
 		} catch (e) {
 			const resp = { error: e.message }
             

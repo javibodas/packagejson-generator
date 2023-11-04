@@ -5,15 +5,15 @@ import FileNotExist from 'src/server/errors/FileNotExist'
 databaseConnect()
 
 export default async function handler(req, res) {
-	const { query: { pid }, method, body } = req
+	const { query: { pid: fileId }, method, body } = req
 
 	switch (method) {
 	case 'GET':
 		try {
-			const file = await File.findById(pid)
+			const file = await File.findById(fileId)
 			if (!file) throw new FileNotExist()
 
-			return res.status(200).json({ id: file._doc._id.toString(), ...file._doc })
+			return res.status(200).json(file)
 		} catch (e) {
 			const resp = { error : e.message }
 
@@ -22,10 +22,10 @@ export default async function handler(req, res) {
 		}
 	case 'PUT':
 		try {
-			const fileUpdated = await File.findByIdAndUpdate(pid, { json: body }, { new: true })
+			const fileUpdated = await File.findByIdAndUpdate(fileId, body, { new: true })
 			if (!fileUpdated) throw new FileNotExist()
 
-			return res.status(200).json({ ...fileUpdated._doc })
+			return res.status(200).json(fileUpdated)
 		} catch(e) {
 			const resp = { error : e.message }
 
@@ -34,10 +34,10 @@ export default async function handler(req, res) {
 		}
 	case 'DELETE':
 		try {
-			const fileDeleted = await File.findByIdAndDelete(pid)
+			const fileDeleted = await File.findByIdAndDelete(fileId)
 			if (!fileDeleted) throw new FileNotExist()
 
-			return res.status(200).json({ id: pid })
+			return res.status(200).json({ id: fileId })
 		} catch(e) {
 			const resp = { error : e.message }
 
