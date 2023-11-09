@@ -21,7 +21,7 @@ jest.mock('src/client/hooks/useUser', () => {
 	})
 })
 
-describe('User Test Application', () => {
+describe('User Page Test', () => {
 	describe('When user does not have files saved', () => {
 		beforeEach(() => {
 			const userFiles = []

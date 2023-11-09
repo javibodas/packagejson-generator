@@ -13,7 +13,7 @@ jest.mock('src/client/hooks/useFile', () => {
 	})
 })
 
-describe('File Test', () => {
+describe('File Page Test', () => {
 	describe('When existing file loaded', () => {
 		const file = { id: FILE_ID_EXAMPLE, json: { name: 'TestNameProject', version: '1.0.0' } }
 
