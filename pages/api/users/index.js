@@ -1,7 +1,4 @@
-import databaseConnect from 'src/server/database'
-import User from 'src/server/models/User'
-
-databaseConnect()
+import UserRepository from 'src/server/database/repository/UserRepository'
 
 export default async function handler(req, res) {
 	const { body, method } = req
@@ -9,7 +6,7 @@ export default async function handler(req, res) {
 	switch (method) {
 	case 'GET':
 		try {
-			const users = await User.find()
+			const users = await UserRepository.findAll()
 
 			return res.status(200).json({ users })
 		} catch (e) {
@@ -17,10 +14,9 @@ export default async function handler(req, res) {
 		}
 	case 'POST':
 		try {
-			const user = new User({ _id: body.id })
-			await user.save()
+			const userCreated = await UserRepository.create(body.id)
 
-			return res.status(200).json(user)
+			return res.status(200).json(userCreated)
 		} catch (e) {
 			return res.status(500).json({ error: e.message })
 		}
