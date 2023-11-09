@@ -1,4 +1,4 @@
-export default class FileNotExist extends Error {
+export default class FileNotExistError extends Error {
 	constructor() {
 		super('File does not exist')
         
