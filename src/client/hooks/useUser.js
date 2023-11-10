@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { uuid } from 'uuidv4'
+import { v4 } from 'uuid'
 import { loginWithGithub, logoutWithGithub, onAuthStateChanged } from 'src/client/firebase/client'
 import createUser from 'src/client/services/createUser'
 import createUserFile from 'src/client/services/createUserFile'
@@ -39,7 +39,7 @@ export default function useUser({ user, setUser }) {
 	const saveUserFile = async (file) => {
 		try {
 			file.createdBy = user.uid
-			file.id = uuid()
+			file.id = v4()
 			const response = await createUserFile(user.uid, file)
 
 			if (response.error) throw new Error(response.error)
