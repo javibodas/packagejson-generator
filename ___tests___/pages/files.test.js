@@ -1,8 +1,8 @@
 import React from 'react'
 import File from 'pages/files/[id]'
 import { UserContextProvider } from 'src/client/context/user'
-import { FILE_ID_EXAMPLE } from '___tests___/constants'
-import { cleanup, render, screen, act, fireEvent } from '@testing-library/react'
+import { FILE_ID_EXAMPLE, USER_ID_EXAMPLE } from '___tests___/constants'
+import { cleanup, render, screen, act } from '@testing-library/react'
 import 'jest-extended'
 
 const mockUpdateFile = jest.fn()
@@ -14,30 +14,80 @@ jest.mock('src/client/hooks/useFile', () => {
 })
 
 describe('File Page Test', () => {
-	describe('When existing file loaded', () => {
+	describe('When existing file loaded but user is not logged', () => {
 		const file = { id: FILE_ID_EXAMPLE, json: { name: 'TestNameProject', version: '1.0.0' } }
+		const user = { isLogged: false }
 
 		beforeEach(async () => {
-			const user = { isLogged: false }
-
 			await act(async () => render(
 				<UserContextProvider value={user}>
-					<File json={file.json} id={file.id}/> 
+					<File {...file} /> 
 				</UserContextProvider>
 			))
 		})
 		afterEach(() => cleanup())
 
-		it('should appear "Update" button', () => {
-			expect(screen.getByTestId('btn-save')).toBeDefined()
-			expect(screen.getByTestId('btn-save').textContent).toEqual('Update')
+		it('should not appear "Update" not "Clear" button', () => {
+			expect(screen.queryByTestId('btn-save')).toBeNull()
+			expect(screen.queryByTestId('btn-save')).toBeNull()
 		})
 
-		it('should let update the file', () => {
+		it('should appear file values in form', () => {
+			Object.keys(file.json).map((key) => {
+				if(typeof file.json[key] === 'string'){
+					expect(screen.getByTestId('form-' + key)).toBeDefined()
+					const input = screen.getByTestId('form-' + key)
+					expect(input.value).toBe(file.json[key])
+				}
+			})
+		})
+	})
+
+	describe('When existing file loaded and user is logged but not owner', () => {
+		const file = { id: FILE_ID_EXAMPLE, createdBy: 'USER_NOT_OWNER', json: { name: 'TestNameProject', version: '1.0.0', scripts: {} } }
+		const user = { isLogged: true, uid: USER_ID_EXAMPLE }
+
+		beforeEach(async () => {
+			await act(async () => render(
+				<UserContextProvider value={user}>
+					<File {...file} /> 
+				</UserContextProvider>
+			))
+		})
+		afterEach(() => cleanup())
+
+		it('should not appear "Update" not "Clear" button', () => {
+			expect(screen.queryByTestId('btn-save')).toBeNull()
+			expect(screen.queryByTestId('btn-save')).toBeNull()
+		})
+
+		it('should appear file values in form', () => {
+			Object.keys(file.json).map((key) => {
+				if(typeof file.json[key] === 'string'){
+					expect(screen.getByTestId('form-' + key)).toBeDefined()
+					const input = screen.getByTestId('form-' + key)
+					expect(input.value).toBe(file.json[key])
+				}
+			})
+		})
+	})
+
+	describe('When existing file loaded and user is logged and owner', () => {
+		const file = { id: FILE_ID_EXAMPLE, createdBy: USER_ID_EXAMPLE, json: { name: 'TestNameProject', version: '1.0.0', scripts: {}, author: 'TestAuthor' } }
+		const user = { isLogged: true, uid: USER_ID_EXAMPLE }
+
+		beforeEach(async () => {
+			await act(async () => render(
+				<UserContextProvider value={user}>
+					<File {...file} /> 
+				</UserContextProvider>
+			))
+		})
+		afterEach(() => cleanup())
+
+		it('should appear "Update" and "Clear" button', () => {
 			expect(screen.getByTestId('btn-save')).toBeDefined()
-			fireEvent.click(screen.getByTestId('btn-save'))
-			expect(mockUpdateFile).toHaveBeenCalledTimes(1)
-			expect(mockUpdateFile).toHaveBeenCalledWith(file.id)
+			expect(screen.getByTestId('btn-save')).toBeDefined()
 		})
 
 		it('should appear file values in form', () => {

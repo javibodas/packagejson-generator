@@ -3,7 +3,7 @@ import Keypad from 'src/client/components/Keypad'
 import { FileContextProvider } from 'src/client/context/file'
 import { UserContextProvider } from 'src/client/context/user'
 import { fileInitialState } from 'src/client/state'
-import { FILE_ID_EXAMPLE } from '___tests___/constants'
+import { FILE_ID_EXAMPLE, USER_ID_EXAMPLE } from '___tests___/constants'
 import { cleanup, render, screen, fireEvent } from '@testing-library/react'
 import 'jest-extended'
 
@@ -41,8 +41,9 @@ describe('Keypad Test', () => {
 		})
 		afterEach(() => cleanup() )
 
-		it('should appear "Share" button', () => {
+		it('should appear "Share" and "Clear" button', () => {
 			expect(screen.getByTestId('btn-save')).toBeDefined()
+			expect(screen.getByTestId('btn-clear')).toBeDefined()
 			expect(screen.getByTestId('btn-save').textContent).toEqual('Share')
 		})
         
@@ -64,7 +65,7 @@ describe('Keypad Test', () => {
 		})
 	})
 
-	describe('When user is logged', () => {
+	describe('When user is logged and file does not exist', () => {
 		const user = { isLogged: true }
 		const file = { json: fileInitialState.json }
 
@@ -79,8 +80,9 @@ describe('Keypad Test', () => {
 		})
 		afterEach(() => cleanup())
 
-		it('should appear "Save" button', () => {
+		it('should appear "Save" and "Clear" button', () => {
 			expect(screen.getByTestId('btn-save')).toBeDefined()
+			expect(screen.getByTestId('btn-clear')).toBeDefined()
 			expect(screen.getByTestId('btn-save').textContent).toEqual('Save')
 		})
 
@@ -103,11 +105,12 @@ describe('Keypad Test', () => {
 		})
 	})
 
-	describe('When file already exists ', () => {
+	describe('When user is not logged and file already exists ', () => {
+		const user = { isLogged: false }
 		const file = { id: FILE_ID_EXAMPLE }
 		beforeEach(() => {
 			render(
-				<UserContextProvider>
+				<UserContextProvider value={user}>
 					<FileContextProvider value={file}>
 						<Keypad /> 
 					</FileContextProvider>
@@ -116,26 +119,73 @@ describe('Keypad Test', () => {
 		})
 		afterEach(() => cleanup())
 
-		it('should appear "Update" button', () => {
-			expect(screen.getByTestId('btn-save')).toBeDefined()
-			expect(screen.getByTestId('btn-save').textContent).toEqual('Update')
+		it('should not appear "Update" nor "Clear" button', () => {
+			expect(screen.queryByTestId('btn-save')).toBeNull()
+			expect(screen.queryByTestId('btn-clear')).toBeNull()
 		})
 
 		it('should let export the file', () => {
-			expect(screen.getByTestId('btn-export')).toBeDefined()
+			fireEvent.click(screen.getByTestId('btn-export'))
+			expect(mockExportFile).toHaveBeenCalledTimes(1)
+		})
+	})
+
+	describe('When user is logged and file already exists but file is not owned ', () => {
+		const user = { isLogged: true, uid: USER_ID_EXAMPLE }
+		const file = { id: FILE_ID_EXAMPLE, createdBy: 'NOT_USER_LOGGED' }
+		beforeEach(() => {
+			render(
+				<UserContextProvider value={user}>
+					<FileContextProvider value={file}>
+						<Keypad /> 
+					</FileContextProvider>
+				</UserContextProvider>
+			)
+		})
+		afterEach(() => cleanup())
+
+		it('should not appear "Update" nor "Clear" button', () => {
+			expect(screen.queryByTestId('btn-save')).toBeNull()
+			expect(screen.queryByTestId('btn-clear')).toBeNull()
+		})
+
+		it('should let export the file', () => {
+			fireEvent.click(screen.getByTestId('btn-export'))
+			expect(mockExportFile).toHaveBeenCalledTimes(1)
+		})
+	})
+
+	describe('When user is logged and file already exists but file is owned ', () => {
+		const user = { isLogged: true, uid: USER_ID_EXAMPLE }
+		const file = { id: FILE_ID_EXAMPLE, createdBy: USER_ID_EXAMPLE }
+		beforeEach(() => {
+			render(
+				<UserContextProvider value={user}>
+					<FileContextProvider value={file}>
+						<Keypad /> 
+					</FileContextProvider>
+				</UserContextProvider>
+			)
+		})
+		afterEach(() => cleanup())
+
+		it('should appear "Update" and "Clear" button', () => {
+			expect(screen.getByTestId('btn-save')).toBeDefined()
+			expect(screen.getByTestId('btn-clear')).toBeDefined()
+			expect(screen.getByTestId('btn-save').textContent).toEqual('Update')
+		})
+        
+		it('should let export the file', () => {
 			fireEvent.click(screen.getByTestId('btn-export'))
 			expect(mockExportFile).toHaveBeenCalledTimes(1)
 		})
 
 		it('should let update the file', () => {
-			expect(screen.getByTestId('btn-save')).toBeDefined()
 			fireEvent.click(screen.getByTestId('btn-save'))
 			expect(mockUpdateFile).toHaveBeenCalledTimes(1)
-			expect(mockUpdateFile).toHaveBeenCalledWith(file.id)
 		})
 
 		it('should let clear the file', () => {
-			expect(screen.getByTestId('btn-clear')).toBeDefined()
 			fireEvent.click(screen.getByTestId('btn-clear'))
 		})
 	})

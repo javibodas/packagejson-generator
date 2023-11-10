@@ -1,9 +1,9 @@
 import HomePage from 'pages'
 import getFile from 'src/client/services/getFile'
  
-export default function File({ json, id }){
+export default function File(file){
 
-	return(<HomePage file={{ json, id }} />)
+	return(<HomePage file={file} />)
 }
 
 export async function getServerSideProps(context) {
