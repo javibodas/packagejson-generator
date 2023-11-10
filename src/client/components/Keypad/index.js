@@ -14,6 +14,14 @@ export default function Keypad() {
 	const { user, setUser } = useContext(UserCtx)
 	const { saveUserFile } = useUser({ user, setUser })
 
+	const fileExists = file.id
+	const userLogged = user.isLogged
+	const fileIsForUpdating = fileExists && userLogged && user.uid === file.createdBy
+	const fileIsForSavingInUser = userLogged && !fileExists
+	const fileIsForSharing = !userLogged && !fileExists
+	console.log(user.uid)
+	console.log(file.createdBy)
+
 	const handleClickSave = () => {
 		file.id ? handleUpdateFile(file.id)
 			: user.isLogged ? saveUserFile(file)
@@ -28,8 +36,18 @@ export default function Keypad() {
 	return(<>
 		<div className='btns-keypad'>
 			<Button name='btn-exportjson' click={exportFile} testid='btn-export'>Export</Button>
-			<Button name='btn-generateuri' click={handleClickSave} testid='btn-save'>{ file.id ? 'Update' : !user.isLogged ? 'Share' : 'Save' }</Button>
-			<Button name='btn-clear' click={handleClear} testid='btn-clear'>Clear</Button>
+			{
+				fileIsForUpdating || fileIsForSharing || fileIsForSavingInUser
+					? 	<Button name='btn-generateuri' click={handleClickSave} testid='btn-save'>
+						{ fileExists ? 'Update' : userLogged ? 'Save' : 'Share' }
+					</Button>
+					: 	null
+			}
+			{
+				fileIsForUpdating || fileIsForSharing || fileIsForSavingInUser
+					?	<Button name='btn-clear' click={handleClear} testid='btn-clear'>Clear</Button>
+					: 	null
+			}
 		</div>
 		<style jsx>{`
             .btns-keypad {
