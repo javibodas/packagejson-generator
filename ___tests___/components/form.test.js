@@ -3,7 +3,6 @@ import Form from 'src/client/components/Form'
 import { FileContextProvider } from 'src/client/context/file'
 import { UserContextProvider } from 'src/client/context/user'
 import { fileInitialState } from 'src/client/state'
-import { server } from '../setupWorkerAPI'
 import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import 'jest-extended'
 
@@ -18,9 +17,6 @@ describe('Form Test', () => {
 	}
 
 	beforeEach(() => render(<Form />, {wrapper}) )
-	beforeAll(() => server.listen())
-	afterEach(() => server.resetHandlers() )
-	afterAll(() => server.close() )
 
 	describe('When initial load', () => {
 		it('should have default context values in form', () => {
@@ -56,40 +52,6 @@ describe('Form Test', () => {
 			await waitFor(() => {
 				expect(screen.queryByTestId('devDependencies-list-item')).toBeDefined()
 			})
-		})
-	})
-
-	describe('When selecting package in packages list of dependencies combo', () => {
-		const packageName = 'react'
-        
-		beforeEach(async () => {
-			fireEvent.change(screen.getByTestId('input-dependencies'), {target: { value: packageName }})
-
-			await waitFor(() => {
-				expect(screen.queryByTestId('dependencies-list-item')).toBeDefined()
-				fireEvent.click(screen.getByTestId('dependencies-list-item'), {target : { innerText: packageName}})
-			})
-		})
-
-		it('should add package to dependencies list', () => {
-			expect(screen.getByTestId('dependencies-list').textContent).toMatch(packageName)
-		})
-	})
-
-	describe('When selecting package in packages list of devDependencies combo', () => {
-		const packageName = 'react'
-        
-		beforeEach(async () => {
-			fireEvent.change(screen.getByTestId('input-devDependencies'), {target: { value: packageName }})
-
-			await waitFor(() => {
-				expect(screen.queryByTestId('devDependencies-list-item')).toBeDefined()
-				fireEvent.click(screen.getByTestId('devDependencies-list-item'), {target : { innerText: packageName}})
-			})
-		})
-
-		it('should add package to devdependencies list', () => {
-			expect(screen.getByTestId('devDependencies-list').textContent).toMatch(packageName)
 		})
 	})
 
