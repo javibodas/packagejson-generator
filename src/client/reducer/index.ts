@@ -1,4 +1,7 @@
-const fileInitialState = {
+import { File } from 'src/types/File'
+import { FileAction } from 'src/types/reducer/FileAction'
+
+const fileInitialState: File = {
 	json: {
 		name: 'example',
 		version: '1.0.0',
@@ -14,49 +17,48 @@ const fileInitialState = {
 	},
 }
 
-export default function fileReducer(file, action) {
+export default (file: File, action: FileAction): File => {
     
 	switch (action.type) {
 	case 'updateProjectName':
-		return {...file, json: {...file.json, 'name': action.value}}
+		return {...file, json: {...file.json, 'name': <string>action.value }}
 	case 'updateProjectVersion':
-		return {...file, json: {...file.json, 'version': action.value}}
+		return {...file, json: {...file.json, 'version': <string>action.value }}
 	case 'updateProjectDescription':
-		return {...file, json: {...file.json, 'description': action.value}}
+		return {...file, json: {...file.json, 'description': <string>action.value }}
 	case 'updateProjectAuthor':
-		return {...file, json: {...file.json, 'author': action.value}}
+		return {...file, json: {...file.json, 'author': <string>action.value }}
 	case 'updateProjectMainFile':
-		return {...file, json: {...file.json, 'main': action.value}}
+		return {...file, json: {...file.json, 'main': <string>action.value }}
 	case 'addDependencie':
-		let addDependencies = file.json.dependencies
+		const addDependencies = file.json.dependencies
 		addDependencies[action.key] = action.value
 		return {...file, json: {...file.json, 'dependencies': addDependencies}}
 	case 'removeDependencie':
-		let delDependencies = file.json.dependencies
+		const delDependencies = file.json.dependencies
 		delete delDependencies[action.key]
 		return {...file, json: {...file.json, 'dependencies': delDependencies}}
 	case 'addDevDependencie':
-		var newDevDependencies = file.json.devDependencies
+		const newDevDependencies = file.json.devDependencies
 		newDevDependencies[action.key] = action.value
 		return {...file, json: {...file.json, 'devDependencies': newDevDependencies}}
 	case 'removeDevDependencie':
-		var newDevpendencies = file.json.devDependencies
+		const newDevpendencies = file.json.devDependencies
 		delete newDevpendencies[action.key]
 		return {...file, json: {...file.json, 'devDependencies': newDevpendencies}}
 	case 'addScript':
-		let addScripts = file.json.scripts
+		const addScripts = file.json.scripts
 		addScripts[action.key] = action.value
 		return {...file, json: {...file.json, 'scripts': addScripts}}
 	case 'removeScript':
-		let delScripts = file.json.scripts
+		const delScripts = file.json.scripts
 		delete delScripts[action.key]
 		return {...file, json: {...file.json, 'scripts': delScripts}}
 	case 'updateJSON':
-		return action.value
+		return <File>action.value
 	case 'clearJSON':
-		return action.value ? {...fileInitialState, id: action.value} : fileInitialState
+		return action.value ? {...fileInitialState, id: <string>action.value } : fileInitialState
 	default:
 		return file
 	}
-
 }
