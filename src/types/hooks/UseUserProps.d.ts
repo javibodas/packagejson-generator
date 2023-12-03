@@ -1,6 +1,6 @@
-import { GithubUser } from '../firebase/GithubUser'
+import { User } from 'src/types/User'
 
 export type UseUserProps = {
-    user: GithubUser,
-    setUser: function
+    user: User,
+    setUser(user: User): void
 }
