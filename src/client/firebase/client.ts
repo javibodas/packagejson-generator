@@ -1,6 +1,7 @@
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import 'firebase/compat/firestore'
+import { User } from 'src/types/User'
 
 const firebaseConfig = {
 	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -15,28 +16,28 @@ const firebaseConfig = {
 
 !firebase.apps.length && firebase.initializeApp(firebaseConfig)
 
-const mapUserFromFirebaseAuth = (user) => {
+const mapUserFromFirebaseAuth = (user: firebase.User): User => {
 	if (!user) return null
 
 	return { 
 		avatar: user.photoURL, 
 		username: user.displayName, 
 		email: user.email, 
-		uid: user.uid
+		id: user.uid
 	}
 }
 
 export const onAuthStateChanged = (onChange) => { 
-	return firebase.auth().onAuthStateChanged((user) => { 
+	return firebase.auth().onAuthStateChanged((user: firebase.User) => { 
 		onChange(mapUserFromFirebaseAuth(user))
 	}) 
 }
 
-export const loginWithGithub = async () => { 
-	const result = await firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider())
+export const loginWithGithub = async (): Promise<User> => { 
+	const result: firebase.auth.UserCredential = await firebase.auth().signInWithPopup(new firebase.auth.GithubAuthProvider())
 	const { user } = result
 
-	return { ...mapUserFromFirebaseAuth(user) }
+	return mapUserFromFirebaseAuth(user)
 }
 
-export const logoutWithGithub = () => { return firebase.auth().signOut() }
+export const logoutWithGithub = (): Promise<void> => { return firebase.auth().signOut() }

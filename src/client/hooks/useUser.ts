@@ -4,45 +4,46 @@ import { loginWithGithub, logoutWithGithub, onAuthStateChanged } from 'src/clien
 import createUser from 'src/client/services/createUser'
 import createUserFile from 'src/client/services/createUserFile'
 import deleteUserFile from 'src/client/services/deleteUserFile'
+import { File } from 'src/types/File'
+import { User } from 'src/types/User'
+import { UseUserProps } from 'src/types/hooks/UseUserProps'
 
-export default function useUser({ user, setUser }) {
+export default function useUser({ user, setUser }: UseUserProps) {
 
 	const router = useRouter()
 
-	const login = () => { return loginWithGithub() }
+	const login = (): Promise<User> => { return loginWithGithub() }
 
-	const logout = () => { return logoutWithGithub() }
+	const logout = (): Promise<void> => { return logoutWithGithub() }
 
-	const handleLogIn = async () => {
+	const handleLogIn = async (): Promise<void> => {
 		try {
-			const userLogin = await login()
-			const userCreated = await createUser(userLogin.uid)
-			if (userCreated.error) throw new Error(userCreated.error)
+			const user: User = await login()
+			await createUser(user.id)
 
-			setUser({...userLogin, isLogged: true})
+			setUser({ ...user, isLogged: true })
 		} catch (e) {
 			console.log(e.message)
 		}
 	}
     
-	const handleLogout = async () => {
+	const handleLogout = async (): Promise<void> => {
 		try {
 			await logout()
 
-			setUser({isLogged: false})
+			setUser({ isLogged: false })
 			router.push('/')
 		} catch (e) {
 			console.log(e.message)
 		}
 	}
 
-	const saveUserFile = async (file) => {
+	const saveUserFile = async (file: File): Promise<void> => {
 		try {
-			file.createdBy = user.uid
+			file.createdBy = user.id
 			file.id = v4()
-			const response = await createUserFile(user.uid, file)
-
-			if (response.error) throw new Error(response.error)
+			
+			const response = await createUserFile(user.id, file)
 
 			router.push('/files/' + response.id)
 		} catch (e) {
@@ -50,11 +51,9 @@ export default function useUser({ user, setUser }) {
 		}
 	}
 
-	const deleteFile = async (fileId) => {
+	const deleteFile = async (fileId: string): Promise<boolean> => {
 		try {
-			const response = await deleteUserFile(user.uid, fileId)
-		
-			if (response.error) throw new Error(response.error)
+			await deleteUserFile(user.id, fileId)
 
 			return true
 		} catch (e) {

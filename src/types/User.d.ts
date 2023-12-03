@@ -1,3 +1,7 @@
 export type User = {
-    id: string
+    avatar?: string, 
+	username?: string, 
+	email?: string,
+    id: string,
+    isLogged?: boolean
 }
