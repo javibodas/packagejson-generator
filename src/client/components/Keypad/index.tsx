@@ -21,7 +21,7 @@ export default function Keypad(): JSX.Element {
 
 	const handleClickSave = (): void => {
 		file.id ? handleUpdateFile(file.id)
-			: user.id ? saveUserFile(file)
+			: user ? saveUserFile(file)
 				: handleCreateFile()
 
 	}

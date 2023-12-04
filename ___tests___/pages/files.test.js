@@ -16,7 +16,7 @@ jest.mock('src/client/hooks/useFile', () => {
 describe('File Page Test', () => {
 	describe('When existing file loaded but user is not logged', () => {
 		const file = { id: FILE_ID_EXAMPLE, json: { name: 'TestNameProject', version: '1.0.0' } }
-		const user = { isLogged: false }
+		const user = undefined
 
 		beforeEach(async () => {
 			await act(async () => render(
@@ -45,7 +45,7 @@ describe('File Page Test', () => {
 
 	describe('When existing file loaded and user is logged but not owner', () => {
 		const file = { id: FILE_ID_EXAMPLE, createdBy: 'USER_NOT_OWNER', json: { name: 'TestNameProject', version: '1.0.0', scripts: {} } }
-		const user = { isLogged: true, uid: USER_ID_EXAMPLE }
+		const user = { id: USER_ID_EXAMPLE }
 
 		beforeEach(async () => {
 			await act(async () => render(
@@ -74,7 +74,7 @@ describe('File Page Test', () => {
 
 	describe('When existing file loaded and user is logged and owner', () => {
 		const file = { id: FILE_ID_EXAMPLE, createdBy: USER_ID_EXAMPLE, json: { name: 'TestNameProject', version: '1.0.0', scripts: {}, author: 'TestAuthor' } }
-		const user = { isLogged: true, uid: USER_ID_EXAMPLE }
+		const user = { id: USER_ID_EXAMPLE }
 
 		beforeEach(async () => {
 			await act(async () => render(
