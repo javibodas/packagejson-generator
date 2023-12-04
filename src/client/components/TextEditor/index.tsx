@@ -1,17 +1,19 @@
 import { useContext } from 'react'
 import dynamic from 'next/dynamic'
 import FileCtx from 'src/client/context/file'
+import { File } from 'src/types/File'
 
 const MonacoEditor = dynamic(import('react-monaco-editor'), { ssr: false })
 
-export default function TextEditor() {
+export default function TextEditor(): JSX.Element {
 	const { file, dispatch } = useContext(FileCtx)
 
-	const updateContext = function (newValue) {
+	const updateContext = (newValue: string): void => {
 		try {
-			const jsonParsed = JSON.parse(newValue)
+			const jsonParsed: object = JSON.parse(newValue)
+			const fileUpdated: File = { ...file, json: jsonParsed } as File
 
-			dispatch({type: 'updateJSON', value: { ...file, json: jsonParsed}})
+			dispatch({ type: 'updateJSON', value: fileUpdated })
 
 		} catch (error) {
 			console.log('Error parsing json text editor')
@@ -24,7 +26,7 @@ export default function TextEditor() {
 				<MonacoEditor
 					language="json"
 					theme="vs-dark"
-					value={ JSON.stringify(file.json, 0, 4) }
+					value={ JSON.stringify(file.json, null, 4) }
 					options={{ minimap: { enabled: false, }, automaticLayout: true,}}
 					onChange={ updateContext }
 					data-testid="monaco-editor"

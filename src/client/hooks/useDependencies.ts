@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, MouseEvent, TouchEvent, useState } from 'react'
 import getDependencies from 'src/client/services/getDependencies'
 import { Dependencie } from 'src/types/Dependencie'
 import { UseDependenciesProps } from 'src/types/hooks/UseDependenciesProps'
@@ -33,7 +33,7 @@ export default function useDependencies({ classType, type, dispatch, file }: Use
 		}
 	}
 
-	const typePackage = (e: Event, timeout: number = 300): void => {
+	const typePackage = (e: ChangeEvent, timeout: number = 300): void => {
 		clearTimeout(searchDependenciesTimer)
 		const eventTarget: HTMLInputElement = <HTMLInputElement> e.target
 
@@ -45,8 +45,8 @@ export default function useDependencies({ classType, type, dispatch, file }: Use
 		searchDependenciesTimer = setTimeout(() => { searchPackages(eventTarget.value) }, timeout)
 	}
 
-	const addPackage = (e: Event): void => {
-		const eventTarget: HTMLElement = <HTMLElement> e.target
+	const addPackage = (e: MouseEvent<HTMLLIElement> | TouchEvent<HTMLLIElement>): void => {
+		const eventTarget: HTMLLIElement = <HTMLLIElement> e.target
 		const packagesListElement: HTMLElement = document.getElementById('packlist' + type)
 		const inputPackage: HTMLInputElement = <HTMLInputElement> document.getElementById('inpt-dependencies' + type)
 

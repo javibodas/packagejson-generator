@@ -17,7 +17,7 @@ export default function useFile(file: File) {
 
 	const exportFile = (): void => {
 		const filename: string = 'package.json'
-		const blob: Blob = new Blob([JSON.stringify(file.json, [0, 4])], {
+		const blob: Blob = new Blob([JSON.stringify(file.json, null, 4)], {
 			type: 'application/json'
 		})
 

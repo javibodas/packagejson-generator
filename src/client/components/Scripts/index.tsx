@@ -5,7 +5,7 @@ import Button from 'src/client/components/Button'
 import useScripts from 'src/client/hooks/useScripts'
 
 
-export default function Scripts(){
+export default function Scripts(): JSX.Element {
 
 	const { file, dispatch } = useContext(FileCtx)
 	const { addScript, removeScript } = useScripts({ dispatch, file })
@@ -17,11 +17,11 @@ export default function Scripts(){
 					<label className='label-title'>Scripts</label>
 					<input id='key-script' className = 'input-form key-inpt' placeholder='Key' data-testid='script-key'/>
 					<input id='command-script' className = 'input-form comd-inpt' placeholder='Command' data-testid='script-value'/>
-					<Button className='btn-add-script' name='btn-add-script' testid='script-add-btn' click={addScript}>+</Button>
+					<Button name='btn-add-script' testid='script-add-btn' click={addScript}>+</Button>
 				</div>
 				<div id='scripts-list' className='scripts-list' data-testid='scripts-list'>
 					{file.json.scripts ? 
-						Object.keys(file.json.scripts).map(key => <Badge type='script' key={key} objKey={key} objValue={file.json.scripts[key]} remove={removeScript}/>)
+						Object.keys(file.json.scripts).map(script => <Badge key={script} type='script' label={script} value={file.json.scripts[script]} remove={removeScript}/>)
 						: null
 					}
 				</div>

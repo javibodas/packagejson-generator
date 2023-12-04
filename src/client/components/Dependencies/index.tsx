@@ -3,38 +3,34 @@ import Badge from 'src/client/components/Badge'
 import useDependencies from 'src/client/hooks/useDependencies'
 import FileCtx from 'src/client/context/file'
 
+type DependenciesProps = {
+    title: string,
+    classType: string,
+    type: string,
+}
 
-export default function Dependencies(props){
+export default function Dependencies({ title, classType, type } : DependenciesProps): JSX.Element {
 
 	const { file, dispatch } = useContext(FileCtx)
-	const { packages, typePackage, addPackage, removePackage, outFocusInputDependencie } = useDependencies({classType: props.classType, type: props.type, dispatch, file })
-
-	const handleOnClick = function(event) {
-		addPackage(event)
-	}
-
-	const handleOnTouch = function(event) {
-		addPackage(event)
-	}
+	const { packages, typePackage, addPackage, removePackage, outFocusInputDependencie } = useDependencies({ classType, type, dispatch, file })
     
-
 	return (<>
-		<div id={'formdepd' +  props.type} className = 'form-group dependencies'>
+		<div id={'formdepd' +  type} className = 'form-group dependencies'>
 			<div className='dependencies-box'>
 				<div className='data-box'>
-					<label className='label-title'>{props.title}</label>
+					<label className='label-title'>{title}</label>
 					<section className='section-input'>
-						<input id = {'inpt-dependencies' + props.type} className = 'input-form input-dependencie' placeholder="NPM Package" onChange={typePackage} onBlur={outFocusInputDependencie} data-testid={'input-' + props.classType}/>
-						<div id = {'packlist' + props.type} className='packages-list' data-testid={'combo-' + props.classType}>
+						<input id = {'inpt-dependencies' + type} className = 'input-form input-dependencie' placeholder="NPM Package" onChange={typePackage} onBlur={outFocusInputDependencie} data-testid={'input-' + classType}/>
+						<div id = {'packlist' + type} className='packages-list' data-testid={'combo-' + classType}>
 							<ul>
-								{packages.map(pack => <li key={pack.name} onClick={handleOnClick} onTouchStart={handleOnTouch}>{pack.name}<span className='pckg-version' data-testid={props.classType + '-list-item'}>{' (' + pack.version+')'}</span></li>)}
+								{packages.map(pack => <li key={pack.name} onClick={addPackage} onTouchStart={addPackage}>{pack.name}<span className='pckg-version' data-testid={classType + '-list-item'}>{' (' + pack.version+')'}</span></li>)}
 							</ul>
 						</div>
 					</section>
 				</div>
-				<div id={'depdlist' + props.type} className='dependencies-list' data-testid={props.classType + '-list'}>
-					{file.json[props.classType] ? 
-						Object.keys(file.json[props.classType]).map(dependencie => <Badge key={dependencie} type={props.type} objKey={dependencie} objValue={file.json[props.classType][dependencie]} remove={removePackage}/>)
+				<div id={'depdlist' + type} className='dependencies-list' data-testid={classType + '-list'}>
+					{file.json[classType] ? 
+						Object.keys(file.json[classType]).map(dependencie => <Badge key={dependencie} type={type} label={dependencie} value={file.json[classType][dependencie]} remove={removePackage}/>)
 						: null
 					}
 				</div>

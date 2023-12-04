@@ -1,19 +1,20 @@
-import { useContext } from 'react'
+import { ChangeEvent, useContext } from 'react'
 import FileCtx from 'src/client/context/file'
 
 
-export default function ProjectData(){
+export default function ProjectData(): JSX.Element {
 
 	const { file, dispatch } = useContext(FileCtx)
 
-	const typeData = function(event){
-		if (event.target) {
-			if (event.target.name === 'projectName') dispatch({type: 'updateProjectName', value: event.target.value})
-			if (event.target.name === 'version') dispatch({type: 'updateProjectVersion', value: event.target.value})
-			if (event.target.name === 'description') dispatch({type: 'updateProjectDescription', value: event.target.value})
-			if (event.target.name === 'author') dispatch({type: 'updateProjectAuthor', value: event.target.value})
-			if (event.target.name === 'main') dispatch({type: 'updateProjectMainFile', value: event.target.value})
-		}
+	const typeData = (event: ChangeEvent<HTMLInputElement>): void => {
+		if (!event.target) return
+
+		const target: HTMLInputElement = event.target as HTMLInputElement
+		if (target.name === 'projectName') dispatch({type: 'updateProjectName', value: target.value})
+		if (target.name === 'version') dispatch({type: 'updateProjectVersion', value: target.value})
+		if (target.name === 'description') dispatch({type: 'updateProjectDescription', value: target.value})
+		if (target.name === 'author') dispatch({type: 'updateProjectAuthor', value: target.value})
+		if (target.name === 'main') dispatch({type: 'updateProjectMainFile', value: target.value})
 	}
 
 	return(<>

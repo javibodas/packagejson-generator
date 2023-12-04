@@ -21,7 +21,7 @@ export default function useUser({ user, setUser }: UseUserProps) {
 			const user: User = await login()
 			await createUser(user.id)
 
-			setUser({ ...user, isLogged: true })
+			setUser(user)
 		} catch (e) {
 			console.log(e.message)
 		}
@@ -31,7 +31,7 @@ export default function useUser({ user, setUser }: UseUserProps) {
 		try {
 			await logout()
 
-			setUser({ isLogged: false })
+			setUser(undefined)
 			router.push('/')
 		} catch (e) {
 			console.log(e.message)

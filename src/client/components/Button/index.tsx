@@ -1,7 +1,14 @@
-export default function Button(props){
+type ButtonProps = {
+    name?: string,
+    testid: string,
+    click(): void | Promise<void> | Promise<boolean>,
+    children: string | JSX.Element | JSX.Element[] | (string | JSX.Element)[]
+}
+
+export default function Button({ name, testid, click, children }: ButtonProps): JSX.Element {
 
 	return(<>
-		<button className={'btn ' + props.name} onClick={props.click} data-testid={props.testid}>{props.children}</button>
+		<button className={'btn ' + name} onClick={click} data-testid={testid}>{children}</button>
 		<style jsx>
 			{`
                 .btn {

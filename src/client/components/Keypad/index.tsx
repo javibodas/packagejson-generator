@@ -6,7 +6,7 @@ import Button from 'src/client/components/Button'
 import useFile from 'src/client/hooks/useFile'
 
 
-export default function Keypad() {
+export default function Keypad(): JSX.Element {
 
 	const { file, dispatch } = useContext(FileCtx)
 	const { exportFile, handleCreateFile, handleUpdateFile } = useFile(file)
@@ -14,23 +14,20 @@ export default function Keypad() {
 	const { user, setUser } = useContext(UserCtx)
 	const { saveUserFile } = useUser({ user, setUser })
 
-	const fileExists = file.id
-	const userLogged = user.isLogged
-	const fileIsForUpdating = fileExists && userLogged && user.uid === file.createdBy
-	const fileIsForSavingInUser = userLogged && !fileExists
-	const fileIsForSharing = !userLogged && !fileExists
-	console.log(user.uid)
-	console.log(file.createdBy)
+	const fileExists: string = file.id
+	const fileIsForUpdating: boolean = fileExists && user && user.id === file.createdBy
+	const fileIsForSavingInUser: boolean = user && !fileExists
+	const fileIsForSharing: boolean = !user && !fileExists
 
-	const handleClickSave = () => {
+	const handleClickSave = (): void => {
 		file.id ? handleUpdateFile(file.id)
-			: user.isLogged ? saveUserFile(file)
+			: user.id ? saveUserFile(file)
 				: handleCreateFile()
 
 	}
 
-	const handleClear = () => {
-		dispatch({ type: 'clearJSON', value: file.id })
+	const handleClear = (): void => {
+		dispatch({ type: 'clearJSON', value: { id: file.id, createdBy: file.createdBy }})
 	}
 
 	return(<>
@@ -39,7 +36,7 @@ export default function Keypad() {
 			{
 				fileIsForUpdating || fileIsForSharing || fileIsForSavingInUser
 					? 	<Button name='btn-generateuri' click={handleClickSave} testid='btn-save'>
-						{ fileExists ? 'Update' : userLogged ? 'Save' : 'Share' }
+						{ fileExists ? 'Update' : user ? 'Save' : 'Share' }
 					</Button>
 					: 	null
 			}

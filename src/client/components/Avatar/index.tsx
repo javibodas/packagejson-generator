@@ -1,4 +1,8 @@
-export default function Avatar({ avatar }){
+type AvatarProps = {
+    avatar: string
+}
+
+export default function Avatar({ avatar }: AvatarProps): JSX.Element  {
 	return(<>
 		<div className='avatar'>
 			<img src={avatar ? avatar : 'default-avatar.png'}/>

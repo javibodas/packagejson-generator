@@ -2,7 +2,7 @@ import Form from 'src/client/components/Form'
 import TextEditor from 'src/client/components/TextEditor'
 import Keypad from 'src/client/components/Keypad'
 
-export default function Container(){
+export default function Container(): JSX.Element {
 	return(<>
 		<div className='container'>
 			<div className='editor'>

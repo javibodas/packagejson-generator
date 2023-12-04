@@ -1,18 +1,25 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
-export default function Badge(props){
+type BadgeProps = {
+    type: string,
+    label: string,
+    value: string,
+    remove(value: string): void
+}
 
-	const stylesValuesBadge = ['badge-value-blue', 'badge-value-green']
-	const styleValue = (props.type == 'script') ? stylesValuesBadge[1] : stylesValuesBadge[0]
+export default function Badge({ type, label, value, remove }: BadgeProps): JSX.Element {
+
+	const stylesValuesBadge: Array<string> = ['badge-value-blue', 'badge-value-green']
+	const styleValue: string = (type == 'script') ? stylesValuesBadge[1] : stylesValuesBadge[0]
 
 	return(<>
 		<div className='badge'>
 			<div className='badge-key text-ellipsis'>
-				<span>{props.objKey}</span>
+				<span>{label}</span>
 			</div>
-			{props.objValue ? <div className={styleValue + ' text-ellipsis'}><span>{props.objValue}</span></div> : null}
-			<div className='badge-close' onClick={() => {props.remove(props.objKey)}}>
+			{value ? <div className={styleValue + ' text-ellipsis'}><span>{value}</span></div> : null}
+			<div className='badge-close' onClick={() => {remove(label)}}>
 				<span className='badge-close-icon'><FontAwesomeIcon icon={faTrash} size="xs"/></span>
 			</div>
 		</div>

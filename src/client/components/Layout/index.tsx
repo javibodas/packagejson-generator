@@ -1,7 +1,11 @@
 import { UserContextProvider } from 'src/client/context/user'
 import Header from 'src/client/components/Header'
 
-export default function Layout({ children }) {
+type LayoutProps = {
+	children: string | JSX.Element | JSX.Element[] | (string | JSX.Element)[]
+}
+
+export default function Layout({ children }: LayoutProps): JSX.Element {
 	return (
 		<UserContextProvider>
 			<Header />

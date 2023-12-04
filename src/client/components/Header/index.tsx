@@ -7,24 +7,22 @@ import UserOptions from 'src/client/components/UserOptions'
 import Button from 'src/client/components/Button'
 
 
-export default function Header(){
+export default function Header(): JSX.Element {
 
 	const { user, setUser } = useContext(UserCtx)
 	const { handleLogIn, handleLogout, onAuthStateChanged } = useUser({ user, setUser })
 
-	useEffect(function(){
-		onAuthStateChanged((userUpdated) => {
-			(userUpdated) ? setUser({...userUpdated, isLogged: true })
-				: setUser({isLogged: false})
-		})
-	}, [])
+	useEffect(() => onAuthStateChanged((userUpdated) => {
+		(userUpdated) ? setUser(userUpdated)
+			: setUser(undefined)
+	}), [])
 
 	return(<>
 		<header>
 			<nav>
 				{
-					!user.isLogged ?
-						<Button name='btn-login' click={handleLogIn}>Login With <FontAwesomeIcon icon={faGithub} /></Button>
+					!user ?
+						<Button name='btn-login' click={handleLogIn} testid='btn-login'>Login With <FontAwesomeIcon icon={faGithub} /></Button>
 						:
 						<UserOptions user={user} logout={handleLogout}/>
 				}

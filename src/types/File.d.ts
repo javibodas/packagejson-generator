@@ -1,4 +1,5 @@
-export type File = {
+export interface File {
+	_id?: string,
     id?: string,
     json?: {
         name: string,
