@@ -1,20 +1,18 @@
 import { File } from 'src/types/File'
 import { FileAction } from 'src/types/reducer/FileAction'
 
-const fileInitialState: File = {
-	json: {
-		name: 'example',
-		version: '1.0.0',
-		description: 'Build the next generation of js...',
-		author: '',
-		main: 'index.js',
-		dependencies: {},
-		devDependencies: {},
-		scripts: {
-			test: 'echo "Error: no test specified" && exit 1',
-		},
-		license: 'ISC',
+const fileInitialState: object = {
+	name: 'example',
+	version: '1.0.0',
+	description: 'Build the next generation of js...',
+	author: '',
+	main: 'index.js',
+	dependencies: {},
+	devDependencies: {},
+	scripts: {
+		test: 'echo "Error: no test specified" && exit 1',
 	},
+	license: 'ISC',
 }
 
 export default (file: File, action: FileAction): File => {
@@ -57,7 +55,8 @@ export default (file: File, action: FileAction): File => {
 	case 'updateJSON':
 		return <File>action.value
 	case 'clearJSON':
-		return action.value ? {...fileInitialState, id: <string>action.value } : fileInitialState
+		const { id, createdBy } = <File>action.value
+		return { json: fileInitialState, id, createdBy } as File
 	default:
 		return file
 	}
