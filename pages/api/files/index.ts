@@ -1,12 +1,16 @@
+import type { NextApiRequest, NextApiResponse } from 'next'
+import { File } from 'src/types/File'
 import FileRepository from 'src/server/database/repository/FileRepository'
 
-export default async function handler(req, res) {
+type ResponseData = File | { files: Array<File> } | { error: string}
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>): Promise<void | NextApiResponse> {
 	const { method, body } = req
 
 	switch (method) {
 	case 'GET':
 		try {
-			const files = await FileRepository.findAll()
+			const files: Array<File> = await FileRepository.findAll()
 
 			return res.status(200).json({ files })
 		} catch(e) {
@@ -14,8 +18,8 @@ export default async function handler(req, res) {
 		}
 	case 'POST':
 		try {
-			const file = FileRepository.create(body)
-			
+			const file: File = await FileRepository.create(body)
+				
 			return res.status(200).json(file)
 		} catch (e) {
 			return res.status(500).json({ error: e.message })

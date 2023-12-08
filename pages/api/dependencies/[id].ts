@@ -1,14 +1,22 @@
+import type { NextApiRequest, NextApiResponse } from 'next'
+import { Dependencie } from 'src/types/Dependencie'
 import axios from 'axios'
 
-export default async function handler(req, res) {
+type ResponseData = {
+	error: string,
+	data: Array<Dependencie>
+}
+
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>): Promise<void> {
 	const { query: { id } } = req
-	const resp = { error: '', data: [] }
+	const resp: ResponseData = { error: '', data: [] }
 
 	await axios.get(`https://www.npmjs.com/search/suggestions?q=${id}`)
 		.then(response => {
 			if (response.data) {
 				resp.data = response.data.map(p => {
-					const { name, version, description} = p
+					const { name, version, description }: Dependencie = p
 					return { id, name, version, description }
 				})
 			} else {

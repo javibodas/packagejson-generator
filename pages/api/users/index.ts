@@ -1,20 +1,24 @@
+import type { NextApiRequest, NextApiResponse } from 'next'
+import { User } from 'src/types/User'
 import UserRepository from 'src/server/database/repository/UserRepository'
 
-export default async function handler(req, res) {
+type ResponseData = User | Array<User> | { error: string }
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>): Promise<void | NextApiResponse> {
 	const { body, method } = req
 
 	switch (method) {
 	case 'GET':
 		try {
-			const users = await UserRepository.findAll()
+			const users: Array<User> = await UserRepository.findAll()
 
-			return res.status(200).json({ users })
+			return res.status(200).json(users)
 		} catch (e) {
 			return res.status(500).json({ error: e.nessage })
 		}
 	case 'POST':
 		try {
-			const userCreated = await UserRepository.create(body.id)
+			const userCreated: User = await UserRepository.create(body.id)
 
 			return res.status(200).json(userCreated)
 		} catch (e) {
