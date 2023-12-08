@@ -4,9 +4,9 @@ import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FileDetail } from 'src/types/FileDetail'
 
 type FileDetailCardProps = {
-    fileDetail: FileDetail
+    fileDetail?: FileDetail
     handleClick(event: MouseEvent<HTMLDivElement>, id?: string): void
-    handleDelete(event: MouseEvent<HTMLSpanElement>, id: string): void
+    handleDelete?(event: MouseEvent<HTMLSpanElement>, id: string): void
 }
 
 export default function FileDetailCard({ fileDetail, handleClick, handleDelete }: FileDetailCardProps): JSX.Element {

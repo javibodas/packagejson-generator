@@ -1,9 +1,9 @@
-import { useState, useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import UserCtx from 'src/client/context/user'
 import useUser from 'src/client/hooks/useUser'
 import FileDetailCard from 'src/client/components/FileDetailCard'
-import getUser from 'src/client/services/getUser'
+import getUserFiles from 'src/client/services/getUserFiles'
 
 export default function User({ filesApi }){
 
@@ -53,11 +53,9 @@ export async function getServerSideProps(context) {
 	const id = context.params.id
 
 	try {
-		const data = await getUser(id)
+		const files = await getUserFiles(id)
 
-		if (data.error) throw new Error()
-
-		return { props: { filesApi: data.files ? data.files : [] }}
+		return { props: { filesApi: files ? files : [] }}
 	} catch (e) {
 		return {
 			notFound: true
