@@ -1,6 +1,7 @@
+import { File } from 'src/server/types/File'
 import { Schema, model, models } from 'mongoose'
 
-const FileSchema = new Schema({
+const FileSchema = new Schema<File>({
 	_id: { type: String },
 	json: {
 		name: { type: String, trim: true },
