@@ -19,7 +19,7 @@
 			"jsx": true
 		}
 	},
-	"plugins": [ "react", "jest", "@typescript-eslint" ],
+	"plugins": [ "react", "jest", "@typescript-eslint", "sort-imports-es6-autofix" ],
 	"settings": {
 		"react": {
 		  "version": "detect"
@@ -45,6 +45,11 @@
 		"react/react-in-jsx-scope": "off",
 		"react/prop-types": "off",
 		"react/no-unknown-property": [2, { "ignore": [ "jsx" ] }],
-		"no-case-declarations": "off"
+		"no-case-declarations": "off",
+		"sort-imports-es6-autofix/sort-imports-es6": [2, {
+			"ignoreCase": false,
+			"ignoreMemberSort": false,
+			"memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+		  }]
 	}
 }
