@@ -1,9 +1,9 @@
-import React from 'react'
-import File from 'pages/files/[id]'
-import { UserContextProvider } from 'src/client/context/user'
-import { FILE_ID_EXAMPLE, USER_ID_EXAMPLE } from '___tests___/constants'
-import { cleanup, render, screen, act } from '@testing-library/react'
 import 'jest-extended'
+import { FILE_ID_EXAMPLE, USER_ID_EXAMPLE } from '___tests___/constants'
+import { UserContextProvider } from 'src/client/context/user'
+import { act, cleanup, render, screen } from '@testing-library/react'
+import File from 'pages/files/[id]'
+import React from 'react'
 
 const mockUpdateFile = jest.fn()
 
@@ -21,7 +21,7 @@ describe('File Page Test', () => {
 		beforeEach(async () => {
 			await act(async () => render(
 				<UserContextProvider value={user}>
-					<File {...file} /> 
+					<File file={file} />
 				</UserContextProvider>
 			))
 		})
@@ -50,7 +50,7 @@ describe('File Page Test', () => {
 		beforeEach(async () => {
 			await act(async () => render(
 				<UserContextProvider value={user}>
-					<File {...file} /> 
+					<File file={file} /> 
 				</UserContextProvider>
 			))
 		})
@@ -79,7 +79,7 @@ describe('File Page Test', () => {
 		beforeEach(async () => {
 			await act(async () => render(
 				<UserContextProvider value={user}>
-					<File {...file} /> 
+					<File file={file} /> 
 				</UserContextProvider>
 			))
 		})
