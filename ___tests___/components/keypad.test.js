@@ -30,7 +30,7 @@ describe('Keypad Test', () => {
 
 	describe('When user is not logged', () => {
 		beforeEach(() => {
-			const user = { isLogged: false }
+			const user = undefined
 			render(
 				<UserContextProvider value={user}>
 					<FileContextProvider>  
@@ -66,8 +66,8 @@ describe('Keypad Test', () => {
 	})
 
 	describe('When user is logged and file does not exist', () => {
-		const user = { isLogged: true }
-		const file = { json: fileInitialState.json }
+		const user = { id: USER_ID_EXAMPLE }
+		const file = fileInitialState
 
 		beforeEach(() => {
 			render(
@@ -106,8 +106,8 @@ describe('Keypad Test', () => {
 	})
 
 	describe('When user is not logged and file already exists ', () => {
-		const user = { isLogged: false }
-		const file = { id: FILE_ID_EXAMPLE }
+		const user = undefined
+		const file = { id: FILE_ID_EXAMPLE, createdBy: USER_ID_EXAMPLE }
 		beforeEach(() => {
 			render(
 				<UserContextProvider value={user}>
@@ -131,7 +131,7 @@ describe('Keypad Test', () => {
 	})
 
 	describe('When user is logged and file already exists but file is not owned ', () => {
-		const user = { isLogged: true, uid: USER_ID_EXAMPLE }
+		const user = { id: USER_ID_EXAMPLE }
 		const file = { id: FILE_ID_EXAMPLE, createdBy: 'NOT_USER_LOGGED' }
 		beforeEach(() => {
 			render(
@@ -155,8 +155,8 @@ describe('Keypad Test', () => {
 		})
 	})
 
-	describe('When user is logged and file already exists but file is owned ', () => {
-		const user = { isLogged: true, uid: USER_ID_EXAMPLE }
+	describe('When user is logged and file already exists and is owned ', () => {
+		const user = { id: USER_ID_EXAMPLE }
 		const file = { id: FILE_ID_EXAMPLE, createdBy: USER_ID_EXAMPLE }
 		beforeEach(() => {
 			render(

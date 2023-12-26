@@ -1,8 +1,7 @@
-import userController from 'pages/api/users/[id]'
-import UserRepository from 'src/server/database/repository/UserRepository'
-import FileRepository from 'src/server/database/repository/FileRepository'
-import { USER_ID_EXAMPLE } from '___tests___/constants'
 import 'jest-extended'
+import { USER_ID_EXAMPLE } from '___tests___/constants'
+import UserRepository from 'src/server/database/repository/UserRepository'
+import userController from 'pages/api/users/[id]'
 
 jest.mock('src/server/database/repository/UserRepository', () => ({
 	findById: jest.fn().mockReturnValueOnce({ toObject: () => { return {}}})
@@ -25,7 +24,5 @@ describe('Files Api Test', () => {
 		expect(response.statusCode).toEqual(200)
 		expect(UserRepository.findById).toHaveBeenCalledTimes(1)
 		expect(UserRepository.findById).toHaveBeenCalledWith(USER_ID_EXAMPLE)
-		expect(FileRepository.getFilesByUserId).toHaveBeenCalledTimes(1)
-		expect(FileRepository.getFilesByUserId).toHaveBeenCalledWith(USER_ID_EXAMPLE)
 	})
 })

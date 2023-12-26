@@ -1,7 +1,7 @@
-import usersController from 'pages/api/users'
-import UserRepository from 'src/server/database/repository/UserRepository'
-import { USER_ID_EXAMPLE } from '___tests___/constants'
 import 'jest-extended'
+import { USER_ID_EXAMPLE } from '___tests___/constants'
+import UserRepository from 'src/server/database/repository/UserRepository'
+import usersController from 'pages/api/users'
 
 jest.mock('src/server/database/repository/UserRepository', () => ({
 	findAll: jest.fn(),
@@ -26,6 +26,6 @@ describe('Files Api Test', () => {
 		const body = { id: USER_ID_EXAMPLE}
 		await usersController({ method: 'POST', body }, response)
 		expect(UserRepository.create).toHaveBeenCalledTimes(1)
-		expect(UserRepository.create).toHaveBeenCalledWith(USER_ID_EXAMPLE)
+		expect(UserRepository.create).toHaveBeenCalledWith({ id: USER_ID_EXAMPLE})
 	})
 })
