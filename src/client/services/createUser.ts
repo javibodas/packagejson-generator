@@ -1,6 +1,6 @@
-import callApi from 'src/util/callApi'
-import { User } from 'src/types/User'
 import { CREATE_USER_ENDPOINT } from 'src/util/constants'
+import { User } from 'src/client/types/User'
+import callApi from 'src/util/callApi'
 
 export default async (userId: string): Promise<User> => {
 	const request: RequestInfo = new Request(CREATE_USER_ENDPOINT,

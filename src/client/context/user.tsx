@@ -1,5 +1,5 @@
+import { User } from 'src/client/types/User'
 import React, { useState } from 'react'
-import { User } from 'src/types/User'
 
 type UserContext = {
 	user?: User,

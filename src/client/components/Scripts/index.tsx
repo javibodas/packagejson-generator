@@ -1,7 +1,7 @@
 import { useContext } from 'react'
-import FileCtx from 'src/client/context/file'
 import Badge from 'src/client/components/Badge'
 import Button from 'src/client/components/Button'
+import FileCtx from 'src/client/context/file'
 import useScripts from 'src/client/hooks/useScripts'
 
 

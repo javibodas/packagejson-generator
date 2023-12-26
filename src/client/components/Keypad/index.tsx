@@ -1,9 +1,9 @@
 import { useContext } from 'react'
+import Button from 'src/client/components/Button'
 import FileCtx from 'src/client/context/file'
 import UserCtx from 'src/client/context/user'
-import useUser from 'src/client/hooks/useUser'
-import Button from 'src/client/components/Button'
 import useFile from 'src/client/hooks/useFile'
+import useUser from 'src/client/hooks/useUser'
 
 
 export default function Keypad(): JSX.Element {

@@ -1,8 +1,8 @@
 import { ChangeEvent, MouseEvent, TouchEvent, useState } from 'react'
-import getDependencies from 'src/client/services/getDependencies'
-import { Dependencie } from 'src/types/Dependencie'
-import { UseDependenciesProps } from 'src/types/hooks/UseDependenciesProps'
+import { Dependencie } from 'src/client/types/Dependencie'
 import { StringUtils } from 'src/util/StringUtils'
+import { UseDependenciesProps } from 'src/client/types/hooks/UseDependenciesProps'
+import getDependencies from 'src/client/services/getDependencies'
 
 export default function useDependencies({ classType, type, dispatch, file }: UseDependenciesProps) {
 

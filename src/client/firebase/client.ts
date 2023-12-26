@@ -1,7 +1,7 @@
-import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import 'firebase/compat/firestore'
-import { User } from 'src/types/User'
+import { User } from 'src/client/types/User'
+import firebase from 'firebase/compat/app'
 
 const firebaseConfig = {
 	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,

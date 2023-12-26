@@ -1,7 +1,8 @@
 export interface User {
-    _id?: string,
+    id: string,
     avatar?: string, 
 	username?: string, 
 	email?: string,
-    id?: string,
+    createdAt?: boolean | string,
+    updatedAt?: boolean | string
 }

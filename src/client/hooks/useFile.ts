@@ -1,8 +1,8 @@
+import { File } from 'src/client/types/File'
 import { NextRouter, useRouter } from 'next/router'
 import { v4 } from 'uuid'
 import createFile from 'src/client/services/createFile'
 import updateFile from 'src/client/services/updateFile'
-import { File } from 'src/types/File'
 
 declare global {
 	interface Navigator {

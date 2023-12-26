@@ -1,10 +1,10 @@
-import { useContext, useEffect } from 'react'
-import UserCtx from 'src/client/context/user'
-import useUser from 'src/client/hooks/useUser'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
-import UserOptions from 'src/client/components/UserOptions'
+import { useContext, useEffect } from 'react'
 import Button from 'src/client/components/Button'
+import UserCtx from 'src/client/context/user'
+import UserOptions from 'src/client/components/UserOptions'
+import useUser from 'src/client/hooks/useUser'
 
 
 export default function Header(): JSX.Element {

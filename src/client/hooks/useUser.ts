@@ -1,12 +1,12 @@
+import { File } from 'src/client/types/File'
+import { UseUserProps } from 'src/client/types/hooks/UseUserProps'
+import { User } from 'src/client/types/User'
+import { loginWithGithub, logoutWithGithub, onAuthStateChanged } from 'src/client/firebase/client'
 import { useRouter } from 'next/router'
 import { v4 } from 'uuid'
-import { loginWithGithub, logoutWithGithub, onAuthStateChanged } from 'src/client/firebase/client'
 import createUser from 'src/client/services/createUser'
 import createUserFile from 'src/client/services/createUserFile'
 import deleteUserFile from 'src/client/services/deleteUserFile'
-import { File } from 'src/types/File'
-import { User } from 'src/types/User'
-import { UseUserProps } from 'src/types/hooks/UseUserProps'
 
 export default function useUser({ user, setUser }: UseUserProps) {
 

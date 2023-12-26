@@ -1,7 +1,7 @@
-import { MouseEvent } from 'react'
+import { FileDetail } from 'src/client/types/FileDetail'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { MouseEvent } from 'react'
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { FileDetail } from 'src/types/FileDetail'
 
 type FileDetailCardProps = {
     fileDetail?: FileDetail

@@ -1,7 +1,7 @@
+import { File } from 'src/client/types/File'
 import { useContext } from 'react'
-import dynamic from 'next/dynamic'
 import FileCtx from 'src/client/context/file'
-import { File } from 'src/types/File'
+import dynamic from 'next/dynamic'
 
 const MonacoEditor = dynamic(import('react-monaco-editor'), { ssr: false })
 

@@ -1,5 +1,4 @@
 export interface File {
-	_id?: string,
     id?: string,
     json?: {
         name: string,
@@ -12,5 +11,7 @@ export interface File {
 		scripts: object,
 		license: string,
     },
-    createdBy?: string
+    createdBy?: string,
+	createdAt?: boolean | string,
+	updatedAt?: boolean | string
 }

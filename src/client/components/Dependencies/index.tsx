@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import Badge from 'src/client/components/Badge'
-import useDependencies from 'src/client/hooks/useDependencies'
 import FileCtx from 'src/client/context/file'
+import useDependencies from 'src/client/hooks/useDependencies'
 
 type DependenciesProps = {
     title: string,

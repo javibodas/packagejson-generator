@@ -1,7 +1,7 @@
+import { User } from 'src/client/types/User'
 import { useRouter } from 'next/router'
 import Avatar from 'src/client/components/Avatar'
 import Button from 'src/client/components/Button'
-import { User } from 'src/types/User'
 
 type UserOptionsProps = {
 	user: User,

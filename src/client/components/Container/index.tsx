@@ -1,6 +1,6 @@
 import Form from 'src/client/components/Form'
-import TextEditor from 'src/client/components/TextEditor'
 import Keypad from 'src/client/components/Keypad'
+import TextEditor from 'src/client/components/TextEditor'
 
 export default function Container(): JSX.Element {
 	return(<>

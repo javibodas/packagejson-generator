@@ -1,5 +1,5 @@
-import { UseScriptsProps } from 'src/types/hooks/UseScriptsProps'
 import { StringUtils } from 'src/util/StringUtils'
+import { UseScriptsProps } from 'src/client/types/hooks/UseScriptsProps'
 
 export default function useScripts({ dispatch, file }: UseScriptsProps) {
 
