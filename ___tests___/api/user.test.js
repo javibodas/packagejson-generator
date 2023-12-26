@@ -1,7 +1,7 @@
-import userController from 'pages/api/users/[id]'
-import UserRepository from 'src/server/database/repository/UserRepository'
-import { USER_ID_EXAMPLE } from '___tests___/constants'
 import 'jest-extended'
+import { USER_ID_EXAMPLE } from '___tests___/constants'
+import UserRepository from 'src/server/database/repository/UserRepository'
+import userController from 'pages/api/users/[id]'
 
 jest.mock('src/server/database/repository/UserRepository', () => ({
 	findById: jest.fn().mockReturnValueOnce({ toObject: () => { return {}}})

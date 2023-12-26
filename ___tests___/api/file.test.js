@@ -1,7 +1,7 @@
-import fileController from 'pages/api/files/[pid]'
-import FileRepository from 'src/server/database/repository/FileRepository'
-import { FILE_ID_EXAMPLE } from '___tests___/constants'
 import 'jest-extended'
+import { FILE_ID_EXAMPLE } from '___tests___/constants'
+import FileRepository from 'src/server/database/repository/FileRepository'
+import fileController from 'pages/api/files/[pid]'
 
 jest.mock('src/server/database/repository/FileRepository', () => ({
 	findById: jest.fn().mockReturnValueOnce({}),
