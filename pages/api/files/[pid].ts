@@ -1,17 +1,17 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { File } from 'src/types/File'
+import { File } from 'src/server/types/File'
 import FileNotExistError from 'src/server/errors/FileNotExist'
 import FileRepository from 'src/server/database/repository/FileRepository'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 type ResponseData = File | { id: string } | { error: string }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>): Promise<void | NextApiResponse> {
-	const { query: { pid: fileId }, method, body } = req
+	const { query: { pid: fileId}, method, body } = req
 
 	switch (method) {
 	case 'GET':
 		try {
-			const file: File = await FileRepository.findById(fileId)
+			const file: File = await FileRepository.findById(<string> fileId)
 			if (!file) throw new FileNotExistError()
 
 			return res.status(200).json(file)
@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 		}
 	case 'PUT':
 		try {
-			const fileUpdated: File = await FileRepository.update(fileId, body)
+			const fileUpdated: File = await FileRepository.update(<string> fileId, <File> body)
 			if (!fileUpdated) throw new FileNotExistError()
 
 			return res.status(200).json(fileUpdated)
@@ -35,7 +35,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 		}
 	case 'DELETE':
 		try {
-			const fileDeleted: File = await FileRepository.deleteById(fileId)
+			const fileDeleted: File = await FileRepository.deleteById(<string> fileId)
 			if (!fileDeleted) throw new FileNotExistError()
 
 			return res.status(200).json({ id: <string> fileId })

@@ -1,7 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { User } from 'src/types/User'
+import { User } from 'src/server/types/User'
 import UserNotExistError from 'src/server/errors/UserNotExist'
 import UserRepository from 'src/server/database/repository/UserRepository'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 type ResponseData = User | { error: string }
 

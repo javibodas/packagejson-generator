@@ -1,6 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { Dependencie } from 'src/types/Dependencie'
+import { Dependencie } from 'src/server/types/Dependencie'
 import axios from 'axios'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 type ResponseData = {
 	error: string,

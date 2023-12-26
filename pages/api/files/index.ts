@@ -1,6 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { File } from 'src/types/File'
+import { File } from 'src/server/types/File'
 import FileRepository from 'src/server/database/repository/FileRepository'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 type ResponseData = File | { files: Array<File> } | { error: string}
 

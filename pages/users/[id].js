@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
-import UserCtx from 'src/client/context/user'
-import useUser from 'src/client/hooks/useUser'
 import FileDetailCard from 'src/client/components/FileDetailCard'
+import UserCtx from 'src/client/context/user'
 import getUserFiles from 'src/client/services/getUserFiles'
+import useUser from 'src/client/hooks/useUser'
 
 export default function User({ filesApi }){
 
