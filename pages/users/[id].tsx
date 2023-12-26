@@ -1,30 +1,36 @@
+import { FileDetail } from 'src/client/types/FileDetail'
+import { GetServerSidePropsResult } from 'next'
+import { NextRouter, useRouter } from 'next/router'
 import { useContext, useState } from 'react'
-import { useRouter } from 'next/router'
 import FileDetailCard from 'src/client/components/FileDetailCard'
 import UserCtx from 'src/client/context/user'
 import getUserFiles from 'src/client/services/getUserFiles'
 import useUser from 'src/client/hooks/useUser'
 
-export default function User({ filesApi }){
+type UserProps = {
+	filesApi: Array<FileDetail>
+}
 
-	const router = useRouter()
+export default function User({ filesApi }: UserProps): JSX.Element {
+
+	const router: NextRouter = useRouter()
 
 	const [ files, setFiles ] = useState(filesApi)
 	const { user, setUser } = useContext(UserCtx)
 	const { deleteFile } = useUser({ user, setUser })
 
-	const handleClickNewFile = () => {
+	const handleClickNewFile = (): void => {
 		router.push('/')
 	}
 
-	const handleClickFile = (event, fileId) => {
+	const handleClickFile = (event, fileId: string): void => {
 		router.push('/files/' + fileId)
 	}
 
-	const handleDeleteFile = async (event, fileId) => {
+	const handleDeleteFile = async (event, fileId: string): Promise<void> => {
 		event.stopPropagation()
 
-		const isFileDeleted = await deleteFile(fileId)
+		const isFileDeleted: boolean = await deleteFile(fileId)
 		if (!isFileDeleted) return
 
 		setFiles(files.filter((file) => file.id !== fileId))
@@ -49,11 +55,11 @@ export default function User({ filesApi }){
 	</>)
 }
 
-export async function getServerSideProps(context) {
-	const id = context.params.id
+export async function getServerSideProps(context): Promise<GetServerSidePropsResult<{ filesApi: Array<FileDetail>}>> {
+	const id: string = context.params.id
 
 	try {
-		const files = await getUserFiles(id)
+		const files: Array<FileDetail> = await getUserFiles(id)
 
 		return { props: { filesApi: files ? files : [] }}
 	} catch (e) {

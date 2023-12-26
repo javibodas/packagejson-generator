@@ -1,4 +1,4 @@
-export default function NotFoundPage() {
+export default function NotFoundPage(): JSX.Element {
 	return <>
 		<div className='container'>
 			<section className='description'>

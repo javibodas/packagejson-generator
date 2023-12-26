@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 		}
 	case 'POST':
 		try {
-			const userCreated: User = await UserRepository.create(body.id)
+			const userCreated: User = await UserRepository.create(<User> body)
 
 			return res.status(200).json(userCreated)
 		} catch (e) {

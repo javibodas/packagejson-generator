@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 	switch (method) {
 	case 'GET':
 		try {
-			const user: User = await UserRepository.findById(userId)
+			const user: User = await UserRepository.findById(<string> userId)
 			if(!user) throw new UserNotExistError()
 
 			return res.status(200).json(user)
