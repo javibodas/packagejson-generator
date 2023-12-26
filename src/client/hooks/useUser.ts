@@ -19,7 +19,7 @@ export default function useUser({ user, setUser }: UseUserProps) {
 	const handleLogIn = async (): Promise<void> => {
 		try {
 			const user: User = await login()
-			await createUser(user.id)
+			await createUser(user)
 
 			setUser(user)
 		} catch (e) {
