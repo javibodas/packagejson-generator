@@ -26,26 +26,15 @@
 		}
 	},
 	"rules": {
-		"indent": [
-			"error",
-			"tab"
-		],
-		"linebreak-style": [
-			"error",
-			"unix"
-		],
-		"quotes": [
-			"error",
-			"single"
-		],
-		"semi": [
-			"error",
-			"never"
-		],
+		"indent": [ "error", "tab" ],
+		"linebreak-style": [ "error", "unix" ],
+		"quotes": [ "error", "single" ],
+		"semi": [ "error", "never"],
 		"react/react-in-jsx-scope": "off",
 		"react/prop-types": "off",
 		"react/no-unknown-property": [2, { "ignore": [ "jsx" ] }],
 		"no-case-declarations": "off",
+		"@typescript-eslint/no-explicit-any": [ "off" ],
 		"sort-imports-es6-autofix/sort-imports-es6": [2, {
 			"ignoreCase": false,
 			"ignoreMemberSort": false,

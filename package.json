@@ -10,7 +10,7 @@
     "start": "next start",
     "test": "jest --silent",
     "local-test": "jest --silent --watchAll",
-    "lint": "eslint src/**/*.js pages/**/*.js"
+    "lint": "eslint src/**/*.ts src/**/*.tsx pages/**/*.ts pages/**/*.tsx"
   },
   "keywords": [],
   "author": "Javier",
