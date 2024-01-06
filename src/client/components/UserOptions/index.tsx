@@ -11,30 +11,11 @@ type UserOptionsProps = {
 export default function UserOptions({ user, logout }: UserOptionsProps): JSX.Element {
 	const router = useRouter()
 
-	return (<>
-		<div className='user'>
-			<ul>
-				<li><Button click={() => router.push('/users/' + user.id )} testid='btn-user-files'>Files</Button></li>
-				<li><Button click={logout} testid='btn-logout'>Logout</Button></li>
-			</ul>
-			<Avatar avatar={user.avatar}/>
-		</div>
-		<style jsx>
-			{`
-                .user {
-                    display: flex;
-                    flex-direction: row;
-                }
-
-                .user ul {
-                    margin: auto 0;
-                    padding-right: .5rem;
-                }
-
-                .user ul li {
-                    display:inline;
-                }                
-            `}
-		</style>
-	</>)
+	return (<div className='flex flex-row'>
+		<ul className='my-auto mx-0 pr-2 pl-10'>
+			<li className='inline'><Button click={() => router.push('/users/' + user.id )} testid='btn-user-files'>Files</Button></li>
+			<li className='inline'><Button click={logout} testid='btn-logout'>Logout</Button></li>
+		</ul>
+		<Avatar avatar={user.avatar}/>
+	</div>)
 }

@@ -10,45 +10,18 @@ export default function Scripts(): JSX.Element {
 	const { file, dispatch } = useContext(FileCtx)
 	const { addScript, removeScript } = useScripts({ dispatch, file })
 
-	return(<>
-		<div className='form-group form-scripts'>
-			<div className='dependencies-box'>
-				<div className='data-box'>
-					<label className='label-title'>Scripts</label>
-					<input id='key-script' className = 'input-form key-inpt' placeholder='Key' data-testid='script-key'/>
-					<input id='command-script' className = 'input-form comd-inpt' placeholder='Command' data-testid='script-value'/>
-					<Button name='btn-add-script' testid='script-add-btn' click={addScript}>+</Button>
-				</div>
-				<div id='scripts-list' className='scripts-list' data-testid='scripts-list'>
-					{file.json.scripts ? 
-						Object.keys(file.json.scripts).map(script => <Badge key={script} type='script' label={script} value={file.json.scripts[script]} remove={removeScript}/>)
-						: null
-					}
-				</div>
-			</div>
+	return(<div className='flex flex-col max-h-52'>
+		<div className='grid grid-cols-5 py-1.5 px-0'>
+			<label className='label-title mx-4 my-auto col-start-1 col-end-1 font-bold lg:text-base text-[10px]'>Scripts</label>
+			<input id='key-script' className = 'w-full py-1 px-0 col-start-2 col-end-2 border-b-1 border-solid border-gray-200 hover:border-garnet hover:outline-none focus:border-garnet focus:outline-none rounded-none lg:text-base text-[10px]' placeholder='Key' data-testid='script-key'/>
+			<input id='command-script' className = 'w-full py-1 px-0 col-start-3 col-end-5 border-b-1 border-solid border-gray-200 hover:border-garnet hover:outline-none focus:border-garnet focus:outline-none rounded-none lg:text-base text-[10px]' placeholder='Command' data-testid='script-value'/>
+			<Button name='btn-add-script' styles='col-start-5 col-end-6' testid='script-add-btn' click={addScript}>+</Button>
 		</div>
-		<style jsx>{`
-                .form-scripts .scripts-list{
-                    padding: 1rem 0 1rem 1rem;
-                    display: flex;
-                    flex-flow: row wrap;
-                    overflow-y: auto;
-                }
-
-                .key-inpt {
-                    grid-column: 2/2;
-                    grid-row: 1;
-                }
-                
-                .comd-inpt {
-                    grid-column: 3/4;
-                    grid-row: 1;
-                }
-
-                .btn-add-script {
-                    grid-column: 5/5;
-                    grid-row: 1;
-                }
-            `}</style>
-	</>)
+		<div id='scripts-list' className='flex flex-row flex-wrap overflow-y-auto py-4 pl-0 pr-4' data-testid='scripts-list'>
+			{file.json.scripts ? 
+				Object.keys(file.json.scripts).map(script => <Badge key={script} type='script' label={script} value={file.json.scripts[script]} remove={removeScript}/>)
+				: null
+			}
+		</div>
+	</div>)
 }

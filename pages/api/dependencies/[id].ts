@@ -2,31 +2,26 @@ import { Dependencie } from 'src/server/types/Dependencie'
 import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-type ResponseData = {
-	error: string,
-	data: Array<Dependencie>
-}
+type ResponseData = Array<Dependencie> | { error: string }
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>): Promise<void> {
 	const { query: { id } } = req
-	const resp: ResponseData = { error: '', data: [] }
 
 	await axios.get(`https://www.npmjs.com/search/suggestions?q=${id}`)
 		.then(response => {
 			if (response.data) {
-				resp.data = response.data.map(p => {
+				const mapNpmPackages = response.data.map(p => {
 					const { name, version, description }: Dependencie = p
 					return { id, name, version, description }
 				})
-			} else {
-				resp.error = 'No packages found'
-			}
 
-			res.status(200).json(resp)
+				res.status(200).json(mapNpmPackages)
+			} else {
+				res.status(500).json({ error: 'No packages found' })
+			}
 		})
 		.catch(() => {
-			resp.error = 'No packages found'
-			res.status(200).json(resp)
+			res.status(500).json({ error: 'No packages found' })
 		})
 }

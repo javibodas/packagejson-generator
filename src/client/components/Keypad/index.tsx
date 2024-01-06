@@ -30,37 +30,20 @@ export default function Keypad(): JSX.Element {
 		dispatch({ type: 'clearJSON', value: { id: file.id, createdBy: file.createdBy }})
 	}
 
-	return(<>
-		<div className='btns-keypad'>
-			<Button name='btn-exportjson' click={exportFile} testid='btn-export'>Export</Button>
-			{
-				fileIsForUpdating || fileIsForSharing || fileIsForSavingInUser
-					? 	<Button name='btn-generateuri' click={handleClickSave} testid='btn-save'>
-						{ fileExists ? 'Update' : user ? 'Save' : 'Share' }
-					</Button>
-					: 	null
-			}
-			{
-				fileIsForUpdating || fileIsForSharing || fileIsForSavingInUser
-					?	<Button name='btn-clear' click={handleClear} testid='btn-clear'>Clear</Button>
-					: 	null
-			}
-		</div>
-		<style jsx>{`
-            .btns-keypad {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                grid-column-gap: 5rem;
-                width: 100%;
-                align-content: end;
-            }
-
-            @media (max-width: 600px) {
-                .btns-keypad {
-                    grid-column-gap: .5rem;
-                }
-            }
-        `}</style>
-	</>)
+	return(<div className='btns-keypad grid grid-cols-3 gap-x-2 sm:gap-x-20 w-full content-end'>
+		<Button name='btn-exportjson' click={exportFile} testid='btn-export'>Export</Button>
+		{
+			fileIsForUpdating || fileIsForSharing || fileIsForSavingInUser
+				? 	<Button name='btn-generateuri' click={handleClickSave} testid='btn-save'>
+					{ fileExists ? 'Update' : user ? 'Save' : 'Share' }
+				</Button>
+				: 	null
+		}
+		{
+			fileIsForUpdating || fileIsForSharing || fileIsForSavingInUser
+				?	<Button name='btn-clear' click={handleClear} testid='btn-clear'>Clear</Button>
+				: 	null
+		}
+	</div>)
 
 }

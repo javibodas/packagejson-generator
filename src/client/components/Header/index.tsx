@@ -17,36 +17,14 @@ export default function Header(): JSX.Element {
 			: setUser(undefined)
 	}), [])
 
-	return(<>
-		<header>
-			<nav>
-				{
-					!user ?
-						<Button name='btn-login' click={handleLogIn} testid='btn-login'>Login With <FontAwesomeIcon icon={faGithub} /></Button>
-						:
-						<UserOptions user={user} logout={handleLogout}/>
-				}
-			</nav>
-		</header>
-		<style jsx>
-			{`
-                    header {
-                        max-width: 80%;
-                        height: 6vh;
-                        display: flex; flex-direction: row-reverse;
-                        padding: 0.5rem 0 0.5rem 0;
-                        margin: 0 auto;
-                    }
-                    
-                    nav {
-                        margin: auto 0;
-                    }
-
-                    @media (max-width: 1000px) {
-                        max-width: 90%!important;
-                        margin: 0 auto;
-                    }
-                `}
-		</style>
-	</>)
+	return(<header className='flex flex-row-reverse py-2 px-0 my-0 mx-auto w-4/5 h-6-vh'>
+		<nav className='mx-0 my-auto'>
+			{
+				!user ?
+					<Button name='btn-login' click={handleLogIn} testid='btn-login'>Login With <FontAwesomeIcon icon={faGithub} /></Button>
+					:
+					<UserOptions user={user} logout={handleLogout}/>
+			}
+		</nav>
+	</header>)
 }

@@ -4,19 +4,19 @@ import TextEditor from 'src/client/components/TextEditor'
 
 export default function Container(): JSX.Element {
 	return(<>
-		<div className='container'>
-			<div className='editor'>
+		<div className='container lg:max-w-80% max-w-full lg:min-h-80-vh min-h-92-vh mx-auto my-0 rounded-[4px] bg-white shadow-2xl lg:mt-2'>
+			<div className='editor hidden lg:flex'>
 				<TextEditor />
 			</div>
-			<div className='form'>
+			<div className='form p-4 sm:p-8'>
 				<Form />
 			</div>
-			<div className='keypad'>
+			<div className='keypad py-4 px-0 sm:py-8 sm:px-8 flex'>
 				<Keypad />
 			</div>
 		</div>
 		<style jsx>{`
-                .container {
+				.container {
                     display: grid;
                     grid-template-areas:
                         "form editor editor"
@@ -24,26 +24,14 @@ export default function Container(): JSX.Element {
                         "keypad editor editor";
                     grid-template-columns: 1.4fr 0.6fr 1fr; 
                     grid-template-rows: 1fr 1.5fr 0.5fr;
-                    max-width: 80%;
-                    min-height: 80vh;
-                    margin: 0 auto;
-                    border-radius: 4px;
-
-                    background-color: white;
-                    -webkit-box-shadow: 5px 5px 69px -14px rgb(0 0 0 / 0.3);
-                    -moz-box-shadow: 5px 5px 69px -14px rgb(0 0 0 / 0.3);
-                    box-shadow: 5px 5px 69px -14px rgb(0 0 0 / 0.3);
                 }
 
                 .form {
                     grid-area: form;
-                    padding: 2rem 2rem 2rem 2rem;
                 }
 
-                .keypad {
+				.keypad {
                     grid-area: keypad;
-                    padding: 2rem 2rem 2rem 2rem;
-                    display: flex;
                 }
 
                 .editor {
@@ -52,28 +40,10 @@ export default function Container(): JSX.Element {
 
                 @media (max-width: 1000px) {
                     .container {
-                        display: grid;
                         grid-template-areas:
                             "form"
                             "form"
                             "keypad";
-                        grid-template-columns: 1fr; 
-                        grid-template-rows: 1fr 1fr 1fr;
-                        max-width: 100%;
-                        min-height: 92vh;
-                        margin-top: .5rem;
-                    }
-                    .editor {
-                        display: none;
-                    }
-                }
-                
-                @media (max-width: 500px) {
-                    .keypad {
-                        padding: 1rem 1rem 1rem 1rem;
-                    }
-                    .form {
-                        padding: 1rem 0 1rem 0;
                     }
                 }
                 `}</style>
