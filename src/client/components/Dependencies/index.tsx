@@ -14,76 +14,30 @@ export default function Dependencies({ title, classType, type } : DependenciesPr
 	const { file, dispatch } = useContext(FileCtx)
 	const { packages, typePackage, addPackage, removePackage, outFocusInputDependencie } = useDependencies({ classType, type, dispatch, file })
     
-	return (<>
-		<div id={'formdepd' +  type} className = 'form-group dependencies'>
-			<div className='dependencies-box'>
-				<div className='data-box'>
-					<label className='label-title'>{title}</label>
-					<section className='section-input'>
-						<input id = {'inpt-dependencies' + type} className = 'input-form input-dependencie' placeholder="NPM Package" onChange={typePackage} onBlur={outFocusInputDependencie} data-testid={'input-' + classType}/>
-						<div id = {'packlist' + type} className='packages-list' data-testid={'combo-' + classType}>
-							<ul>
-								{packages.map(pack => <li key={pack.name} onClick={addPackage} onTouchStart={addPackage}>{pack.name}<span className='pckg-version' data-testid={classType + '-list-item'}>{' (' + pack.version+')'}</span></li>)}
-							</ul>
-						</div>
-					</section>
+	return (<div className='flex flex-col max-h-52'>
+		<div className='grid grid-cols-5 py-1.5 px-0'>
+			<label className='label-title mx-4 my-auto col-start-1 col-end-1 font-bold lg:text-base text-[10px]'>{title}</label>
+			<section className='section-input col-start-2 col-end-6'>
+				<input id = {'inpt-dependencies' + type} className = 'w-full py-1 px-0 input-dependencie border-b-1 border-solid border-gray-200 hover:border-garnet hover:outline-none focus:border-garnet focus:outline-none rounded-none lg:text-base text-[10px]' placeholder="NPM Package" onChange={typePackage} onBlur={outFocusInputDependencie} data-testid={'input-' + classType}/>
+				<div id = {'packlist' + type} className='text-black text-xs bg-white hidden max-h-[100px] fixed z-10 w-400 transition-all delay-75 overflow-y-scroll' data-testid={'combo-' + classType}>
+					<ul className='list-none p-0'>
+						{
+							packages.map(pack => 
+								<li key={pack.name} onClick={addPackage} onTouchStart={addPackage} className='group text-xs italic p-1 cursor-pointer border-b-1 border-solid border-garnet hover:font-bold'>
+									{pack.name}
+									<span className='group-hover:font-bold absolute right-0 text-red' data-testid={classType + '-list-item'}>{' (' + pack.version+')'}</span>
+								</li>
+							)
+						}
+					</ul>
 				</div>
-				<div id={'depdlist' + type} className='dependencies-list' data-testid={classType + '-list'}>
-					{file.json[classType] ? 
-						Object.keys(file.json[classType]).map(dependencie => <Badge key={dependencie} type={type} label={dependencie} value={file.json[classType][dependencie]} remove={removePackage}/>)
-						: null
-					}
-				</div>
-			</div>
+			</section>
 		</div>
-		<style jsx>{`
-         
-                    .dependencies .packages-list{
-                        color: black; background-color: white;
-                        max-height: 0; position: fixed; z-index: 10; width: 400px;
-                        transition: all 0.5s;
-                        overflow-y: scroll;
-                    }
-
-                    .dependencies .packages-list.active{
-                        max-height: 100px;
-                    }
-
-                    .dependencies .packages-list ul{
-                        list-style: none;
-                        padding: 0 0 0 0rem;
-                    }
-
-                    .dependencies .packages-list li{
-                        border-bottom: solid 1px #c12127;
-                        font-style: italic;
-                        font-size: 14px;
-                        padding: 0.25rem;
-                        cursor: pointer;
-                    }
-
-                    .dependencies .packages-list li:hover{
-                        font-weight: bold;
-                    }
-
-                    .dependencies .packages-list li .pckg-version{
-                        position: absolute;
-                        right: 0;
-                        font-size: 10px;
-                        color: red;
-                    }
-
-                    .dependencies .packages-list li:hover .pckg-version{
-                        font-weight: bold;
-                    }
-
-                    .dependencies .dependencies-list{
-                        padding: 1rem 0 1rem 1rem;
-                        display: flex;
-                        flex-flow: row wrap;
-                        overflow-y: auto;
-                    }
-
-                `}</style>
-	</>)
+		<div className='flex flex-row flex-wrap overflow-y-auto py-4 pl-0 pr-4' data-testid={classType + '-list'}>
+			{file.json[classType] ? 
+				Object.keys(file.json[classType]).map(dependencie => <Badge key={dependencie} type={type} label={dependencie} value={file.json[classType][dependencie]} remove={removePackage}/>)
+				: null
+			}
+		</div>
+	</div>)
 }

@@ -13,12 +13,12 @@ export default function useDependencies({ classType, type, dispatch, file }: Use
 
 	const outFocusInputDependencie = (): void => {
 		const packagesListElement: HTMLElement = document.getElementById('packlist' + type)
-		if (packagesListElement) packagesListElement.classList.remove('active')
+		if (packagesListElement && !packagesListElement.classList.contains('hidden')) packagesListElement.classList.add('hidden')
 	}
 
 	const showPackagesList = (): void => {
 		const packagesListElement: HTMLElement = document.getElementById('packlist' + type)
-		if (!packagesListElement.classList.contains('active')) packagesListElement.classList.add('active')
+		packagesListElement.classList.remove('hidden')
 	}
 
 	const searchPackages = async (name: string): Promise<void> => {

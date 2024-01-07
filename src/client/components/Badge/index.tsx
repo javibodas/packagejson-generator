@@ -13,93 +13,22 @@ export default function Badge({ type, label, value, remove }: BadgeProps): JSX.E
 	const stylesValuesBadge: Array<string> = ['badge-value-blue', 'badge-value-green']
 	const styleValue: string = (type == 'script') ? stylesValuesBadge[1] : stylesValuesBadge[0]
 
-	return(<>
-		<div className='badge'>
-			<div className='badge-key text-ellipsis'>
-				<span>{label}</span>
-			</div>
-			{value ? <div className={styleValue + ' text-ellipsis'}><span>{value}</span></div> : null}
-			<div className='badge-close' onClick={() => {remove(label)}}>
-				<span className='badge-close-icon'><FontAwesomeIcon icon={faTrash} size="xs"/></span>
-			</div>
+	return(<div className='badge flex flex-row text-center p-0.5 cursor-context-menu lg:text-base text-2xs'>
+		<div className='bg-bgray px-1 py-0 border-1 border-solid border-bgray rounded-tl-md rounded-bl-md text-white max-w-[150px] min-h-[15px] line-clamp-1'>
+			<span>{label}</span>
 		</div>
-		<style jsx>{`
-
-                .badge {
-                    display: flex;
-                    flex-direction: row;
-                    font-size: calc(0.35em + 0.35vw);
-                    text-align: center;
-                    align-items: center;
-                    padding: .15rem .15rem .15rem .15rem;
-                }
-
-                .badge:hover {
-                    cursor: context-menu;
-                }
-
-                .badge > div {
-                    min-height: 15px;
-                    padding: .1em .25em;
-                }
-
-                .badge .badge-close {
-                    display: flex;
-                    border: 1px solid #dc3545;
-                    background-color: white;
-                    border-top-right-radius: 5px;
-                    border-bottom-right-radius: 5px;
-                    font-weight: bold;
-                    color: #dc3545;
-                }
-
-                .badge .badge-close .badge-close-icon {
-                    margin: auto 0;
-                }
-
-                .badge .badge-close:hover {
-                    cursor:pointer;
-                    color: white;
-                    background-color: #dc3545;
-                }
-
-                .badge .badge-key {
-                    background-color: #5a5a5a;
-                    border: 1px solid #5a5a5a;
-                    border-top-left-radius: 5px;
-                    border-bottom-left-radius: 5px;
-                    color: white;
-                }
-
-                .badge .badge-value-blue {
-                    color: white;
-                    border-top: 1px solid #0976b4;
-                    border-bottom: 1px solid #0976b4;
-                    background-color: #0976b4;
-                    
-                }
-
-                .badge .badge-value-green {
-                    color: white;
-                    border-top: 1px solid green;
-                    border-bottom: 1px solid green;
-                    background-color: green;
-                }
-
-                .text-ellipsis {
-                    display: -webkit-box !important;
-                    text-overflow: ellipsis;
-                    white-space: normal;
-                    overflow:hidden;
-                    -webkit-line-clamp: 1;
-                    -webkit-box-orient: vertical;
-                }
-
-                @media (max-width: 1000px) {
-                    .badge {
-                        font-size: 10px;
-                    }
-                }
-            `}</style>
-	</>)
+		{value 
+			? <div className={
+				(styleValue === 'badge-value-blue' 
+					? 'border-t-bblue border-b-bblue bg-bblue' 
+					: 'border-t-bgreen border-b-bgreen bg-bgreen') 
+                    + ' px-1 py-0 text-white border-solid border-t-1 border-b-1 max-w-[300px] line-clamp-1 min-h-[15px]'}>
+				<span>{value}</span>
+			</div> 
+			: null
+		}
+		<div className='flex min-h-[15px] px-1 py-0 border-1 border-solid border-red-500 bg-white rounded-tr-md rounded-br-md font-bold text-red-500 hover:cursor-pointer hover:text-white hover:bg-red-500' onClick={() => {remove(label)}}>
+			<span className='mx-auto my-0'><FontAwesomeIcon icon={faTrash} size="xs"/></span>
+		</div>
+	</div>)
 }

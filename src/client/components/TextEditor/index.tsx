@@ -20,24 +20,14 @@ export default function TextEditor(): JSX.Element {
 		}
 	}
 
-	return (
-		<>
-			<div className="text-editor" data-testid="text-area-editor">
-				<MonacoEditor
-					language="json"
-					theme="vs-dark"
-					value={ JSON.stringify(file.json, null, 4) }
-					options={{ minimap: { enabled: false, }, automaticLayout: true,}}
-					onChange={ updateContext }
-					data-testid="monaco-editor"
-				/>
-			</div>
-			<style jsx>{`
-            .text-editor {
-                width: 100%;
-                height: 100%;
-            }
-        `}</style>
-		</>
-	)
+	return (<div className="w-full h-full" data-testid="text-area-editor">
+		<MonacoEditor
+			language="json"
+			theme="vs-dark"
+			value={ JSON.stringify(file.json, null, 4) }
+			options={{ minimap: { enabled: false, }, automaticLayout: true,}}
+			onChange={ updateContext }
+			data-testid="monaco-editor"
+		/>
+	</div>)
 }
