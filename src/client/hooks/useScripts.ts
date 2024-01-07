@@ -1,4 +1,4 @@
-import { StringUtils } from 'src/util/StringUtils'
+import { StringUtils } from 'src/client/util/StringUtils'
 import { UseScriptsProps } from 'src/client/types/hooks/UseScriptsProps'
 
 export default function useScripts({ dispatch, file }: UseScriptsProps) {
