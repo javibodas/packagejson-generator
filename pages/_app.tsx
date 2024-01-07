@@ -12,11 +12,10 @@ const fontLongCang = Long_Cang({ // eslint-disable-line @typescript-eslint/no-un
 	variable: '--font-tilt-neon',
 })
 
-function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
 	return (<>
 		<Head>
 			<title>Package.json generator</title>
-			<link rel="icon" href="/favicon.png" />
 			<meta name="description" content="Generator and manager of package.json files" />
 		</Head>
 		<Layout>
@@ -24,5 +23,3 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
 		</Layout>
 	</>)
 }
-
-export default MyApp
