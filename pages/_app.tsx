@@ -5,7 +5,7 @@ import Head from 'next/head'
 import Layout from 'src/client/components/Layout'
 import type { AppProps } from 'next/app'
 
-const fontLongCang = Long_Cang({
+const fontLongCang = Long_Cang({ // eslint-disable-line @typescript-eslint/no-unused-vars
 	subsets: [ 'latin' ],
 	weight: '400',
 	display: 'swap',
