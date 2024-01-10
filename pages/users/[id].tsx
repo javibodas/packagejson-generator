@@ -60,7 +60,6 @@ export async function getServerSideProps(context): Promise<GetServerSidePropsRes
 
 	try {
 		const files: Array<FileDetail> = await getUserFiles(id)
-		console.log(files)
 
 		return { props: { filesApi: files ? files : [] }}
 	} catch (e) {
