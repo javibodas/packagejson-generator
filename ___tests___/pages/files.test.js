@@ -1,13 +1,19 @@
 import 'jest-extended'
 import { FILE_ID_EXAMPLE, USER_ID_EXAMPLE } from '___tests___/constants'
-import { UserContextProvider } from 'src/client/context/user'
+import { UserContextProvider } from 'src/context/user'
 import { act, cleanup, render, screen } from '@testing-library/react'
-import File from 'pages/files/[id]'
+import File from 'src/pages/files/[id]'
 import React from 'react'
 
 const mockUpdateFile = jest.fn()
 
-jest.mock('src/client/hooks/useFile', () => {
+jest.mock('src/lib/firebase/firebase', () => {
+	return jest.fn().mockImplementation(() => {
+		return { firebaseApp: {}, auth: {} }
+	})
+})
+
+jest.mock('src/hooks/useFile', () => {
 	return jest.fn().mockImplementation(() => {
 		return { handleUpdateFile: mockUpdateFile }
 	})

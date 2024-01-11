@@ -1,8 +1,8 @@
-import React from 'react'
-import User from 'pages/users/[id]'
-import { UserContextProvider } from 'src/client/context/user'
-import { cleanup, render, screen, fireEvent, within } from '@testing-library/react'
 import 'jest-extended'
+import { UserContextProvider } from 'src/context/user'
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react'
+import React from 'react'
+import User from 'src/pages/users/[id]'
 
 const mockDeleteUserFile = jest.fn()
 const mockPushRouter = jest.fn()
@@ -15,7 +15,7 @@ jest.mock('next/router', () => ({
 	},
 })
 )
-jest.mock('src/client/hooks/useUser', () => {
+jest.mock('src/hooks/useUser', () => {
 	return jest.fn().mockImplementation(() => {
 		return { deleteFile: mockDeleteUserFile }
 	})

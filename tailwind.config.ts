@@ -2,7 +2,6 @@ import type { Config } from 'tailwindcss'
 
 export default <Config> {
 	content: [
-		'./pages/**/*.{js,ts,jsx,tsx,mdx}',
 		'./src/**/*.{js,ts,jsx,tsx,mdx}',
 	],
 	theme: {

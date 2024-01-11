@@ -1,13 +1,13 @@
 import 'jest-extended'
 import { USER_ID_EXAMPLE } from '___tests___/constants'
-import UserRepository from 'src/server/database/repository/UserRepository'
-import userController from 'pages/api/users/[id]'
+import UserRepository from 'src/lib/database/repository/UserRepository'
+import userController from 'src/pages/api/users/[id]'
 
-jest.mock('src/server/database/repository/UserRepository', () => ({
+jest.mock('src/lib/database/repository/UserRepository', () => ({
 	findById: jest.fn().mockReturnValueOnce({ toObject: () => { return {}}})
 }))
 
-jest.mock('src/server/database/repository/FileRepository', () => ({
+jest.mock('src/lib/database/repository/FileRepository', () => ({
 	getFilesByUserId: jest.fn().mockReturnValueOnce([]),
 }))
 

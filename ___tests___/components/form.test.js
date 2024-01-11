@@ -1,10 +1,10 @@
-import React from 'react'
-import Form from 'src/client/components/Form'
-import { FileContextProvider } from 'src/client/context/file'
-import { UserContextProvider } from 'src/client/context/user'
-import { fileInitialState } from 'src/client/state'
-import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import 'jest-extended'
+import { FileContextProvider } from 'src/context/file'
+import { UserContextProvider } from 'src/context/user'
+import { fileInitialState } from 'src/lib/state'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import Form from 'src/components/Form'
+import React from 'react'
 
 describe('Form Test', () => {
 

@@ -1,23 +1,23 @@
-import React from 'react'
-import Keypad from 'src/client/components/Keypad'
-import { FileContextProvider } from 'src/client/context/file'
-import { UserContextProvider } from 'src/client/context/user'
-import { fileInitialState } from 'src/client/state'
-import { FILE_ID_EXAMPLE, USER_ID_EXAMPLE } from '___tests___/constants'
-import { cleanup, render, screen, fireEvent } from '@testing-library/react'
 import 'jest-extended'
+import { FILE_ID_EXAMPLE, USER_ID_EXAMPLE } from '___tests___/constants'
+import { FileContextProvider } from 'src/context/file'
+import { UserContextProvider } from 'src/context/user'
+import { cleanup, fireEvent, render, screen } from '@testing-library/react'
+import { fileInitialState } from 'src/lib/state'
+import Keypad from 'src/components/Keypad'
+import React from 'react'
 
 const mockSaveFile = jest.fn()
 const mockSaveUserFile = jest.fn()
 const mockUpdateFile = jest.fn()
 const mockExportFile = jest.fn()
 
-jest.mock('src/client/hooks/useFile', () => {
+jest.mock('src/hooks/useFile', () => {
 	return jest.fn().mockImplementation(() => {
 		return { handleCreateFile: mockSaveFile, exportFile: mockExportFile, handleUpdateFile: mockUpdateFile }
 	})
 })
-jest.mock('src/client/hooks/useUser', () => {
+jest.mock('src/hooks/useUser', () => {
 	return jest.fn().mockImplementation(() => {
 		return { saveUserFile: mockSaveUserFile }
 	})

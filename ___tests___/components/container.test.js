@@ -1,10 +1,16 @@
 import 'jest-extended'
-import { FileContextProvider } from 'src/client/context/file'
-import { UserContextProvider } from 'src/client/context/user'
+import { FileContextProvider } from 'src/context/file'
+import { UserContextProvider } from 'src/context/user'
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
-import { fileInitialState } from 'src/client/state'
-import Container from 'src/client/components/Container'
+import { fileInitialState } from 'src/lib/state'
+import Container from 'src/components/Container'
 import React from 'react'
+
+jest.mock('src/lib/firebase/firebase', () => {
+	return jest.fn().mockImplementation(() => {
+		return { firebaseApp: {}, auth: {} }
+	})
+})
 
 describe('Container Test', () => {
 
