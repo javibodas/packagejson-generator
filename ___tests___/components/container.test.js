@@ -6,12 +6,6 @@ import { fileInitialState } from 'src/lib/state'
 import Container from 'src/components/Container'
 import React from 'react'
 
-jest.mock('src/lib/firebase/firebase', () => {
-	return jest.fn().mockImplementation(() => {
-		return { firebaseApp: {}, auth: {} }
-	})
-})
-
 describe('Container Test', () => {
 
 	const wrapper = ({ children }) => {

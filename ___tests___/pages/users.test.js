@@ -13,8 +13,8 @@ jest.mock('next/router', () => ({
 			push: mockPushRouter
 		}
 	},
-})
-)
+}))
+
 jest.mock('src/hooks/useUser', () => {
 	return jest.fn().mockImplementation(() => {
 		return { deleteFile: mockDeleteUserFile }

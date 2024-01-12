@@ -7,12 +7,6 @@ import React from 'react'
 
 const mockUpdateFile = jest.fn()
 
-jest.mock('src/lib/firebase/firebase', () => {
-	return jest.fn().mockImplementation(() => {
-		return { firebaseApp: {}, auth: {} }
-	})
-})
-
 jest.mock('src/hooks/useFile', () => {
 	return jest.fn().mockImplementation(() => {
 		return { handleUpdateFile: mockUpdateFile }
