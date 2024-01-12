@@ -28,7 +28,10 @@ jobs:
       run: npm install
     
     - name: Build
-      run: npm run build --if-present
+      run: |
+        touch .env.local
+        echo NEXT_PUBLIC_FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }} >> .env.local
+        npm run build --if-present
     
     - name: Run Test 
       run: npm test && npm run lint
