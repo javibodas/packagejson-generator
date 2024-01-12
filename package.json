@@ -9,8 +9,8 @@
     "build": "next build",
     "start": "next start",
     "test": "jest --silent",
-    "local-test": "jest --silent --watchAll",
-    "lint": "eslint src/**/*.ts src/**/*.tsx pages/**/*.ts pages/**/*.tsx"
+    "test:coverage" : "jest --coverage",
+    "lint": "eslint src/**/*.ts src/**/*.tsx"
   },
   "keywords": [],
   "author": "Javier",
