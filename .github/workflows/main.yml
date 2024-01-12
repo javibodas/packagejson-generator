@@ -30,7 +30,7 @@ jobs:
     - name: Build
       run: |
         touch .env.local
-        echo NEXT_PUBLIC_FIREBASE_API_KEY=${{ secrets.firebaseApiKey }} >> .env.local
+        echo NEXT_PUBLIC_FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }} >> .env.local
         npm run build --if-present
     
     - name: Run Test 
