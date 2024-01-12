@@ -6,9 +6,6 @@ on:
   pull_request:
     branches: [ main ]
 
-env:
-  NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.firebaseApiKey }}
-
 jobs:
   build:
 
@@ -31,7 +28,10 @@ jobs:
       run: npm install
     
     - name: Build
-      run: npm run build --if-present
+      run: |
+        touch .env.local
+        echo NEXT_PUBLIC_FIREBASE_API_KEY=${{ secrets.firebaseApiKey }}
+        npm run build --if-present
     
     - name: Run Test 
       run: npm test && npm run lint
