@@ -9,7 +9,7 @@
     "build": "next build",
     "start": "next start",
     "test": "jest --silent",
-    "test:coverage" : "jest --coverage",
+    "test:coverage": "jest --coverage",
     "lint": "eslint src/**/*.ts src/**/*.tsx"
   },
   "keywords": [],

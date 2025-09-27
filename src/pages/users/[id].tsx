@@ -1,21 +1,17 @@
-import { FileDetail } from 'src/lib/types/FileDetail'
-import { GetServerSidePropsResult } from 'next'
 import { NextRouter, useRouter } from 'next/router'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import FileDetailCard from 'src/components/FileDetailCard'
+import Loading from 'src/components/Loading'
 import UserCtx from 'src/context/user'
-import getUserFiles from 'src/services/getUserFiles'
 import useUser from 'src/hooks/useUser'
+import useUserFiles from 'src/hooks/useUserFiles'
 
-type UserProps = {
-	filesApi: Array<FileDetail>
-}
-
-export default function User({ filesApi }: UserProps): JSX.Element {
-
+export default function User(): JSX.Element {
 	const router: NextRouter = useRouter()
+	const { id } = router.query
+	const userId = typeof id === 'string' ? id : undefined
 
-	const [ files, setFiles ] = useState(filesApi)
+	const { files, setFiles, loading, error } = useUserFiles(userId)
 	const { user, setUser } = useContext(UserCtx)
 	const { deleteFile } = useUser({ user, setUser })
 
@@ -36,6 +32,29 @@ export default function User({ filesApi }: UserProps): JSX.Element {
 		setFiles(files.filter((file) => file.id !== fileId))
 	}
 
+	if (loading) {
+		return <Loading />
+	}
+
+	if (error) {
+		return (
+			<div className="error-container">
+				<h1>Error loading files</h1>
+				<p>{error}</p>
+				<style jsx>{`
+					.error-container {
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+						min-height: 400px;
+						text-align: center;
+					}
+				`}</style>
+			</div>
+		)
+	}
+
 	return(<>
 		<div className='user-files'>
 			<FileDetailCard key={0} handleClick={handleClickNewFile}/>
@@ -53,18 +72,4 @@ export default function User({ filesApi }: UserProps): JSX.Element {
             }
         `}</style>
 	</>)
-}
-
-export async function getServerSideProps(context): Promise<GetServerSidePropsResult<{ filesApi: Array<FileDetail>}>> {
-	const id: string = context.params.id
-
-	try {
-		const files: Array<FileDetail> = await getUserFiles(id)
-
-		return { props: { filesApi: files ? files : [] }}
-	} catch (e) {
-		return {
-			notFound: true
-		}
-	}
 }

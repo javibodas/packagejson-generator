@@ -1,26 +1,37 @@
-import { File as FileType } from 'src/lib/types/client/File'
-import { GetServerSidePropsResult } from 'next'
+import { useRouter } from 'next/router'
 import HomePage from 'src/pages'
-import getFile from 'src/services/getFile'
+import Loading from 'src/components/Loading'
+import useClientFile from 'src/hooks/useClientFile'
 
-type FileProps = {
-	file: FileType
-}
- 
-export default function File({ file }: FileProps): JSX.Element {
-	return(<HomePage file={file} />)
-}
+export default function File(): JSX.Element {
+	const router = useRouter()
+	const { id } = router.query
+	const fileId = typeof id === 'string' ? id : undefined
 
-export async function getServerSideProps(context): Promise<GetServerSidePropsResult<{ file: FileType}>> {
-	const id: string = context.params.id
+	const { file, loading, error } = useClientFile(fileId)
 
-	try {
-		const file: FileType = await getFile(id)
-
-		return { props: { file }}
-	} catch (e) {
-		return {
-			notFound: true
-		}
+	if (loading) {
+		return <Loading />
 	}
+
+	if (error || !file) {
+		return (
+			<div className="error-container">
+				<h1>File not found</h1>
+				<p>The requested file could not be found.</p>
+				<style jsx>{`
+					.error-container {
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						justify-content: center;
+						min-height: 400px;
+						text-align: center;
+					}
+				`}</style>
+			</div>
+		)
+	}
+
+	return <HomePage file={file} />
 }
