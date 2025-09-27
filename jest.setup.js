@@ -1,9 +1,7 @@
 import '@testing-library/jest-dom'
 import 'whatwg-fetch'
 
-// Set NODE_ENV to 'test' to enable React's development mode features like act()
-process.env.NODE_ENV = 'test'
-
+// Global Mocks
 jest.mock('src/lib/firebase/firebase', () => {
 	return jest.fn().mockImplementation(() => {
 		return { firebaseApp: {}, auth: {} }
