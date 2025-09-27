@@ -7,18 +7,44 @@ import React from 'react'
 
 const mockUpdateFile = jest.fn()
 
+jest.mock('next/router', () => ({
+	useRouter() {
+		return {
+			query: { id: FILE_ID_EXAMPLE },
+			push: jest.fn(),
+			pathname: '/files/[id]',
+			route: '/files/[id]'
+		}
+	},
+}))
+
 jest.mock('src/hooks/useFile', () => {
 	return jest.fn().mockImplementation(() => {
 		return { handleUpdateFile: mockUpdateFile }
 	})
 })
 
+const mockUseClientFile = jest.fn()
+
+jest.mock('src/hooks/useClientFile', () => () => mockUseClientFile())
+
 describe('File Page Test', () => {
+	beforeEach(() => {
+		jest.clearAllMocks()
+	})
+
 	describe('When existing file loaded but user is not logged', () => {
 		const file = { id: FILE_ID_EXAMPLE, json: { name: 'TestNameProject', version: '1.0.0' } }
 		const user = undefined
 
 		beforeEach(async () => {
+			// Mock useClientFile to return the test file
+			mockUseClientFile.mockReturnValue({
+				file: file,
+				loading: false,
+				error: null
+			})
+
 			await act(async () => render(
 				<UserContextProvider value={user}>
 					<File file={file} />
@@ -48,6 +74,13 @@ describe('File Page Test', () => {
 		const user = { id: USER_ID_EXAMPLE }
 
 		beforeEach(async () => {
+			// Mock useClientFile to return the test file
+			mockUseClientFile.mockReturnValue({
+				file: file,
+				loading: false,
+				error: null
+			})
+
 			await act(async () => render(
 				<UserContextProvider value={user}>
 					<File file={file} /> 
@@ -77,6 +110,13 @@ describe('File Page Test', () => {
 		const user = { id: USER_ID_EXAMPLE }
 
 		beforeEach(async () => {
+			// Mock useClientFile to return the test file
+			mockUseClientFile.mockReturnValue({
+				file: file,
+				loading: false,
+				error: null
+			})
+
 			await act(async () => render(
 				<UserContextProvider value={user}>
 					<File file={file} /> 

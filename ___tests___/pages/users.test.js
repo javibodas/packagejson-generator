@@ -1,4 +1,5 @@
 import 'jest-extended'
+import { USER_ID_EXAMPLE } from '___tests___/constants'
 import { UserContextProvider } from 'src/context/user'
 import { cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import React from 'react'
@@ -6,11 +7,13 @@ import User from 'src/pages/users/[id]'
 
 const mockDeleteUserFile = jest.fn()
 const mockPushRouter = jest.fn()
+const mockUseUserFiles = jest.fn()
 
 jest.mock('next/router', () => ({
 	useRouter() {
 		return {
-			push: mockPushRouter
+			push: mockPushRouter,
+			query: { id: USER_ID_EXAMPLE }
 		}
 	},
 }))
@@ -21,11 +24,21 @@ jest.mock('src/hooks/useUser', () => {
 	})
 })
 
+jest.mock('src/hooks/useUserFiles', () => () => mockUseUserFiles())
+
 describe('User Page Test', () => {
 	describe('When user does not have files saved', () => {
 		beforeEach(() => {
 			const userFiles = []
 			const user = { isLogged: false }
+
+			// Mock useUserFiles to return empty files array
+			mockUseUserFiles.mockReturnValue({
+				files: [],
+				setFiles: jest.fn(),
+				loading: false,
+				error: null
+			})
 
 			render(
 				<UserContextProvider value={user}> 
@@ -60,6 +73,15 @@ describe('User Page Test', () => {
 		const user = { isLogged: false }
 		beforeEach(() => {
 			jest.clearAllMocks()
+			
+			// Mock useUserFiles to return the test userFiles
+			mockUseUserFiles.mockReturnValue({
+				files: userFiles,
+				setFiles: jest.fn(),
+				loading: false,
+				error: null
+			})
+
 			render(
 				<UserContextProvider value={user}> 
 					<User filesApi={userFiles} /> 
