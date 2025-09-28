@@ -10,9 +10,7 @@ export default function File(): JSX.Element {
 
 	const { file, loading, error } = useClientFile(fileId)
 
-	if (loading) {
-		return <Loading />
-	}
+	if (loading) return <Loading />
 
 	if (error || !file) {
 		return (
