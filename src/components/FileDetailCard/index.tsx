@@ -26,7 +26,7 @@ export default function FileDetailCard({ fileDetail, handleClick, handleDelete }
 		<div className='flex flex-col h-full'>
 			<span className='text-gray-400 text-base h-full'>{description}</span>
 			<div className='flex flex-row'>
-				<span className='font-bold text-base w-100 mx-auto my-0' data-testid="file-description">{(new Date(createdAt)).toDateString()}</span>
+				<span className='font-bold text-base w-100 mx-auto my-0' data-testid="file-description">{(new Date(createdAt)).toUTCString()}</span>
 				<span className='hover:text-garnet' onClick={(e) => handleDelete(e, id)}  data-testid={`btn-delete-file-saved-${id}`}><FontAwesomeIcon icon={faTrash} size="lg"/></span>
 			</div>
 		</div>
