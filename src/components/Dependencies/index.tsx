@@ -12,7 +12,7 @@ type DependenciesProps = {
 export default function Dependencies({ title, classType, type } : DependenciesProps): JSX.Element {
 
 	const { file, dispatch } = useContext(FileCtx)
-	const { packages, typePackage, addPackage, removePackage, outFocusInputDependencie, isPackagesOpen } = useDependencies({ classType, type, dispatch, file })
+	const { packages, typePackage, addPackage, removePackage, isPackagesOpen } = useDependencies({ classType, type, dispatch, file })
     
 	return (<div className='flex flex-col max-h-52'>
 		<div className='grid grid-cols-5 py-1.5 px-0'>
