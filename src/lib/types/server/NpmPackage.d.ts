@@ -1,4 +1,4 @@
-export type Dependencie = {
+export type NpmPackage = {
     id?: string, 
     name: string, 
     version?: string, 

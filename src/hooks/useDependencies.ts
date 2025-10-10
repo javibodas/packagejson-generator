@@ -7,18 +7,18 @@ import getDependencies from 'src/services/getDependencies'
 export default function useDependencies({ classType, type, dispatch, file }: UseDependenciesProps) {
 
 	const [ packages, setPackages ] = useState<Array<Dependencie>>([])
+	const [ isPackagesOpen, setIsPackagesOpen ] = useState<boolean>(false)
 
 	const EMPTY_OR_ERROR_PACKAGE: Dependencie = { 'name' : 'No packages founded' }
 	let searchDependenciesTimer: NodeJS.Timeout
 
 	const outFocusInputDependencie = (): void => {
-		const packagesListElement: HTMLElement = document.getElementById('packlist' + type)
-		if (packagesListElement && !packagesListElement.classList.contains('hidden')) packagesListElement.classList.add('hidden')
+		setIsPackagesOpen(false)
+		console.log(isPackagesOpen)
 	}
 
 	const showPackagesList = (): void => {
-		const packagesListElement: HTMLElement = document.getElementById('packlist' + type)
-		packagesListElement.classList.remove('hidden')
+		setIsPackagesOpen(true)
 	}
 
 	const searchPackages = async (name: string): Promise<void> => {
@@ -67,10 +67,11 @@ export default function useDependencies({ classType, type, dispatch, file }: Use
 
 		if (classType === 'dependencies') dispatch({type: 'addDependencie', key: packageSelected.name, value: packageSelected.version})
 		if (classType === 'devDependencies') dispatch({type: 'addDevDependencie', key: packageSelected.name ,value: packageSelected.version})
+		setIsPackagesOpen(false)
 	}
 
 	const clearDependenciesElements = (packagesListElement: HTMLElement, inputPackage: HTMLInputElement): void => {
-		if (packagesListElement) packagesListElement.classList.remove('active')
+		setIsPackagesOpen(false)
 		if (inputPackage) inputPackage.value = ''
 	}
     
@@ -79,5 +80,5 @@ export default function useDependencies({ classType, type, dispatch, file }: Use
 		if (classType === 'devDependencies') dispatch({type: 'removeDevDependencie', key: packageName})
 	}
 
-	return { packages, typePackage, addPackage, removePackage, outFocusInputDependencie }
+	return { packages, typePackage, addPackage, removePackage, outFocusInputDependencie, isPackagesOpen }
 }
