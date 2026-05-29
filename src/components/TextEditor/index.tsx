@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import FileCtx from 'src/context/file'
 import dynamic from 'next/dynamic'
 
-const MonacoEditor = dynamic(import('react-monaco-editor'), { ssr: false })
+const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
 
 export default function TextEditor(): JSX.Element {
 	const { file, dispatch } = useContext(FileCtx)
@@ -27,7 +27,6 @@ export default function TextEditor(): JSX.Element {
 			value={ JSON.stringify(file.json, null, 4) }
 			options={{ minimap: { enabled: false, }, automaticLayout: true,}}
 			onChange={ updateContext }
-			data-testid="monaco-editor"
 		/>
 	</div>)
 }

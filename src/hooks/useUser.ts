@@ -1,44 +1,28 @@
 import { File } from 'src/lib/types/client/File'
 import { UseUserProps } from 'src/lib/types/client/hooks/UseUserProps'
-import { User } from 'src/lib/types/client/User'
-import { loginWithGithub, logoutWithGithub, onAuthStateChanged } from 'src/lib/firebase/auth'
+import { signIn, signOut } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { v4 } from 'uuid'
-import createUser from 'src/services/createUser'
 import createUserFile from 'src/services/createUserFile'
 import deleteUserFile from 'src/services/deleteUserFile'
 
-export default function useUser({ user, setUser }: UseUserProps) {
+export default function useUser({ user }: UseUserProps) {
 
 	const router = useRouter()
 
 	const handleLogIn = async (): Promise<void> => {
-		try {
-			const user: User = await loginWithGithub()
-			await createUser(user)
-
-			setUser(user)
-		} catch (e) {
-			console.log(e.message)
-		}
+		await signIn('github', { callbackUrl: '/' })
 	}
-    
-	const handleLogout = async (): Promise<void> => {
-		try {
-			await logoutWithGithub()
 
-			setUser(undefined)
-			router.push('/')
-		} catch (e) {
-			console.log(e.message)
-		}
+	const handleLogout = async (): Promise<void> => {
+		await signOut({ callbackUrl: '/' })
 	}
 
 	const saveUserFile = async (file: File): Promise<void> => {
 		try {
 			file.createdBy = user.id
 			file.id = v4()
-			
+
 			const response = await createUserFile(user.id, file)
 
 			router.push('/files/' + response.id)
@@ -58,5 +42,5 @@ export default function useUser({ user, setUser }: UseUserProps) {
 		}
 	}
 
-	return { onAuthStateChanged, handleLogIn, handleLogout, deleteFile, saveUserFile }
+	return { handleLogIn, handleLogout, deleteFile, saveUserFile }
 }
