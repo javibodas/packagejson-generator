@@ -1,29 +1,26 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
-import { useContext, useEffect } from 'react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import Button from 'src/components/Button'
-import UserCtx from 'src/context/user'
 import UserOptions from 'src/components/UserOptions'
-import useUser from 'src/hooks/useUser'
-
 
 export default function Header(): JSX.Element {
 
-	const { user, setUser } = useContext(UserCtx)
-	const { handleLogIn, handleLogout, onAuthStateChanged } = useUser({ user, setUser })
-
-	useEffect(() => onAuthStateChanged((userUpdated) => {
-		(userUpdated) ? setUser(userUpdated)
-			: setUser(undefined)
-	}), [])
+	const { data: session } = useSession()
+	const user = session?.user ? {
+		id: session.user.id,
+		username: session.user.name,
+		email: session.user.email,
+		avatar: session.user.image,
+	} : undefined
 
 	return(<header className='flex flex-row-reverse py-2 px-0 my-0 mx-auto w-4/5 h-6-vh'>
 		<nav className='mx-0 my-auto'>
 			{
 				!user ?
-					<Button name='btn-login' click={handleLogIn} testid='btn-login'>Login With <FontAwesomeIcon icon={faGithub} /></Button>
+					<Button name='btn-login' click={async () => { await signIn('github') }} testid='btn-login'>Login With <FontAwesomeIcon icon={faGithub} /></Button>
 					:
-					<UserOptions user={user} logout={handleLogout}/>
+					<UserOptions user={user} logout={() => signOut({ callbackUrl: '/' })}/>
 			}
 		</nav>
 	</header>)

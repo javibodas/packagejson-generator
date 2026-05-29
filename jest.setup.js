@@ -1,15 +1,8 @@
 import '@testing-library/jest-dom'
 import 'whatwg-fetch'
 
-// Global Mocks
-jest.mock('src/lib/firebase/firebase', () => {
-	return jest.fn().mockImplementation(() => {
-		return { firebaseApp: {}, auth: {} }
-	})
-})
-
-// Mock react-monaco-editor to avoid ESM import issues
-jest.mock('react-monaco-editor', () => {
+// Mock @monaco-editor/react to avoid dynamic import issues
+jest.mock('@monaco-editor/react', () => {
 	const React = require('react')
 	return {
 		__esModule: true,
@@ -22,5 +15,19 @@ jest.mock('react-monaco-editor', () => {
 				className: 'monaco-editor-mock'
 			}, props.value || '')
 		})
+	}
+})
+
+// Mock next-auth/react for tests
+jest.mock('next-auth/react', () => {
+	const React = require('react')
+	return {
+		useSession: jest.fn(() => ({ data: null, status: 'unauthenticated' })),
+		signIn: jest.fn(),
+		signOut: jest.fn(),
+		SessionProvider: ({ children }) => React.createElement(React.Fragment, null, children),
+		getSession: jest.fn(),
+		getCsrfToken: jest.fn(),
+		getProviders: jest.fn(),
 	}
 })
