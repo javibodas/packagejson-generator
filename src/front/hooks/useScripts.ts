@@ -1,5 +1,5 @@
 import { StringUtils } from 'src/shared/StringUtils'
-import { UseScriptsProps } from 'src/back/domain/client/hooks/UseScriptsProps'
+import { UseScriptsProps } from 'src/front/hooks/types/UseScriptsProps'
 
 export default function useScripts({ dispatch, file }: UseScriptsProps) {
 

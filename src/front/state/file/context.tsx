@@ -1,5 +1,5 @@
 import { File } from 'src/back/domain/File'
-import { FileAction } from 'src/back/domain/client/reducer/FileAction'
+import { FileAction } from 'src/front/state/FileAction'
 import { fileInitialState } from 'src/front/state/file/initialState'
 import React, { Dispatch, useReducer } from 'react'
 import fileReducer from 'src/front/state/file/reducer'

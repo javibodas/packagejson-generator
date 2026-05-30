@@ -1,5 +1,5 @@
 import { File } from 'src/back/domain/File'
-import { FileAction } from 'src/back/domain/client/reducer/FileAction'
+import { FileAction } from 'src/front/state/FileAction'
 
 const fileInitialState: object = {
 	name: 'example',

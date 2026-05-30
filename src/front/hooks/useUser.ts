@@ -1,5 +1,5 @@
 import { File } from 'src/back/domain/File'
-import { UseUserProps } from 'src/back/domain/client/hooks/UseUserProps'
+import { UseUserProps } from 'src/front/hooks/types/UseUserProps'
 import { signIn, signOut } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { v4 } from 'uuid'
