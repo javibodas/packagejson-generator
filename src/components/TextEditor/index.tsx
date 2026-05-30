@@ -1,4 +1,4 @@
-import { File } from 'src/lib/types/client/File'
+import { File } from 'src/lib/types/File'
 import { useContext } from 'react'
 import FileCtx from 'src/context/file'
 import dynamic from 'next/dynamic'

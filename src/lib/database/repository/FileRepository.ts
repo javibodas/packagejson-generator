@@ -1,4 +1,4 @@
-import { File } from 'src/lib/types/server/File'
+import { File } from 'src/lib/types/File'
 import { FileDetail } from 'src/lib/types/FileDetail'
 import { FilterQuery } from 'mongoose'
 import FileModel from 'src/lib/database/models/FileModel'

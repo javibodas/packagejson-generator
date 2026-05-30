@@ -1,4 +1,4 @@
-import { Dependencie } from 'src/lib/types/client/Dependencie'
+import { Dependencie } from 'src/lib/types/Dependencie'
 import callApi from 'src/lib/util/callApi'
 
 export default async (dependencieName: string): Promise<Array<Dependencie>> => {

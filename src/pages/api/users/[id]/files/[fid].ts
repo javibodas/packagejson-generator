@@ -1,5 +1,5 @@
-import { File } from 'src/lib/types/server/File'
-import { User } from 'src/lib/types/server/User'
+import { File } from 'src/lib/types/File'
+import { User } from 'src/lib/types/User'
 import FileDoesntBelongToUserError from 'src/lib/errors/server/FileDoesntBelongToUser'
 import FileNotExistError from 'src/lib/errors/server/FileNotExist'
 import FileRepository from 'src/lib/database/repository/FileRepository'

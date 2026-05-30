@@ -1,4 +1,4 @@
-import { User } from 'src/lib/types/client/User'
+import { User } from 'src/lib/types/User'
 import { useRouter } from 'next/router'
 import Avatar from 'src/components/Avatar'
 import Button from 'src/components/Button'

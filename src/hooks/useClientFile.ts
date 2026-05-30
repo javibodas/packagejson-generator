@@ -1,4 +1,4 @@
-import { File } from 'src/lib/types/client/File'
+import { File } from 'src/lib/types/File'
 import { useEffect, useState } from 'react'
 import getFile from 'src/services/getFile'
 

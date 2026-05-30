@@ -1,4 +1,4 @@
-import { File } from 'src/lib/types/client/File'
+import { File } from 'src/lib/types/File'
 import { UseUserProps } from 'src/lib/types/client/hooks/UseUserProps'
 import { signIn, signOut } from 'next-auth/react'
 import { useRouter } from 'next/router'

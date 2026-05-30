@@ -1,4 +1,4 @@
-import { User } from 'src/lib/types/server/User'
+import { User } from 'src/lib/types/User'
 import UserRepository from 'src/lib/database/repository/UserRepository'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
