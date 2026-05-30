@@ -1,6 +1,6 @@
 import 'jest-extended'
 import { USER_ID_EXAMPLE } from '___tests___/constants'
-import { UserContextProvider } from 'front/state/user'
+import { UserContextProvider } from 'src/front/state/user'
 import { cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import React from 'react'
 import User from 'src/pages/users/[id]'
@@ -18,13 +18,13 @@ jest.mock('next/router', () => ({
 	},
 }))
 
-jest.mock('front/hooks/useUser', () => {
+jest.mock('src/front/hooks/useUser', () => {
 	return jest.fn().mockImplementation(() => {
 		return { deleteFile: mockDeleteUserFile }
 	})
 })
 
-jest.mock('front/hooks/useUserFiles', () => () => mockUseUserFiles())
+jest.mock('src/front/hooks/useUserFiles', () => () => mockUseUserFiles())
 
 describe('User Page Test', () => {
 	describe('When user does not have files saved', () => {

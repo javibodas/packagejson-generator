@@ -1,6 +1,6 @@
-import { User } from 'back/domain/User'
-import UserNotExistError from 'back/infrastructure/errors/server/UserNotExist'
-import UserRepository from 'back/infrastructure/database/repository/UserRepository'
+import { User } from 'src/back/domain/User'
+import UserNotExistError from 'src/back/infrastructure/errors/server/UserNotExist'
+import UserRepository from 'src/back/infrastructure/database/repository/UserRepository'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 type ResponseData = User | { error: string }

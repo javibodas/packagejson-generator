@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import HomePage from 'src/pages'
-import Loading from 'front/components/Loading'
-import useClientFile from 'front/hooks/useClientFile'
+import Loading from 'src/front/components/Loading'
+import useClientFile from 'src/front/hooks/useClientFile'
 
 export default function File(): JSX.Element {
 	const router = useRouter()

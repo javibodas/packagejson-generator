@@ -1,9 +1,9 @@
 import 'jest-extended'
-import { FileContextProvider } from 'front/state/file'
-import { UserContextProvider } from 'front/state/user'
+import { FileContextProvider } from 'src/front/state/file'
+import { UserContextProvider } from 'src/front/state/user'
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
-import { fileInitialState } from 'front/state/file/initialState'
-import Container from 'front/components/Container'
+import { fileInitialState } from 'src/front/state/file/initialState'
+import Container from 'src/front/components/Container'
 import React from 'react'
 
 describe('Container Test', () => {

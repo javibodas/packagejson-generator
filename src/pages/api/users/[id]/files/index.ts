@@ -1,9 +1,9 @@
-import { File } from 'back/domain/File'
-import { FileDetail } from 'back/domain/FileDetail'
-import { User } from 'back/domain/User'
-import FileRepository from 'back/infrastructure/database/repository/FileRepository'
-import UserNotExistError from 'back/infrastructure/errors/server/UserNotExist'
-import UserRepository from 'back/infrastructure/database/repository/UserRepository'
+import { File } from 'src/back/domain/File'
+import { FileDetail } from 'src/back/domain/FileDetail'
+import { User } from 'src/back/domain/User'
+import FileRepository from 'src/back/infrastructure/database/repository/FileRepository'
+import UserNotExistError from 'src/back/infrastructure/errors/server/UserNotExist'
+import UserRepository from 'src/back/infrastructure/database/repository/UserRepository'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 type ResponseData = File | Array<File> | Array<FileDetail> | { error: string }

@@ -1,6 +1,6 @@
 import 'jest-extended'
 import { FILE_ID_EXAMPLE, USER_ID_EXAMPLE } from '___tests___/constants'
-import { UserContextProvider } from 'front/state/user'
+import { UserContextProvider } from 'src/front/state/user'
 import { act, cleanup, render, screen } from '@testing-library/react'
 import File from 'src/pages/files/[id]'
 import React from 'react'
@@ -18,7 +18,7 @@ jest.mock('next/router', () => ({
 	},
 }))
 
-jest.mock('front/hooks/useFile', () => {
+jest.mock('src/front/hooks/useFile', () => {
 	return jest.fn().mockImplementation(() => {
 		return { handleUpdateFile: mockUpdateFile }
 	})
@@ -26,7 +26,7 @@ jest.mock('front/hooks/useFile', () => {
 
 const mockUseClientFile = jest.fn()
 
-jest.mock('front/hooks/useClientFile', () => () => mockUseClientFile())
+jest.mock('src/front/hooks/useClientFile', () => () => mockUseClientFile())
 
 describe('File Page Test', () => {
 	beforeEach(() => {

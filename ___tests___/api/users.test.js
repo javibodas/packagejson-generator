@@ -1,9 +1,9 @@
 import 'jest-extended'
 import { USER_ID_EXAMPLE } from '___tests___/constants'
-import UserRepository from 'back/infrastructure/database/repository/UserRepository'
+import UserRepository from 'src/back/infrastructure/database/repository/UserRepository'
 import usersController from 'src/pages/api/users'
 
-jest.mock('back/infrastructure/database/repository/UserRepository', () => ({
+jest.mock('src/back/infrastructure/database/repository/UserRepository', () => ({
 	findAll: jest.fn(),
 	create: jest.fn()
 }))

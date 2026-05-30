@@ -1,6 +1,6 @@
-import { File } from 'back/domain/File'
-import { FileContextProvider } from 'front/state/file'
-import Container from 'front/components/Container'
+import { File } from 'src/back/domain/File'
+import { FileContextProvider } from 'src/front/state/file'
+import Container from 'src/front/components/Container'
 
 type HomePageProps = {
 	file?: File
