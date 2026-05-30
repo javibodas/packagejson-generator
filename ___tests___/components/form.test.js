@@ -1,7 +1,7 @@
 import 'jest-extended'
 import { FileContextProvider } from 'src/context/file'
 import { UserContextProvider } from 'src/context/user'
-import { fileInitialState } from 'src/lib/state'
+import { fileInitialState } from 'src/context/file/initialState'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import Form from 'src/components/Form'
 import React from 'react'

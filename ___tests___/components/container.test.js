@@ -2,7 +2,7 @@ import 'jest-extended'
 import { FileContextProvider } from 'src/context/file'
 import { UserContextProvider } from 'src/context/user'
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
-import { fileInitialState } from 'src/lib/state'
+import { fileInitialState } from 'src/context/file/initialState'
 import Container from 'src/components/Container'
 import React from 'react'
 

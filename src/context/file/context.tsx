@@ -1,8 +1,8 @@
 import { File } from 'src/lib/types/File'
 import { FileAction } from 'src/lib/types/client/reducer/FileAction'
-import { fileInitialState } from 'src/lib/state'
+import { fileInitialState } from 'src/context/file/initialState'
 import React, { Dispatch, useReducer } from 'react'
-import fileReducer from 'src/reducer'
+import fileReducer from 'src/context/file/reducer'
 
 type FileContext = {
 	file?: File,

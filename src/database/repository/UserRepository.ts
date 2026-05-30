@@ -1,6 +1,6 @@
 import { User } from 'src/lib/types/User'
-import UserModel from 'src/lib/database/models/UserModel'
-import databaseConnect from 'src/lib/database'
+import UserModel from 'src/database/models/UserModel'
+import databaseConnect from 'src/database'
 
 databaseConnect()
 

@@ -1,4 +1,4 @@
-import ApiResponseError from 'src/lib/errors/client/ApiResponseError'
+import ApiResponseError from 'src/errors/client/ApiResponseError'
 
 export default async <T>(request: Request): Promise<T> => {
 	const response: Response = await fetch(request)

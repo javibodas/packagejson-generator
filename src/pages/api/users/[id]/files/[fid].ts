@@ -1,10 +1,10 @@
 import { File } from 'src/lib/types/File'
 import { User } from 'src/lib/types/User'
-import FileDoesntBelongToUserError from 'src/lib/errors/server/FileDoesntBelongToUser'
-import FileNotExistError from 'src/lib/errors/server/FileNotExist'
-import FileRepository from 'src/lib/database/repository/FileRepository'
-import UserNotExistError from 'src/lib/errors/server/UserNotExist'
-import UserRepository from 'src/lib/database/repository/UserRepository'
+import FileDoesntBelongToUserError from 'src/errors/server/FileDoesntBelongToUser'
+import FileNotExistError from 'src/errors/server/FileNotExist'
+import FileRepository from 'src/database/repository/FileRepository'
+import UserNotExistError from 'src/errors/server/UserNotExist'
+import UserRepository from 'src/database/repository/UserRepository'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 type ResponseData = { id: string } | { error: string }

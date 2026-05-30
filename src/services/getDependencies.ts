@@ -1,5 +1,5 @@
 import { Dependencie } from 'src/lib/types/Dependencie'
-import callApi from 'src/lib/util/callApi'
+import callApi from 'src/lib/callApi'
 
 export default async (dependencieName: string): Promise<Array<Dependencie>> => {
 	const request: RequestInfo = new Request(`${process.env.NEXT_PUBLIC_BASE_URL}/api/dependencies/${dependencieName}`)

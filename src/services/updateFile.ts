@@ -1,6 +1,6 @@
 import { File } from 'src/lib/types/File'
-import { UPDATE_FILE_ENDPOINT } from 'src/lib/util/constants'
-import callApi from 'src/lib/util/callApi'
+import { UPDATE_FILE_ENDPOINT } from 'src/lib/constants'
+import callApi from 'src/lib/callApi'
 
 export default async (fileId: string, file: File): Promise<File> => {
 	const URI: string = UPDATE_FILE_ENDPOINT.replace(':fileId', fileId)

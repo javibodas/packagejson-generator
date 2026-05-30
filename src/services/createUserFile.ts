@@ -1,6 +1,6 @@
-import { CREATE_USER_FILE_ENDPOINT } from 'src/lib/util/constants'
+import { CREATE_USER_FILE_ENDPOINT } from 'src/lib/constants'
 import { File } from 'src/lib/types/File'
-import callApi from 'src/lib/util/callApi'
+import callApi from 'src/lib/callApi'
 
 export default async (userId: string, file: File): Promise<File> => {
 	const URI: string = CREATE_USER_FILE_ENDPOINT.replace(':userId', userId)

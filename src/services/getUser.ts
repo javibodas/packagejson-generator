@@ -1,6 +1,6 @@
-import { GET_USER_ENDPOINT } from 'src/lib/util/constants'
+import { GET_USER_ENDPOINT } from 'src/lib/constants'
 import { User } from 'src/lib/types/User'
-import callApi from 'src/lib/util/callApi'
+import callApi from 'src/lib/callApi'
 
 export default async (userId: string): Promise<User> => {
 	const URI: string = GET_USER_ENDPOINT.replace(':userId', userId)

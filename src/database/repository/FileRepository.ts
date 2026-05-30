@@ -1,8 +1,8 @@
 import { File } from 'src/lib/types/File'
 import { FileDetail } from 'src/lib/types/FileDetail'
 import { FilterQuery } from 'mongoose'
-import FileModel from 'src/lib/database/models/FileModel'
-import databaseConnect from 'src/lib/database'
+import FileModel from 'src/database/models/FileModel'
+import databaseConnect from 'src/database'
 
 databaseConnect()
 

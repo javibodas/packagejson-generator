@@ -1,5 +1,5 @@
 import '@fortawesome/fontawesome-svg-core/styles.css'
-import 'styles/global.css'
+import 'src/styles/global.css'
 import { Long_Cang } from '@next/font/google'
 import { SessionProvider } from 'next-auth/react'
 import Head from 'next/head'

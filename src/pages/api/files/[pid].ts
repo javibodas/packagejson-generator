@@ -1,6 +1,6 @@
 import { File } from 'src/lib/types/File'
-import FileNotExistError from 'src/lib/errors/server/FileNotExist'
-import FileRepository from 'src/lib/database/repository/FileRepository'
+import FileNotExistError from 'src/errors/server/FileNotExist'
+import FileRepository from 'src/database/repository/FileRepository'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 type ResponseData = File | { id: string } | { error: string }

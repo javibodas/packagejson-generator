@@ -1,6 +1,6 @@
-import { CREATE_FILE_ENDPOINT } from 'src/lib/util/constants'
+import { CREATE_FILE_ENDPOINT } from 'src/lib/constants'
 import { File } from 'src/lib/types/File'
-import callApi from 'src/lib/util/callApi'
+import callApi from 'src/lib/callApi'
 
 export default async (file: File): Promise<File> => {
 	const request: RequestInfo = new Request(CREATE_FILE_ENDPOINT,

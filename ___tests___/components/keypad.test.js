@@ -3,7 +3,7 @@ import { FILE_ID_EXAMPLE, USER_ID_EXAMPLE } from '___tests___/constants'
 import { FileContextProvider } from 'src/context/file'
 import { UserContextProvider } from 'src/context/user'
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
-import { fileInitialState } from 'src/lib/state'
+import { fileInitialState } from 'src/context/file/initialState'
 import Keypad from 'src/components/Keypad'
 import React from 'react'
 
