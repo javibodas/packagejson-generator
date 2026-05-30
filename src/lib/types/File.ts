@@ -12,7 +12,7 @@ export interface FileJson {
 
 export interface File {
 	id?: string
-	json: FileJson
+	json?: FileJson
 	createdBy?: string
 	createdAt?: string
 	updatedAt?: string
