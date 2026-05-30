@@ -1,4 +1,4 @@
-import { File } from 'src/lib/types/client/File'
+import { File } from 'src/lib/types/File'
 import { FileAction } from 'src/lib/types/client/reducer/FileAction'
 import { fileInitialState } from 'src/lib/state'
 import React, { Dispatch, useReducer } from 'react'

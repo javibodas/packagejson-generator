@@ -1,8 +1,6 @@
 import { Schema, model, models } from 'mongoose'
-import { User } from 'src/lib/types/server/User'
 
-
-const UserSchema = new Schema<User>({
+const UserSchema = new Schema({
 	_id: { type: String }
 }, { 
 	timestamps: true, 

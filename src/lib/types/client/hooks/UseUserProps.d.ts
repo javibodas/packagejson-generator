@@ -1,4 +1,4 @@
-import { User } from 'src/lib/types/client/User'
+import { User } from 'src/lib/types/User'
 
 export type UseUserProps = {
     user: User,

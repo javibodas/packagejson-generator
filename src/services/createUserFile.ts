@@ -1,5 +1,5 @@
 import { CREATE_USER_FILE_ENDPOINT } from 'src/lib/util/constants'
-import { File } from 'src/lib/types/client/File'
+import { File } from 'src/lib/types/File'
 import callApi from 'src/lib/util/callApi'
 
 export default async (userId: string, file: File): Promise<File> => {

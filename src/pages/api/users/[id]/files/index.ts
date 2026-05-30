@@ -1,6 +1,6 @@
-import { File } from 'src/lib/types/server/File'
+import { File } from 'src/lib/types/File'
 import { FileDetail } from 'src/lib/types/FileDetail'
-import { User } from 'src/lib/types/server/User'
+import { User } from 'src/lib/types/User'
 import FileRepository from 'src/lib/database/repository/FileRepository'
 import UserNotExistError from 'src/lib/errors/server/UserNotExist'
 import UserRepository from 'src/lib/database/repository/UserRepository'

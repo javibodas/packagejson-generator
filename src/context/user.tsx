@@ -1,4 +1,4 @@
-import { User } from 'src/lib/types/client/User'
+import { User } from 'src/lib/types/User'
 import React, { useState } from 'react'
 
 type UserContext = {

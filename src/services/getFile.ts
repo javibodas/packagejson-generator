@@ -1,4 +1,4 @@
-import { File } from 'src/lib/types/client/File'
+import { File } from 'src/lib/types/File'
 import { GET_FILE_ENDPOINT } from 'src/lib/util/constants'
 import callApi from 'src/lib/util/callApi'
 

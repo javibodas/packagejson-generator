@@ -1,4 +1,4 @@
-import { File } from 'src/lib/types/server/File'
+import { File } from 'src/lib/types/File'
 import FileNotExistError from 'src/lib/errors/server/FileNotExist'
 import FileRepository from 'src/lib/database/repository/FileRepository'
 import type { NextApiRequest, NextApiResponse } from 'next'

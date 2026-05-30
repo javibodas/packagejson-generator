@@ -1,4 +1,4 @@
-import { File } from 'src/lib/types/client/File'
+import { File } from 'src/lib/types/File'
 import { FileContextProvider } from 'src/context/file'
 import Container from 'src/components/Container'
 

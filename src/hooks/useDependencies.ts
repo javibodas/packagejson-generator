@@ -1,5 +1,5 @@
 import { ChangeEvent, MouseEvent, TouchEvent, useState } from 'react'
-import { Dependencie } from 'src/lib/types/client/Dependencie'
+import { Dependencie } from 'src/lib/types/Dependencie'
 import { StringUtils } from 'src/lib/util/StringUtils'
 import { UseDependenciesProps } from 'src/lib/types/client/hooks/UseDependenciesProps'
 import getDependencies from 'src/services/getDependencies'

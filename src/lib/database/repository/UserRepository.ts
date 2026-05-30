@@ -1,4 +1,4 @@
-import { User } from 'src/lib/types/server/User'
+import { User } from 'src/lib/types/User'
 import UserModel from 'src/lib/database/models/UserModel'
 import databaseConnect from 'src/lib/database'
 

@@ -1,4 +1,4 @@
-import { File } from 'src/lib/types/client/File'
+import { File } from 'src/lib/types/File'
 import { NextRouter, useRouter } from 'next/router'
 import { v4 } from 'uuid'
 import createFile from 'src/services/createFile'

@@ -1,4 +1,4 @@
-import { File } from 'src/lib/types/client/File'
+import { File } from 'src/lib/types/File'
 
 export type FileAction = {
 	type: 'updateProjectName' | 'updateProjectVersion' | 'updateProjectDescription' | 'updateProjectAuthor'
