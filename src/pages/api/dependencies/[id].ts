@@ -1,8 +1,8 @@
-import { NpmPackage} from 'src/lib/types/server/NpmPackage'
+import { Dependencie } from 'src/lib/types/client/Dependencie'
 import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-type ResponseData = Array<NpmPackage> | { error: string }
+type ResponseData = Array<Dependencie> | { error: string }
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>): Promise<void> {
@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
 			res.status(200)
 				.json(npmPackages.map(p => {
-					const { name, version, description }: NpmPackage = p.package
+					const { name, version, description }: Dependencie = p.package
 					return { id, name, version, description }
 				}))
 		})
