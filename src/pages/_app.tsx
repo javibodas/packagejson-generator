@@ -1,9 +1,9 @@
 import '@fortawesome/fontawesome-svg-core/styles.css'
-import 'src/styles/global.css'
+import 'front/styles/global.css'
 import { Long_Cang } from '@next/font/google'
 import { SessionProvider } from 'next-auth/react'
 import Head from 'next/head'
-import Layout from 'src/components/Layout'
+import Layout from 'front/components/Layout'
 import type { AppProps } from 'next/app'
 
 const fontLongCang = Long_Cang({ // eslint-disable-line @typescript-eslint/no-unused-vars

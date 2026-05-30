@@ -1,10 +1,10 @@
 import { NextRouter, useRouter } from 'next/router'
 import { useContext } from 'react'
-import FileDetailCard from 'src/components/FileDetailCard'
-import Loading from 'src/components/Loading'
-import UserCtx from 'src/context/user'
-import useUser from 'src/hooks/useUser'
-import useUserFiles from 'src/hooks/useUserFiles'
+import FileDetailCard from 'front/components/FileDetailCard'
+import Loading from 'front/components/Loading'
+import UserCtx from 'front/state/user'
+import useUser from 'front/hooks/useUser'
+import useUserFiles from 'front/hooks/useUserFiles'
 
 export default function User(): JSX.Element {
 	const router: NextRouter = useRouter()

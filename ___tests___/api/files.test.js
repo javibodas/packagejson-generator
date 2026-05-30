@@ -1,9 +1,9 @@
 import 'jest-extended'
 import { FILE_ID_EXAMPLE } from '___tests___/constants'
-import FileRepository from 'src/database/repository/FileRepository'
+import FileRepository from 'back/infrastructure/database/repository/FileRepository'
 import filesController from 'src/pages/api/files'
 
-jest.mock('src/database/repository/FileRepository', () => ({
+jest.mock('back/infrastructure/database/repository/FileRepository', () => ({
 	findAll: jest.fn(),
 	create: jest.fn()
 }))

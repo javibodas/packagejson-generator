@@ -1,4 +1,4 @@
-import { Dependencie } from 'src/lib/types/Dependencie'
+import { Dependencie } from 'back/domain/Dependencie'
 import axios from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
 

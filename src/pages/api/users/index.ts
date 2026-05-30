@@ -1,5 +1,5 @@
-import { User } from 'src/lib/types/User'
-import UserRepository from 'src/database/repository/UserRepository'
+import { User } from 'back/domain/User'
+import UserRepository from 'back/infrastructure/database/repository/UserRepository'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 type ResponseData = User | Array<User> | { error: string }

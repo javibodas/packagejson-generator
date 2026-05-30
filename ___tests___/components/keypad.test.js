@@ -1,10 +1,10 @@
 import 'jest-extended'
 import { FILE_ID_EXAMPLE, USER_ID_EXAMPLE } from '___tests___/constants'
-import { FileContextProvider } from 'src/context/file'
-import { UserContextProvider } from 'src/context/user'
+import { FileContextProvider } from 'front/state/file'
+import { UserContextProvider } from 'front/state/user'
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
-import { fileInitialState } from 'src/context/file/initialState'
-import Keypad from 'src/components/Keypad'
+import { fileInitialState } from 'front/state/file/initialState'
+import Keypad from 'front/components/Keypad'
 import React from 'react'
 
 const mockSaveFile = jest.fn()
@@ -12,12 +12,12 @@ const mockSaveUserFile = jest.fn()
 const mockUpdateFile = jest.fn()
 const mockExportFile = jest.fn()
 
-jest.mock('src/hooks/useFile', () => {
+jest.mock('front/hooks/useFile', () => {
 	return jest.fn().mockImplementation(() => {
 		return { handleCreateFile: mockSaveFile, exportFile: mockExportFile, handleUpdateFile: mockUpdateFile }
 	})
 })
-jest.mock('src/hooks/useUser', () => {
+jest.mock('front/hooks/useUser', () => {
 	return jest.fn().mockImplementation(() => {
 		return { saveUserFile: mockSaveUserFile }
 	})

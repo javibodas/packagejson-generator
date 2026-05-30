@@ -1,9 +1,9 @@
 import 'jest-extended'
 import { FILE_ID_EXAMPLE } from '___tests___/constants'
-import FileRepository from 'src/database/repository/FileRepository'
+import FileRepository from 'back/infrastructure/database/repository/FileRepository'
 import fileController from 'src/pages/api/files/[pid]'
 
-jest.mock('src/database/repository/FileRepository', () => ({
+jest.mock('back/infrastructure/database/repository/FileRepository', () => ({
 	findById: jest.fn().mockReturnValueOnce({}),
 	update: jest.fn(),
 	deleteById: jest.fn()
